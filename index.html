@@ -58,13 +58,16 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
     #mainArea { margin: 0 !important; padding: 0 !important; width: 100%; height: auto; }
     #pageContent { padding: 0 !important; }
     .print-page { width: 100%; padding: 40px; background: white; color: black; position: relative; page-break-after: always; }
+    
+    /* KOP SURAT */
     .kop-surat { text-align: center; border-bottom: 4px double black; padding-bottom: 15px; margin-bottom: 30px; display: flex; align-items: center; justify-content: center; gap: 20px; }
-    .kop-surat img { height: 90px; width: auto; }
+    .kop-surat img { height: 70px; width: auto; } /* UKURAN LOGO DIPERKECIL */
     .kop-text { text-align: center; line-height: 1.3; }
     .kop-text h1 { font-family: 'Times New Roman', serif; font-size: 16pt; font-weight: bold; text-transform: uppercase; margin: 0; }
     .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold; text-transform: uppercase; margin: 0; }
     .kop-text h3 { font-family: 'Times New Roman', serif; font-size: 12pt; font-weight: normal; margin: 0; font-style: italic; }
     .kop-text p { font-family: 'Times New Roman', serif; font-size: 10pt; margin: 0; }
+    
     .soal-header { text-align: right; margin-bottom: 30px; font-size: 12pt; }
     .soal-header table { width: 100%; margin-top: 10px; }
     .soal-header td { padding: 2px; vertical-align: top; }
@@ -92,7 +95,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 <div id="loginPage" class="login-bg min-h-screen flex items-center justify-center p-4">
 <div class="glass rounded-2xl p-10 w-full max-w-md relative z-10 fade-in">
 <div class="text-center mb-8">
-<div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-4 border-kopAccent shadow-lg shadow-kopAccent/20 flex items-center justify-center bg-white">
+<div class="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-4 border-kopAccent shadow-lg shadow-kopAccent/20 flex items-center justify-center bg-white">
     <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo" class="w-full h-full object-cover">
 </div>
 <h1 class="font-display text-2xl font-bold text-kopAccent tracking-wide">KOREK API</h1>
@@ -132,6 +135,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 <nav class="py-4" id="sidebarNav">
 <div class="px-5 mb-2"><span class="text-xs text-muted uppercase tracking-wider font-semibold">Menu Utama</span></div>
 <div class="nav-item active" data-page="dashboard"><i class="fas fa-th-large w-5 text-center"></i>Dashboard</div>
+<div class="nav-item" data-page="tp"><i class="fas fa-bullseye w-5 text-center"></i>Kelola TP</div>
 <div class="nav-item" data-page="create"><i class="fas fa-plus-circle w-5 text-center"></i>Buat Soal</div>
 <div class="nav-item" data-page="questions"><i class="fas fa-list w-5 text-center"></i>Bank Soal</div>
 <div class="px-5 mt-4 mb-2"><span class="text-xs text-muted uppercase tracking-wider font-semibold">Output Dokumen</span></div>
@@ -242,9 +246,12 @@ async function initApp(){
         populateLoginDropdown();
     });
     
-    // Load TP (Tujuan Pembelajaran)
-    unsubTP = db.collection('tps').onSnapshot(snap => {
+    // Realtime Listener untuk TP
+    unsubTP = db.collection('tps').orderBy('createdAt','asc').onSnapshot(snap => {
         tujuanPembelajaran = snap.docs.map(d => ({id:d.id, ...d.data()}));
+        // Jika halaman TP terbuka, re-render list
+        if(document.getElementById('tpListContainer')) renderTPList();
+        // Jika form create terbuka, update dropdown
         if(document.getElementById('cMapel')) updateTPDropdown();
     });
 }
@@ -309,12 +316,13 @@ function navigateTo(page){
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
     const t=document.querySelector(`.nav-item[data-page="${page}"]`);
     if(t)t.classList.add('active');
-    const titles={dashboard:'Dashboard', create:'Buat Soal',questions:'Bank Soal',print:'Cetak Soal',kisi:'Kisi-Kisi',scoring:'Kunci & Skor'};
+    const titles={dashboard:'Dashboard', tp:'Kelola Tujuan Pembelajaran', create:'Buat Soal',questions:'Bank Soal',print:'Cetak Soal',kisi:'Kisi-Kisi',scoring:'Kunci & Skor'};
     document.getElementById('pageTitle').textContent=titles[page]||page;
     closeSidebar();
     const c=document.getElementById('pageContent');
     switch(page){
         case 'dashboard':renderDashboard(c);break;
+        case 'tp':renderTP(c);break;
         case 'create':renderCreate(c);break;
         case 'questions':renderQuestions(c);break;
         case 'print':renderPrint(c);break;
@@ -343,6 +351,105 @@ function renderDashboard(c){
 }
 
 // ================================================================
+// KELOLA TP (FITUR BARU DI SIDEBAR)
+// ================================================================
+function renderTP(c){
+    const displayTP = currentUser.isAdmin ? tujuanPembelajaran : tujuanPembelajaran.filter(t => t.mapel===currentUser.mapel && t.kelas===currentUser.kelas);
+    
+    let filterHtml = '';
+    if(currentUser.isAdmin){
+        filterHtml = `<div class="flex gap-4 mb-4 p-4 bg-dark/30 rounded">
+            <div><label class="text-xs text-muted">Filter Mapel</label><select id="tpFilterMapel" class="input-field w-40" onchange="renderTPList()">${makeMapelOpt('')}</select></div>
+            <div><label class="text-xs text-muted">Filter Kelas</label><select id="tpFilterKelas" class="input-field w-40" onchange="renderTPList()"><option value="">Semua</option>${KELAS_LIST.map(k=>`<option value="${k}">${k}</option>`).join('')}</select></div>
+        </div>`;
+    }
+
+    c.innerHTML=`<div class="fade-in card">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="font-display text-lg font-bold text-light">Data Tujuan Pembelajaran (${displayTP.length})</h3>
+            <button onclick="openAddTPModal()" class="btn-primary text-sm"><i class="fas fa-plus mr-1"></i>Tambah TP</button>
+        </div>
+        ${filterHtml}
+        <div id="tpListContainer" class="space-y-2 max-h-[70vh] overflow-y-auto pr-2">
+            ${displayTP.length===0?'<p class="text-center text-muted py-8">Belum ada TP. Klik tombol Tambah untuk menambahkan.</p>':''}
+        </div>
+    </div>`;
+    
+    renderTPList();
+}
+
+function renderTPList(){
+    const container = document.getElementById('tpListContainer');
+    if(!container) return;
+    
+    let list = tujuanPembelajaran;
+    // Filter jika admin menggunakan dropdown
+    if(currentUser.isAdmin && document.getElementById('tpFilterMapel')){
+        const mapel = document.getElementById('tpFilterMapel').value;
+        const kelas = document.getElementById('tpFilterKelas').value;
+        if(mapel) list = list.filter(t => t.mapel === mapel);
+        if(kelas) list = list.filter(t => t.kelas === kelas);
+    } else if(!currentUser.isAdmin) {
+        list = list.filter(t => t.mapel===currentUser.mapel && t.kelas===currentUser.kelas);
+    }
+
+    if(list.length === 0) {
+        container.innerHTML = '<p class="text-center text-muted py-8">Tidak ada data TP untuk filter ini.</p>';
+        return;
+    }
+
+    container.innerHTML = list.map(t=>`
+        <div class="p-3 bg-dark/30 rounded flex justify-between items-start border-l-4 border-kopAccent">
+            <div class="flex-1 pr-4">
+                <div class="flex gap-2 mb-1">
+                    <span class="text-xs px-2 py-0.5 rounded bg-kopAccent/20 text-kopAccent">${getMapelSingkat(t.mapel)}</span>
+                    <span class="text-xs text-muted">${t.kelas}</span>
+                </div>
+                <p class="text-sm">${escHtml(t.text)}</p>
+            </div>
+            <button onclick="deleteTP('${t.id}')" class="text-danger hover:text-red-400 flex-shrink-0"><i class="fas fa-trash"></i></button>
+        </div>
+    `).join('');
+}
+
+function openAddTPModal(){
+    openModal(`
+        <h3 class="font-display text-lg font-bold text-light mb-4">Tambah Tujuan Pembelajaran</h3>
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div><label>Mapel</label><select id="mTPMapel" class="input-field" ${!currentUser.isAdmin?'disabled':''}>${makeMapelOpt(currentUser.mapel)}</select></div>
+                <div><label>Kelas</label><select id="mTPKelas" class="input-field" ${!currentUser.isAdmin?'disabled':''}>${makeKelasOpt(currentUser.kelas)}</select></div>
+            </div>
+            <div><label>Isi TP</label><textarea id="mTPText" class="input-field" rows="4" placeholder="Tuliskan Tujuan Pembelajaran..."></textarea></div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button onclick="closeModal()" class="btn-secondary">Batal</button>
+                <button onclick="saveTP()" class="btn-primary">Simpan</button>
+            </div>
+        </div>
+    `);
+}
+
+async function saveTP(){
+    const text = document.getElementById('mTPText').value.trim();
+    if(!text) { showToast('Isi TP tidak boleh kosong','error'); return; }
+    try {
+        await db.collection('tps').add({
+            mapel: document.getElementById('mTPMapel').value,
+            kelas: document.getElementById('mTPKelas').value,
+            text: text,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        showToast('TP berhasil disimpan!');
+        closeModal();
+    } catch(e) { showToast('Gagal menyimpan TP','error'); }
+}
+
+async function deleteTP(id){
+    if(!confirm('Hapus TP ini?')) return;
+    try { await db.collection('tps').doc(id).delete(); showToast('TP Dihapus'); } catch(e){ showToast('Gagal menghapus','error'); }
+}
+
+// ================================================================
 // BUAT SOAL 
 // ================================================================
 function renderCreate(c){
@@ -365,9 +472,10 @@ function renderCreate(c){
             <div><label>Skor</label><input type="number" id="cScore" class="input-field" value="1"></div>
         </div>
         
+        <!-- Dropdown TP Otomatis dari Database -->
         <div class="mb-4">
             <label>Tujuan Pembelajaran (TP)</label>
-            <select id="cTPSelect" class="input-field mb-2"><option value="">-- Pilih TP --</option></select>
+            <select id="cTPSelect" class="input-field mb-2"><option value="">-- Pilih TP (Dari Database) --</option></select>
             <textarea id="cTPManual" class="input-field" rows="2" placeholder="Atau tulis manual jika tidak ada di daftar..."></textarea>
         </div>
 
@@ -414,8 +522,8 @@ function updateTPDropdown(){
     if(!mapel || !kelas) return;
     const relevantTPs=tujuanPembelajaran.filter(t=>t.mapel===mapel && t.kelas===kelas);
     const sel=document.getElementById('cTPSelect');
-    sel.innerHTML='<option value="">-- Pilih TP --</option>';
-    relevantTPs.forEach(t=>{ sel.innerHTML+=`<option value="${escHtml(t.text)}">${escHtml(t.text.substring(0,50))}</option>`; });
+    sel.innerHTML='<option value="">-- Pilih TP (Dari Database) --</option>';
+    relevantTPs.forEach(t=>{ sel.innerHTML+=`<option value="${escHtml(t.text)}">${escHtml(t.text.substring(0,80))}${t.text.length>80?'...':''}</option>`; });
 }
 
 function onCreateKelasChange(){
@@ -437,9 +545,11 @@ function onCreateKelasChange(){
     const sel=document.getElementById('cAnswerSelect');
     sel.innerHTML='<option value="">--</option>'+letters.map(l=>`<option value="${l}">${l}</option>`).join('');
     sel.onchange=function(){document.getElementById('cAnswer').value=this.value;};
+    
+    // Update TP Dropdown saat kelas diganti
+    updateTPDropdown();
 }
 
-// TAMBAHKAN FUNGSI toggleOptions YANG HILANG
 function toggleOptions(){
     const type = document.getElementById('cType').value;
     const area = document.getElementById('optionsArea');
@@ -602,7 +712,6 @@ function renderBankList(list){
     `).join('');
 }
 
-// TAMBAHKAN FUNGSI editQuestion YANG HILANG
 function editQuestion(id){
     const q = questions.find(x => x.id === id);
     if(!q) return;
@@ -640,7 +749,7 @@ async function deleteQuestion(id){
 }
 
 // ================================================================
-// OUTPUT: CETAK SOAL (DENGAN KOP SURAT RAPI)
+// OUTPUT: CETAK SOAL (LOGO KECIL)
 // ================================================================
 function renderPrint(c){
     c.innerHTML=`<div class="fade-in no-print">
@@ -669,7 +778,8 @@ function refreshPrintPreview(){
 
     let html = `<div class="print-page">
     <div class="kop-surat">
-        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo Sekolah">
+        <!-- LOGO DIPERKECIL -->
+        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo Sekolah" style="height: 70px; width: auto;">
         <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN MAJALENGKA</h1>
             <h2>DINAS PENDIDIKAN</h2>
@@ -728,7 +838,7 @@ function refreshPrintPreview(){
 }
 
 // ================================================================
-// OUTPUT: KISI-KISI
+// OUTPUT: KISI-KISI (LOGO KECIL)
 // ================================================================
 function renderKisi(c){
     c.innerHTML=`<div class="fade-in no-print">
@@ -753,7 +863,13 @@ function refreshKisiPreview(){
     
     const data = questions.filter(q => q.mapel===mapel && q.kelas===kelas);
     let html = `<div class="print-page">
-    <div class="kop-surat"><h1>KISI-KISI PENULISAN SOAL</h1><h3>${getMapelName(mapel)} - ${kelas}</h3></div>
+    <div class="kop-surat">
+        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo Sekolah" style="height: 70px; width: auto;">
+        <div class="kop-text">
+            <h1>KISI-KISI PENULISAN SOAL</h1>
+            <h3>${getMapelName(mapel)} - ${kelas}</h3>
+        </div>
+    </div>
     <table class="print-table">
         <thead><tr><th>No</th><th>Indikator / TP</th><th>Soal</th><th>Kunci</th></tr></thead>
         <tbody>
@@ -772,7 +888,7 @@ function refreshKisiPreview(){
 }
 
 // ================================================================
-// OUTPUT: KUNCI & SKORING (SUDAH DIPERBAHI TOTAL)
+// OUTPUT: KUNCI & SKORING (LOGO KECIL)
 // ================================================================
 function renderScoring(c){
     c.innerHTML=`<div class="fade-in no-print">
@@ -799,7 +915,6 @@ function refreshScoringPreview(){
     const pg = data.filter(q=>q.type==='pg');
     const uraian = data.filter(q=>q.type==='uraian');
 
-    // PERBAIKAN: Format tabel PG menjadi 3 kolom yang benar (No|Kunci, No|Kunci, No|Kunci)
     let pgRows = '';
     for(let i = 0; i < pg.length; i += 3) {
         let row = '';
@@ -812,7 +927,13 @@ function refreshScoringPreview(){
     }
 
     let html = `<div class="print-page">
-    <div class="kop-surat"><h1>KUNCI JAWABAN</h1><h3>${getMapelName(mapel)} - ${kelas}</h3></div>
+    <div class="kop-surat">
+        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo Sekolah" style="height: 70px; width: auto;">
+        <div class="kop-text">
+            <h1>KUNCI JAWABAN</h1>
+            <h3>${getMapelName(mapel)} - ${kelas}</h3>
+        </div>
+    </div>
     <h4 style="margin-top:20px;font-weight:bold">Pilihan Ganda</h4>
     <table class="print-table">
         <thead><tr><th>No</th><th>Kunci</th><th>No</th><th>Kunci</th><th>No</th><th>Kunci</th></tr></thead>
