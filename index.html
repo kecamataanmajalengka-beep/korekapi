@@ -67,7 +67,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ==========================================
-   CETAK / PRINT STYLES - PROFESIONAL
+   CETAK / PRINT STYLES - PROFESIONAL (UPDATED)
    ========================================== */
 @media print {
     @page {
@@ -235,8 +235,8 @@ textarea.input-field{resize:vertical;min-height:40px}
 
     /* ITEM SOAL */
     .soal-item {
-        margin-bottom: 18px;
-        page-break-inside: avoid;
+        margin-bottom: 24px;
+        page-break-inside: avoid; /* Mencegah soal terpotong */
         clear: both;
     }
     .soal-num {
@@ -256,43 +256,45 @@ textarea.input-field{resize:vertical;min-height:40px}
         text-align: justify;
     }
 
-    /* === GAMBAR SAAT PRINT - UKURAN TERKONTROL === */
+    /* === GAMBAR SAAT PRINT - UKURAN TERKONTROL & SERAGAM === */
     .soal-img-print {
         display: block;
-        width: auto;
-        height: auto;
-        max-width: 240px;
-        max-height: 160px;
-        margin: 8px auto 8px 0;
-        object-fit: contain;
+        width: 220px; /* Lebar tetap */
+        height: 165px; /* Tinggi tetap (Rasio 4:3) */
+        object-fit: cover; /* Crop gambar agar pas di kotak tanpa gepeng */
+        object-position: center;
+        margin: 10px 0 10px 0;
+        border: 1px solid #ccc; /* Border tipis saat print agar terlihat */
         page-break-inside: avoid;
+        background-color: #eee;
     }
 
-    /* OPSI */
+    /* OPSI - 2 KOLOM (KIRI: A-B, KANAN: C-D) */
     .opsi-wrapper {
         margin-left: 34px;
-        margin-top: 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
+        margin-top: 10px;
+        display: grid; /* Menggunakan Grid agar mudah bagi 2 kolom */
+        grid-template-columns: 1fr 1fr; /* Dua kolom sama lebar */
+        column-gap: 20px; /* Jarak antar kolom */
+        row-gap: 8px; /* Jarak antar baris */
     }
     .opsi-row {
         display: flex;
-        align-items: flex-start;
+        align-items: flex-start; /* Sejajar atas jika ada teks panjang */
         gap: 8px;
         font-family: 'Times New Roman', serif;
         font-size: 12pt;
         line-height: 1.4;
-        text-align: justify;
     }
     .opsi-label {
         font-weight: bold;
         min-width: 22px;
         flex-shrink: 0;
     }
+    /* Gambar kecil di opsi */
     .opsi-img-print {
-        max-width: 90px;
-        max-height: 60px;
+        max-width: 70px;
+        max-height: 50px;
         display: inline-block;
         vertical-align: middle;
         margin-left: 8px;
@@ -420,30 +422,42 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
 
 /* Soal item di preview */
-.print-preview-sheet .soal-item { margin-bottom: 18px; clear: both; }
+.print-preview-sheet .soal-item { margin-bottom: 24px; clear: both; page-break-inside: avoid; }
 .print-preview-sheet .soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }
 .print-preview-sheet .soal-body { display: block; }
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 
-/* Gambar soal di preview - ukuran kecil & rapi */
+/* Gambar soal di preview - Sama dengan print: Fixed width/height, object-fit cover */
 .print-preview-sheet .soal-img-print {
     display: block;
-    width: auto;
-    height: auto;
-    max-width: 220px;
-    max-height: 140px;
-    margin: 8px auto 8px 0;
-    object-fit: contain;
+    width: 220px;
+    height: 165px;
+    object-fit: cover;
+    object-position: center;
+    margin: 10px 0 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background: #fafafa;
+    background-color: #f9f9f9;
 }
 
-/* Opsi di preview */
-.print-preview-sheet .opsi-wrapper { margin-left: 34px; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
-.print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; text-align: justify; }
+/* Opsi di preview - Grid 2 Kolom */
+.print-preview-sheet .opsi-wrapper { 
+    margin-left: 34px; 
+    margin-top: 10px; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    column-gap: 20px; 
+    row-gap: 8px; 
+}
+.print-preview-sheet .opsi-row { 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 8px; 
+    font-size: 12pt; 
+    line-height: 1.4; 
+}
 .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
-.print-preview-sheet .opsi-img-print { max-width: 80px; max-height: 55px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
+.print-preview-sheet .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
 
 /* Answer lines di preview */
 .print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
@@ -1190,15 +1204,19 @@ function doPrintSoal(){
     doc.write('.print-tp-text { font-family: "Times New Roman", serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }');
     doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
     doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
-    doc.write('.soal-item { margin-bottom: 18px; page-break-inside: avoid; clear: both; }');
+    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; clear: both; }');
     doc.write('.soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }');
     doc.write('.soal-body { display: block; }');
     doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
-    doc.write('.soal-img-print { display: block; width: auto; height: auto; max-width: 240px; max-height: 160px; margin: 8px auto 8px 0; object-fit: contain; page-break-inside: avoid; }');
-    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }');
+    
+    /* --- UPDATED PRINT CSS FOR IMAGES & LAYOUT --- */
+    doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
+    
+    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
     doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
     doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
-    doc.write('.opsi-img-print { max-width: 90px; max-height: 60px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
+    doc.write('.opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
+    
     doc.write('.answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
     doc.write('.ttd-section { margin-top: 50px; display: flex; justify-content: space-between; font-family: "Times New Roman", serif; font-size: 11pt; gap: 20px; }');
     doc.write('.ttd-box { text-align: center; min-width: 180px; flex: 1; }');
