@@ -67,7 +67,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ==========================================
-   CETAK / PRINT STYLES - PROFESIONAL (UPDATED)
+   CETAK / PRINT STYLES (UPDATED 2024)
    ========================================== */
 @media print {
     @page {
@@ -269,15 +269,23 @@ textarea.input-field{resize:vertical;min-height:40px}
         background-color: #eee;
     }
 
-    /* OPSI - 2 KOLOM (KIRI: A-B, KANAN: C-D) */
+    /* OPSI - LOGIKA BARU (1-2 Single Column, 3-6 Dual Column) */
     .opsi-wrapper {
         margin-left: 34px;
         margin-top: 10px;
-        display: grid; /* Menggunakan Grid agar mudah bagi 2 kolom */
-        grid-template-columns: 1fr 1fr; /* Dua kolom sama lebar */
-        column-gap: 20px; /* Jarak antar kolom */
-        row-gap: 8px; /* Jarak antar baris */
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
+    
+    /* Modifikasi khusus untuk kelas 3-6 agar jadi 2 kolom */
+    .opsi-wrapper.grid-2-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+        row-gap: 8px;
+    }
+
     .opsi-row {
         display: flex;
         align-items: flex-start; /* Sejajar atas jika ada teks panjang */
@@ -310,31 +318,9 @@ textarea.input-field{resize:vertical;min-height:40px}
         background-color: #fafafa;
     }
 
-    /* TANDA TANGAN */
-    .ttd-section {
-        margin-top: 50px;
-        display: flex;
-        justify-content: space-between;
-        font-family: 'Times New Roman', serif;
-        font-size: 11pt;
-        gap: 20px;
-    }
-    .ttd-box {
-        text-align: center;
-        min-width: 180px;
-        flex: 1;
-    }
-    .ttd-box .ttd-space { height: 70px; }
-    .ttd-box .ttd-line {
-        border-top: 1px solid #000;
-        padding-top: 4px;
-        font-weight: bold;
-        font-size: 11pt;
-    }
-    .ttd-box .ttd-nip {
-        font-size: 10pt;
-        font-weight: normal;
-    }
+    /* TANDA TANGAN - DIHAPUS SESUAI REQUEST */
+    /* Bagian ini disembunyikan agar tidak muncul di print */
+    .ttd-section { display: none; } 
 
     /* TABLE */
     .print-table {
@@ -427,7 +413,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .soal-body { display: block; }
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 
-/* Gambar soal di preview - Sama dengan print: Fixed width/height, object-fit cover */
+/* Gambar soal di preview */
 .print-preview-sheet .soal-img-print {
     display: block;
     width: 220px;
@@ -440,15 +426,22 @@ textarea.input-field{resize:vertical;min-height:40px}
     background-color: #f9f9f9;
 }
 
-/* Opsi di preview - Grid 2 Kolom */
+/* Opsi di preview - Dynamic Logic */
 .print-preview-sheet .opsi-wrapper { 
     margin-left: 34px; 
     margin-top: 10px; 
+    display: flex; 
+    flex-direction: column; 
+    width: 100%;
+}
+/* Class tambahan untuk grid 2 kolom di preview */
+.print-preview-sheet .opsi-wrapper.grid-2-col { 
     display: grid; 
     grid-template-columns: 1fr 1fr; 
     column-gap: 20px; 
     row-gap: 8px; 
 }
+
 .print-preview-sheet .opsi-row { 
     display: flex; 
     align-items: flex-start; 
@@ -462,12 +455,8 @@ textarea.input-field{resize:vertical;min-height:40px}
 /* Answer lines di preview */
 .print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
 
-/* TTD di preview */
-.print-preview-sheet .ttd-section { margin-top: 50px; display: flex; justify-content: space-between; font-size: 11pt; gap: 20px; }
-.print-preview-sheet .ttd-box { text-align: center; min-width: 180px; flex: 1; }
-.print-preview-sheet .ttd-box .ttd-space { height: 70px; }
-.print-preview-sheet .ttd-box .ttd-line { border-top: 1px solid #000; padding-top: 4px; font-weight: bold; font-size: 11pt; }
-.print-preview-sheet .ttd-box .ttd-nip { font-size: 10pt; font-weight: normal; }
+/* TTD di preview - DIHAPUS (Sembunyikan) */
+.print-preview-sheet .ttd-section { display: none; }
 
 /* Table di preview */
 .print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11pt; }
@@ -1142,7 +1131,7 @@ function deleteQuestion(id){
 }
 
 // ================================================================
-// CETAK SOAL - PREVIEW RAPI + PRINT RAPI
+// CETAK SOAL - LOGIC UPDATE (1-2 Single Col, 3-6 Dual Col)
 // ================================================================
 function renderPrint(c){
     c.innerHTML = '<div class="fade-in no-print">' +
@@ -1154,18 +1143,16 @@ function renderPrint(c){
             '</div>' +
             '<div class="mt-4 grid md:grid-cols-2 gap-4">' +
                 '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (Di Dokumen Cetak)</label><textarea id="printTPGlobal" class="input-field" rows="2" placeholder="Masukkan tujuan pembelajaran umum..."></textarea></div>' +
-                '<div><label class="text-xs text-muted mb-1 block">Nama Guru (Tanda Tangan)</label><input type="text" id="printGuruName" class="input-field" placeholder="Contoh: Siti Nurhaliza, S.Pd"></div>' +
+                <!-- Input Nama Guru disembunyikan/opsional karena TTD dihapus, tapi kita biarkan inputnya jika ingin referensi internal, tidak diprint -->
             '</div>' +
             '<div class="mt-4"><button onclick="doPrintSoal()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / Simpan sebagai PDF</button>' +
             '<p class="text-xs text-muted mt-2"><i class="fas fa-info-circle mr-1"></i>Pastikan di dialog print: Margins = None, Background Graphics = Aktifkan</p></div>' +
         '</div>' +
         '<div id="printPreviewContainer"></div>' +
     '</div>';
-    // Delay agar elemen ada dulu
     setTimeout(refreshPrintPreview, 100);
 }
 
-// Fungsi cetak khusus: copy konten ke iframe agar terbebas dari style app
 function doPrintSoal(){
     var sheet = document.querySelector('.print-preview-sheet');
     if(!sheet){ showToast('Tidak ada preview untuk dicetak','error'); return; }
@@ -1209,36 +1196,31 @@ function doPrintSoal(){
     doc.write('.soal-body { display: block; }');
     doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
     
-    /* --- UPDATED PRINT CSS FOR IMAGES & LAYOUT --- */
     doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
     
-    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
+    /* LOGIC OPSI PRINT */
+    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 10px; display: flex; flex-direction: column; width: 100%; }');
+    doc.write('.opsi-wrapper.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
     doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
     doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
     doc.write('.opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
     
     doc.write('.answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
-    doc.write('.ttd-section { margin-top: 50px; display: flex; justify-content: space-between; font-family: "Times New Roman", serif; font-size: 11pt; gap: 20px; }');
-    doc.write('.ttd-box { text-align: center; min-width: 180px; flex: 1; }');
-    doc.write('.ttd-box .ttd-space { height: 70px; }');
-    doc.write('.ttd-box .ttd-line { border-top: 1px solid #000; padding-top: 4px; font-weight: bold; font-size: 11pt; }');
-    doc.write('.ttd-box .ttd-nip { font-size: 10pt; font-weight: normal; }');
+    /* HAPUS TTD PRINT */
+    doc.write('.ttd-section { display: none; }'); 
+
     doc.write('</style></head><body>');
     doc.write(sheet.innerHTML);
     doc.write('</body></html>');
     doc.close();
 
-    // Tunggu gambar dimuat lalu cetak
     setTimeout(function(){
         var imgs = doc.querySelectorAll('img');
-        var loaded = 0;
-        var total = imgs.length;
+        var loaded = 0, total = imgs.length;
         
         if(total === 0){
-            iframe.contentWindow.focus();
-            iframe.contentWindow.print();
-            setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
-            return;
+            iframe.contentWindow.focus(); iframe.contentWindow.print();
+            setTimeout(function(){ document.body.removeChild(iframe); }, 3000); return;
         }
         
         imgs.forEach(function(img){
@@ -1249,14 +1231,11 @@ function doPrintSoal(){
         function checkAll(){
             if(loaded >= total){
                 setTimeout(function(){
-                    iframe.contentWindow.focus();
-                    iframe.contentWindow.print();
+                    iframe.contentWindow.focus(); iframe.contentWindow.print();
                     setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
                 }, 500);
             }
         }
-        
-        // Fallback: cetak anyway setelah 5 detik
         setTimeout(function(){
             try{ iframe.contentWindow.focus(); iframe.contentWindow.print(); } catch(e){}
             setTimeout(function(){ try{ document.body.removeChild(iframe); }catch(e){} }, 3000);
@@ -1272,8 +1251,12 @@ function refreshPrintPreview(){
     var container = document.getElementById('printPreviewContainer');
     if(!mapel || !kelas){ container.innerHTML='<p class="text-center text-muted py-20">Pilih mapel dan kelas terlebih dahulu</p>'; return; }
 
+    // Cek Kelas untuk logika layout opsi
+    var kelasNum = parseInt((kelas||'').replace('Kelas ',''))||0;
+    var isDualColumn = kelasNum >= 3; // Kelas 3,4,5,6 pakai 2 kolom
+
     var globalTP = (document.getElementById('printTPGlobal').value || '').trim();
-    var guruName = (document.getElementById('printGuruName').value || '').trim();
+    var guruName = (document.getElementById('printGuruName') && document.getElementById('printGuruName').value) ? document.getElementById('printGuruName').value.trim() : '';
     var data = questions.filter(function(q){ return q.mapel===mapel && q.kelas===kelas; });
     var pg = data.filter(function(q){ return q.type==='pg'; });
     var uraian = data.filter(function(q){ return q.type==='uraian'; });
@@ -1281,21 +1264,16 @@ function refreshPrintPreview(){
 
     var html = '<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page">';
 
-    // KOP
     html += '<div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Pemerintah Kabupaten Majalengka</h1><h1>Dinas Pendidikan dan Kebudayaan</h1><h2>SD Negeri 1 Majalengka Kulon</h2><p class="kop-sub">Jl. KH. Abdul Halim No. 123, Kec. Majalengka, Kab. Majalengka 45411</p></div></div>';
 
-    // JUDUL
     html += '<div class="ujian-title"><h3>Ulangan Tengah Semester (UTS)</h3><p>'+getMapelName(mapel)+'</p></div>';
 
-    // HEADER SISWA
     html += '<div class="soal-header"><table><tr><td width="100">Nama</td><td width="12">:</td><td class="dot-cell"></td></tr><tr><td>Kelas</td><td>:</td><td>'+kelas+'</td></tr><tr><td>Hari / Tanggal</td><td>:</td><td class="dot-cell"></td></tr></table></div>';
 
-    // TP
     if(globalTP){
         html += '<div class="print-tp-section"><div class="print-tp-title">Tujuan Pembelajaran:</div><div class="print-tp-text">'+escHtml(globalTP)+'</div></div>';
     }
 
-    // PG
     if(pg.length > 0){
         html += '<div class="section-heading">I. Pilihan Ganda</div>';
         html += '<p class="petunjuk-soal">Pilihlah satu jawaban yang paling tepat!</p>';
@@ -1303,7 +1281,11 @@ function refreshPrintPreview(){
             html += '<div class="soal-item"><span class="soal-num">'+(i+1)+'.</span><div class="soal-body">';
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
             if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
-            html += '<div class="opsi-wrapper">';
+            
+            // LOGIC OPSI: Kelas 1-2 Single Col, Kelas 3-6 Dual Col
+            var gridClass = isDualColumn ? 'grid-2-col' : '';
+            html += '<div class="opsi-wrapper '+gridClass+'">';
+            
             (q.options||[]).forEach(function(opt, oi){
                 var letter = String.fromCharCode(65+oi);
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
@@ -1313,7 +1295,6 @@ function refreshPrintPreview(){
         });
     }
 
-    // URAIAN
     if(uraian.length > 0){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
         html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
@@ -1325,13 +1306,10 @@ function refreshPrintPreview(){
         });
     }
 
-    // TTD
-    html += '<div class="ttd-section">';
-    html += '<div class="ttd-box">Mengetahui,<br>Kepala Sekolah<br><div class="ttd-space"></div><div class="ttd-line">NIP. ................................</div></div>';
-    html += '<div class="ttd-box">Majalengka, ........................<br>Guru Mata Pelajaran<br><div class="ttd-space"></div><div class="ttd-line">'+(guruName?escHtml(guruName):'........................................')+'<br><span class="ttd-nip">NIP. ................................</span></div></div>';
-    html += '</div>';
+    // TTD DIHAPUS
+    html += '<div class="ttd-section"></div>';
 
-    html += '</div></div></div>'; // print-page, print-preview-sheet, print-preview-wrap
+    html += '</div></div></div>';
     container.innerHTML = html;
 }
 
@@ -1390,7 +1368,6 @@ function refreshScoringPreview(){
     container.innerHTML=html;
 }
 
-// Fungsi cetak generik untuk Kisi & Kunci (menggunakan iframe juga)
 function doPrintGeneric(containerId){
     var sheet = document.querySelector('#'+containerId+' .print-preview-sheet');
     if(!sheet){ showToast('Tidak ada preview','error'); return; }
