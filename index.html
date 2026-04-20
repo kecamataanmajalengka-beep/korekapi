@@ -18,7 +18,6 @@ tailwind.config={theme:{extend:{colors:{kop:'#1a2744',kopAccent:'#c9a84c',dark:'
 body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min-height:100vh}
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#182538}::-webkit-scrollbar-thumb{background:#2a3f5f;border-radius:3px}
 
-/* ===== LOGIN ===== */
 .login-bg{background:linear-gradient(135deg,#0f1923 0%,#1a2744 40%,#182538 100%);position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;justify-content:center}
 .login-bg::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(201,168,76,0.07) 0%,transparent 70%);top:-150px;right:-150px;border-radius:50%;animation:floatBlob 8s ease-in-out infinite}
 .login-bg::after{content:'';position:absolute;width:450px;height:450px;background:radial-gradient(circle,rgba(6,182,212,0.05) 0%,transparent 70%);bottom:-80px;left:-80px;border-radius:50%;animation:floatBlob 10s ease-in-out infinite reverse}
@@ -26,14 +25,12 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 
 .glass{background:rgba(24,37,56,0.85);backdrop-filter:blur(24px);border:1px solid rgba(42,63,95,0.5)}
 
-/* ===== SIDEBAR ===== */
 .sidebar{width:260px;min-height:100vh;background:linear-gradient(180deg,#1a2744 0%,#0f1923 100%);border-right:1px solid #2a3f5f;position:fixed;left:0;top:0;z-index:40;transition:transform .3s ease}
 .main-content{margin-left:260px;transition:margin-left .3s ease}
 .nav-item{padding:11px 20px;cursor:pointer;border-left:3px solid transparent;transition:all .2s;display:flex;align-items:center;gap:12px;font-size:14px;color:#7a8ba5;user-select:none}
 .nav-item:hover{background:rgba(42,63,95,0.3);color:#e8ecf1}
 .nav-item.active{background:rgba(201,168,76,0.08);border-left-color:#c9a84c;color:#c9a84c;font-weight:600}
 
-/* ===== BUTTONS ===== */
 .btn-primary{background:linear-gradient(135deg,#c9a84c,#b8943f);color:#1a2744;font-weight:700;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;font-size:14px;font-family:'Source Sans 3',sans-serif;display:inline-flex;align-items:center;justify-content:center}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(201,168,76,0.3)}
 .btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none}
@@ -42,24 +39,20 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 .btn-danger{background:transparent;border:1px solid #ef4444;color:#ef4444;padding:8px 16px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:13px;font-family:'Source Sans 3',sans-serif}
 .btn-danger:hover{background:#ef4444;color:white}
 
-/* ===== FORM ===== */
 .input-field{background:#0f1923;border:1px solid #2a3f5f;color:#e8ecf1;padding:10px 14px;border-radius:8px;width:100%;font-size:14px;transition:border-color .2s;font-family:'Source Sans 3',sans-serif}
 .input-field:focus{outline:none;border-color:#c9a84c;box-shadow:0 0 0 2px rgba(201,168,76,0.15)}
 .input-field:disabled{opacity:0.5;cursor:not-allowed}
 .input-field option{background:#182538;color:#e8ecf1}
 textarea.input-field{resize:vertical;min-height:40px}
 
-/* ===== CARD ===== */
 .card{background:#182538;border:1px solid #2a3f5f;border-radius:12px;padding:24px}
 
-/* ===== TOAST ===== */
 .toast{position:fixed;top:20px;right:20px;z-index:9999;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:600;animation:slideIn .3s ease;max-width:420px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
 .toast-success{background:linear-gradient(135deg,#166534,#15803d);color:white;border:1px solid #22c55e}
 .toast-error{background:linear-gradient(135deg,#7f1d1d,#991b1b);color:white;border:1px solid #ef4444}
 .toast-info{background:linear-gradient(135deg,#164e63,#155e75);color:white;border:1px solid #06b6d4}
 @keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
 
-/* ===== MODAL ===== */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
 .modal-content{background:#182538;border:1px solid #2a3f5f;border-radius:16px;padding:32px;max-width:600px;width:100%;animation:fadeIn .3s ease;max-height:90vh;overflow-y:auto}
 
@@ -69,18 +62,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s ease forwards}
 
-/* ===== IMAGE STYLES (APP & PRINT) ===== */
-/* Di aplikasi (preview) gambar jangan terlalu besar */
-.img-preview { 
-    max-width: 100%; 
-    max-height: 250px; /* Batas tinggi agar tidak scroll terlalu panjang */
-    object-fit: contain;  /* Jaga rasio */
-    border-radius: 6px; 
-    margin-top: 8px; 
-    border: 1px solid #2a3f5f; 
-    background: #0f1923;
-}
-
+.img-preview{max-width:100%;max-height:180px;object-fit:contain;border-radius:6px;margin-top:8px;border:1px solid #2a3f5f;background:#0f1923}
 .loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#c9a84c;animation:spin 1s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -103,7 +85,6 @@ textarea.input-field{resize:vertical;min-height:40px}
         line-height: 1.4;
     }
 
-    /* Sembunyikan semua UI aplikasi */
     #sidebar, #mainArea > header, #sidebarOverlay, .no-print,
     #toastContainer, #modalOverlay, #loginPage, .card {
         display: none !important;
@@ -115,6 +96,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         width: 100% !important;
         height: auto !important;
         background: white !important;
+        overflow: visible !important;
     }
 
     #pageContent {
@@ -123,6 +105,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         width: 100% !important;
         background: white !important;
         color: black !important;
+        overflow: visible !important;
     }
 
     .print-page {
@@ -137,7 +120,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         page-break-after: avoid;
     }
 
-    /* ---- KOP SURAT ---- */
+    /* KOP SURAT */
     .kop-surat {
         text-align: center;
         padding-bottom: 12px;
@@ -149,7 +132,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         border-bottom: 3px double #000;
     }
     .kop-surat img {
-        height: 70px; /* Sedikit lebih besar di kertas */
+        height: 70px;
         width: auto;
         flex-shrink: 0;
     }
@@ -178,7 +161,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         color: #333;
     }
 
-    /* ---- JUDUL UJIAN ---- */
+    /* JUDUL UJIAN */
     .ujian-title {
         text-align: center;
         margin-bottom: 20px;
@@ -199,7 +182,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         font-weight: bold;
     }
 
-    /* ---- HEADER SISWA ---- */
+    /* HEADER SISWA */
     .soal-header {
         margin-bottom: 20px;
     }
@@ -217,7 +200,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         min-width: 200px;
     }
 
-    /* ---- TUJUAN PEMBELAJARAN DI PRINT ---- */
+    /* TP */
     .print-tp-section {
         margin-bottom: 20px;
         padding: 10px;
@@ -239,7 +222,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         line-height: 1.4;
     }
 
-    /* ---- SECTION HEADING (I. PG, II. Uraian) ---- */
+    /* SECTION HEADING */
     .section-heading {
         font-family: 'Times New Roman', serif;
         font-weight: bold;
@@ -250,7 +233,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         margin-top: 10px;
     }
 
-    /* ---- ITEM SOAL ---- */
+    /* ITEM SOAL */
     .soal-item {
         margin-bottom: 18px;
         page-break-inside: avoid;
@@ -272,19 +255,20 @@ textarea.input-field{resize:vertical;min-height:40px}
         display: block;
         text-align: justify;
     }
-    
-    /* ---- GAMBAR SAAT PRINT ---- */
-    .soal-img {
+
+    /* === GAMBAR SAAT PRINT - UKURAN TERKONTROL === */
+    .soal-img-print {
         display: block;
-        max-width: 100%; /* Jangan lebihi margin kertas */
-        max-height: 250px; /* Batas tinggi di kertas */
         width: auto;
         height: auto;
-        margin: 10px auto;
+        max-width: 240px;
+        max-height: 160px;
+        margin: 8px auto 8px 0;
         object-fit: contain;
+        page-break-inside: avoid;
     }
 
-    /* ---- OPSI ---- */
+    /* OPSI */
     .opsi-wrapper {
         margin-left: 34px;
         margin-top: 8px;
@@ -306,16 +290,16 @@ textarea.input-field{resize:vertical;min-height:40px}
         min-width: 22px;
         flex-shrink: 0;
     }
-    .opsi-img {
-        max-width: 120px;
-        max-height: 80px;
+    .opsi-img-print {
+        max-width: 90px;
+        max-height: 60px;
         display: inline-block;
         vertical-align: middle;
         margin-left: 8px;
         object-fit: contain;
+        page-break-inside: avoid;
     }
 
-    /* ---- GARIS UNTUK JAWABAN URAIAN ---- */
     .answer-lines {
         margin-top: 10px;
         border: 1px dashed #bbb;
@@ -324,7 +308,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         background-color: #fafafa;
     }
 
-    /* ---- TANDA TANGAN ---- */
+    /* TANDA TANGAN */
     .ttd-section {
         margin-top: 50px;
         display: flex;
@@ -338,9 +322,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         min-width: 180px;
         flex: 1;
     }
-    .ttd-box .ttd-space {
-        height: 70px;
-    }
+    .ttd-box .ttd-space { height: 70px; }
     .ttd-box .ttd-line {
         border-top: 1px solid #000;
         padding-top: 4px;
@@ -352,7 +334,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         font-weight: normal;
     }
 
-    /* ---- TABLE (KISI & KUNCI) ---- */
+    /* TABLE */
     .print-table {
         width: 100%;
         border-collapse: collapse;
@@ -375,10 +357,112 @@ textarea.input-field{resize:vertical;min-height:40px}
         font-size: 10.5pt;
         text-transform: uppercase;
     }
-    .print-table td.center {
-        text-align: center;
-    }
+    .print-table td.center { text-align: center; }
 }
+
+/* ===== PREVIEW CETAK DI APLIKASI ===== */
+/* Container preview meniru kertas A4 */
+.print-preview-wrap {
+    background: #f3f4f6;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+}
+.print-preview-sheet {
+    background: white;
+    color: black;
+    width: 210mm;
+    max-width: 100%;
+    min-height: 297mm;
+    padding: 1.5cm 2cm 2cm 2cm;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12pt;
+    line-height: 1.4;
+    overflow: hidden;
+}
+
+/* KOP di preview */
+.print-preview-sheet .kop-surat {
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    border-bottom: 3px double #000;
+}
+.print-preview-sheet .kop-surat img { height: 65px; width: auto; }
+.print-preview-sheet .kop-text { text-align: center; line-height: 1.2; }
+.print-preview-sheet .kop-text h1 { font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .kop-text h2 { font-size: 14pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .kop-text .kop-sub { font-size: 9pt; margin-top: 2px; color: #555; }
+
+/* Judul di preview */
+.print-preview-sheet .ujian-title { text-align: center; margin-bottom: 20px; }
+.print-preview-sheet .ujian-title h3 { font-size: 14pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .ujian-title p { font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
+
+/* Header siswa di preview */
+.print-preview-sheet .soal-header { margin-bottom: 20px; }
+.print-preview-sheet .soal-header table { width: 100%; font-size: 12pt; }
+.print-preview-sheet .soal-header td { padding: 2px 0; vertical-align: bottom; }
+.print-preview-sheet .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
+
+/* TP di preview */
+.print-preview-sheet .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; }
+.print-preview-sheet .print-tp-title { font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
+.print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: justify; }
+
+/* Section heading di preview */
+.print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
+
+/* Soal item di preview */
+.print-preview-sheet .soal-item { margin-bottom: 18px; clear: both; }
+.print-preview-sheet .soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }
+.print-preview-sheet .soal-body { display: block; }
+.print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
+
+/* Gambar soal di preview - ukuran kecil & rapi */
+.print-preview-sheet .soal-img-print {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 220px;
+    max-height: 140px;
+    margin: 8px auto 8px 0;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fafafa;
+}
+
+/* Opsi di preview */
+.print-preview-sheet .opsi-wrapper { margin-left: 34px; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }
+.print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; text-align: justify; }
+.print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+.print-preview-sheet .opsi-img-print { max-width: 80px; max-height: 55px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
+
+/* Answer lines di preview */
+.print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
+
+/* TTD di preview */
+.print-preview-sheet .ttd-section { margin-top: 50px; display: flex; justify-content: space-between; font-size: 11pt; gap: 20px; }
+.print-preview-sheet .ttd-box { text-align: center; min-width: 180px; flex: 1; }
+.print-preview-sheet .ttd-box .ttd-space { height: 70px; }
+.print-preview-sheet .ttd-box .ttd-line { border-top: 1px solid #000; padding-top: 4px; font-weight: bold; font-size: 11pt; }
+.print-preview-sheet .ttd-box .ttd-nip { font-size: 10pt; font-weight: normal; }
+
+/* Table di preview */
+.print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 11pt; }
+.print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+.print-preview-sheet .print-table th { background-color: #eee; text-align: center; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; }
+.print-preview-sheet .print-table td.center { text-align: center; }
+
+/* Petunjuk soal di preview */
+.print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 </style>
 </head>
 <body>
@@ -469,7 +553,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 // ================================================================
 // FIREBASE CONFIG
 // ================================================================
-const firebaseConfig = {
+var firebaseConfig = {
     apiKey: "AIzaSyC0Hs7SUgPAeQ_JaotHUJL5m6nIhCRif-8",
     authDomain: "pembuatan-soal.firebaseapp.com",
     projectId: "pembuatan-soal",
@@ -478,13 +562,13 @@ const firebaseConfig = {
     appId: "1:56200686194:web:eb2de00c9d152d87bcf0eb"
 };
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
+var db = firebase.firestore();
+var storage = firebase.storage();
 
 // ================================================================
 // DATA MASTER
 // ================================================================
-const MAPEL_LIST = [
+var MAPEL_LIST = [
     {id:'ppkn',nama:'Pendidikan Pancasila',singkat:'PPKn'},
     {id:'mat',nama:'Matematika',singkat:'Mat'},
     {id:'bin',nama:'Bahasa Indonesia',singkat:'B.Indo'},
@@ -495,12 +579,12 @@ const MAPEL_LIST = [
     {id:'pai',nama:'PAI',singkat:'PAI'},
     {id:'pjok',nama:'PJOK',singkat:'PJOK'}
 ];
-const KELAS_LIST = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
+var KELAS_LIST = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
 
-function getMaxOpt(kelas){ var n=parseInt(kelas.replace('Kelas ',''))||0; return n<=2?3:4; }
-function getOptLetters(kelas){ return ['A','B','C','D'].slice(0,getMaxOpt(kelas)); }
-function getMapelName(id){ return (MAPEL_LIST.find(function(m){return m.id===id;})||{}).nama||id; }
-function getMapelSingkat(id){ return (MAPEL_LIST.find(function(m){return m.id===id;})||{}).singkat||id; }
+function getMaxOpt(k){ var n=parseInt((k||'').replace('Kelas ',''))||0; return n<=2?3:4; }
+function getOptLetters(k){ return ['A','B','C','D'].slice(0,getMaxOpt(k)); }
+function getMapelName(id){ var m=MAPEL_LIST.find(function(x){return x.id===id;}); return m?m.nama:id; }
+function getMapelSingkat(id){ var m=MAPEL_LIST.find(function(x){return x.id===id;}); return m?m.singkat:id; }
 function escHtml(s){ if(!s) return ''; var d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; }
 
 // ================================================================
@@ -557,33 +641,30 @@ function closeSidebar(){
     document.getElementById('sidebarOverlay').classList.remove('active');
 }
 
-// Helper: buat option mapel
 function makeMapelOpt(sel){
     if(currentUser && currentUser.isAdmin){
-        return MAPEL_LIST.map(function(m){ return '<option value="'+m.id+'"'+(m.id===sel?' selected':'')+'>'+m.nama+'</option>'; }).join('');
+        var h = '<option value="">-- Pilih --</option>';
+        MAPEL_LIST.forEach(function(m){ h += '<option value="'+m.id+'"'+(m.id===sel?' selected':'')+'>'+m.nama+'</option>'; });
+        return h;
     }
-    if(currentUser){
-        return '<option value="'+currentUser.mapel+'" selected>'+getMapelName(currentUser.mapel)+'</option>';
-    }
+    if(currentUser) return '<option value="'+currentUser.mapel+'" selected>'+getMapelName(currentUser.mapel)+'</option>';
     return '<option value="">-- Pilih --</option>';
 }
 
-// Helper: buat option kelas
 function makeKelasOpt(sel){
     if(currentUser && currentUser.isAdmin){
-        return KELAS_LIST.map(function(k){ return '<option value="'+k+'"'+(k===sel?' selected':'')+'>'+k+'</option>'; }).join('');
+        var h = '<option value="">-- Pilih --</option>';
+        KELAS_LIST.forEach(function(k){ h += '<option value="'+k+'"'+(k===sel?' selected':'')+'>'+k+'</option>'; });
+        return h;
     }
-    if(currentUser){
-        return '<option value="'+currentUser.kelas+'" selected>'+currentUser.kelas+'</option>';
-    }
+    if(currentUser) return '<option value="'+currentUser.kelas+'" selected>'+currentUser.kelas+'</option>';
     return '<option value="">-- Pilih --</option>';
 }
 
 // ================================================================
-// FIREBASE: INIT
+// FIREBASE INIT
 // ================================================================
 function initApp(){
-    // Cek apakah collection accounts sudah ada datanya
     db.collection('accounts').limit(1).get().then(function(snap){
         if(snap.empty){
             var batch = db.batch();
@@ -599,13 +680,11 @@ function initApp(){
         showToast('Data akun siap','info');
     }).catch(function(){});
 
-    // Listener accounts
     db.collection('accounts').onSnapshot(function(snap){
         accounts = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
         populateLoginDropdown();
     });
 
-    // Listener TP
     unsubTP = db.collection('tps').orderBy('createdAt','asc').onSnapshot(function(snap){
         tujuanPembelajaran = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
         if(document.getElementById('tpListContainer')) renderTPList();
@@ -617,25 +696,19 @@ function populateLoginDropdown(){
     var sel = document.getElementById('loginMapel');
     sel.innerHTML = '<option value="">-- Pilih Mata Pelajaran --</option>';
     sel.innerHTML += '<option value="admin">Admin (Semua Akses)</option>';
-    MAPEL_LIST.forEach(function(m){
-        sel.innerHTML += '<option value="'+m.id+'">'+m.nama+'</option>';
-    });
+    MAPEL_LIST.forEach(function(m){ sel.innerHTML += '<option value="'+m.id+'">'+m.nama+'</option>'; });
     sel.disabled = false;
     sel.onchange = function(){
         var ks = document.getElementById('loginKelas');
         document.getElementById('loginError').classList.add('hidden');
         if(this.value==='admin'){
-            ks.innerHTML = '<option value="Semua">Semua Kelas</option>';
-            ks.disabled = false;
+            ks.innerHTML = '<option value="Semua">Semua Kelas</option>'; ks.disabled = false;
         } else if(this.value){
             ks.disabled = false;
             ks.innerHTML = '<option value="">-- Pilih Kelas --</option>';
-            KELAS_LIST.forEach(function(k){
-                ks.innerHTML += '<option value="'+k+'">'+k+'</option>';
-            });
+            KELAS_LIST.forEach(function(k){ ks.innerHTML += '<option value="'+k+'">'+k+'</option>'; });
         } else {
-            ks.innerHTML = '<option value="">-- Pilih Kelas --</option>';
-            ks.disabled = true;
+            ks.innerHTML = '<option value="">-- Pilih Kelas --</option>'; ks.disabled = true;
         }
     };
 }
@@ -648,18 +721,13 @@ function doLogin(){
     var kelas = document.getElementById('loginKelas').value;
     var pass  = document.getElementById('loginPass').value;
     var errEl = document.getElementById('loginError');
-
     if(!mapel){ errEl.textContent='Pilih mapel terlebih dahulu'; errEl.classList.remove('hidden'); return; }
     if(!kelas){ errEl.textContent='Pilih kelas terlebih dahulu'; errEl.classList.remove('hidden'); return; }
-
     var acc = null;
-    for(var i=0; i<accounts.length; i++){
-        if(accounts[i].mapel===mapel && accounts[i].kelas===kelas && accounts[i].password===pass){
-            acc = accounts[i]; break;
-        }
+    for(var i=0;i<accounts.length;i++){
+        if(accounts[i].mapel===mapel && accounts[i].kelas===kelas && accounts[i].password===pass){ acc=accounts[i]; break; }
     }
     if(!acc){ errEl.textContent='Password salah!'; errEl.classList.remove('hidden'); return; }
-
     currentUser = { mapel:acc.mapel, kelas:acc.kelas, isAdmin:acc.mapel==='admin' };
     document.getElementById('loginPage').style.display = 'none';
     document.getElementById('mainPage').classList.remove('hidden');
@@ -668,8 +736,7 @@ function doLogin(){
 }
 
 function doLogout(){
-    currentUser = null;
-    currentEditId = null;
+    currentUser = null; currentEditId = null;
     if(unsubQ) unsubQ();
     document.getElementById('mainPage').classList.add('hidden');
     document.getElementById('loginPage').style.display = '';
@@ -683,7 +750,6 @@ function initMainPage(){
     document.getElementById('topbarInfo').innerHTML = currentUser.isAdmin
         ? '<i class="fas fa-crown mr-1 text-kopAccent"></i>Admin'
         : '<i class="fas fa-graduation-cap mr-1"></i>' + getMapelSingkat(currentUser.mapel) + ' - ' + currentUser.kelas;
-
     unsubQ = db.collection('questions').orderBy('createdAt','asc').onSnapshot(function(snap){
         questions = snap.docs.map(function(d){ return Object.assign({id:d.id}, d.data()); });
         navigateTo('dashboard');
@@ -697,11 +763,9 @@ function navigateTo(page){
     document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
     var t = document.querySelector('.nav-item[data-page="'+page+'"]');
     if(t) t.classList.add('active');
-
     var titles = {dashboard:'Dashboard', tp:'Kelola Tujuan Pembelajaran', create:'Buat Soal', questions:'Bank Soal', print:'Cetak Soal', kisi:'Kisi-Kisi', scoring:'Kunci & Skor'};
     document.getElementById('pageTitle').textContent = titles[page] || page;
     closeSidebar();
-
     var c = document.getElementById('pageContent');
     switch(page){
         case 'dashboard': renderDashboard(c); break;
@@ -724,12 +788,8 @@ document.getElementById('sidebarNav').addEventListener('click', function(e){
 // ================================================================
 function renderDashboard(c){
     var myQ = currentUser.isAdmin ? questions : questions.filter(function(q){ return q.mapel===currentUser.mapel && q.kelas===currentUser.kelas; });
-    var totalSkor = 0, byPg = 0, byUr = 0;
-    myQ.forEach(function(q){
-        totalSkor += (q.score || 0);
-        if(q.type==='pg') byPg++; else byUr++;
-    });
-
+    var totalSkor=0, byPg=0, byUr=0;
+    myQ.forEach(function(q){ totalSkor+=(q.score||0); if(q.type==='pg') byPg++; else byUr++; });
     c.innerHTML = '<div class="fade-in grid grid-cols-2 md:grid-cols-4 gap-4">' +
         '<div class="card text-center border-l-4 border-kopAccent"><div class="text-3xl font-bold text-kopAccent">'+myQ.length+'</div><div class="text-xs text-muted mt-1">Total Soal</div></div>' +
         '<div class="card text-center border-l-4 border-info"><div class="text-3xl font-bold text-info">'+byPg+'</div><div class="text-xs text-muted mt-1">Pilihan Ganda</div></div>' +
@@ -749,22 +809,18 @@ function renderTP(c){
             '<div class="w-44"><label class="text-xs text-muted">Filter Kelas</label><select id="tpFilterKelas" class="input-field" onchange="renderTPList()"><option value="">Semua</option>'+KELAS_LIST.map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('')+'</select></div>' +
         '</div>';
     }
-
     c.innerHTML = '<div class="fade-in card">' +
         '<div class="flex flex-wrap justify-between items-center mb-4 gap-3">' +
             '<h3 class="font-display text-lg font-bold text-light">Tujuan Pembelajaran</h3>' +
             '<button onclick="openAddTPModal()" class="btn-primary text-sm"><i class="fas fa-plus mr-1"></i>Tambah TP</button>' +
-        '</div>' +
-        filterHtml +
-        '<div id="tpListContainer" class="space-y-2 max-h-[70vh] overflow-y-auto pr-2"></div>' +
-    '</div>';
+        '</div>' + filterHtml +
+        '<div id="tpListContainer" class="space-y-2 max-h-[70vh] overflow-y-auto pr-2"></div></div>';
     renderTPList();
 }
 
 function renderTPList(){
     var container = document.getElementById('tpListContainer');
     if(!container) return;
-
     var list = tujuanPembelajaran.slice();
     if(currentUser.isAdmin){
         var fm = document.getElementById('tpFilterMapel');
@@ -774,51 +830,26 @@ function renderTPList(){
     } else {
         list = list.filter(function(t){return t.mapel===currentUser.mapel && t.kelas===currentUser.kelas;});
     }
-
-    if(list.length===0){
-        container.innerHTML = '<p class="text-center text-muted py-10"><i class="fas fa-inbox text-3xl mb-3 block opacity-30"></i>Belum ada data TP</p>';
-        return;
-    }
+    if(list.length===0){ container.innerHTML = '<p class="text-center text-muted py-10"><i class="fas fa-inbox text-3xl mb-3 block opacity-30"></i>Belum ada data TP</p>'; return; }
     container.innerHTML = list.map(function(t){
         return '<div class="p-3 bg-dark/30 rounded-lg flex justify-between items-start border-l-4 border-kopAccent hover:bg-dark/50 transition-colors">' +
-            '<div class="flex-1 pr-4">' +
-                '<div class="flex gap-2 mb-1 flex-wrap">' +
-                    '<span class="text-xs px-2 py-0.5 rounded bg-kopAccent/20 text-kopAccent font-semibold">'+getMapelSingkat(t.mapel)+'</span>' +
-                    '<span class="text-xs text-muted">'+t.kelas+'</span>' +
-                '</div>' +
-                '<p class="text-sm leading-relaxed">'+escHtml(t.text)+'</p>' +
-            '</div>' +
-            '<button onclick="deleteTP(\''+t.id+'\')" class="text-danger/60 hover:text-danger flex-shrink-0 p-1"><i class="fas fa-trash text-xs"></i></button>' +
-        '</div>';
+            '<div class="flex-1 pr-4"><div class="flex gap-2 mb-1 flex-wrap"><span class="text-xs px-2 py-0.5 rounded bg-kopAccent/20 text-kopAccent font-semibold">'+getMapelSingkat(t.mapel)+'</span><span class="text-xs text-muted">'+t.kelas+'</span></div><p class="text-sm leading-relaxed">'+escHtml(t.text)+'</p></div>' +
+            '<button onclick="deleteTP(\''+t.id+'\')" class="text-danger/60 hover:text-danger flex-shrink-0 p-1"><i class="fas fa-trash text-xs"></i></button></div>';
     }).join('');
 }
 
 function openAddTPModal(){
-    openModal(
-        '<h3 class="font-display text-lg font-bold text-light mb-4">Tambah Tujuan Pembelajaran</h3>' +
-        '<div class="space-y-4">' +
-            '<div class="grid grid-cols-2 gap-4">' +
-                '<div><label class="text-xs text-muted mb-1 block">Mapel</label><select id="mTPMapel" class="input-field"'+(currentUser.isAdmin?'':' disabled')+'>'+makeMapelOpt(currentUser.mapel)+'</select></div>' +
-                '<div><label class="text-xs text-muted mb-1 block">Kelas</label><select id="mTPKelas" class="input-field"'+(currentUser.isAdmin?'':' disabled')+'>'+makeKelasOpt(currentUser.kelas)+'</select></div>' +
-            '</div>' +
-            '<div><label class="text-xs text-muted mb-1 block">Isi Tujuan Pembelajaran</label><textarea id="mTPText" class="input-field" rows="4" placeholder="Contoh: Peserta didik mampu menjelaskan..."></textarea></div>' +
-            '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="saveTP()" class="btn-primary">Simpan</button></div>' +
-        '</div>'
-    );
+    openModal('<h3 class="font-display text-lg font-bold text-light mb-4">Tambah Tujuan Pembelajaran</h3><div class="space-y-4">' +
+        '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Mapel</label><select id="mTPMapel" class="input-field"'+(currentUser.isAdmin?'':' disabled')+'>'+makeMapelOpt(currentUser.mapel)+'</select></div><div><label class="text-xs text-muted mb-1 block">Kelas</label><select id="mTPKelas" class="input-field"'+(currentUser.isAdmin?'':' disabled')+'>'+makeKelasOpt(currentUser.kelas)+'</select></div></div>' +
+        '<div><label class="text-xs text-muted mb-1 block">Isi Tujuan Pembelajaran</label><textarea id="mTPText" class="input-field" rows="4" placeholder="Contoh: Peserta didik mampu menjelaskan..."></textarea></div>' +
+        '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="saveTP()" class="btn-primary">Simpan</button></div></div>');
 }
 
 function saveTP(){
     var text = document.getElementById('mTPText').value.trim();
     if(!text){ showToast('Isi TP tidak boleh kosong','error'); return; }
-    db.collection('tps').add({
-        mapel: document.getElementById('mTPMapel').value,
-        kelas: document.getElementById('mTPKelas').value,
-        text: text,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(function(){
-        showToast('TP berhasil disimpan!');
-        closeModal();
-    }).catch(function(e){ showToast('Gagal menyimpan TP','error'); });
+    db.collection('tps').add({ mapel:document.getElementById('mTPMapel').value, kelas:document.getElementById('mTPKelas').value, text:text, createdAt:firebase.firestore.FieldValue.serverTimestamp() })
+    .then(function(){ showToast('TP berhasil disimpan!'); closeModal(); }).catch(function(){ showToast('Gagal menyimpan TP','error'); });
 }
 
 function deleteTP(id){
@@ -830,8 +861,7 @@ function updateTPDropdown(){
     var mapelEl = document.getElementById('cMapel');
     var kelasEl = document.getElementById('cKelas');
     if(!mapelEl || !kelasEl) return;
-    var mapel = mapelEl.value;
-    var kelas = kelasEl.value;
+    var mapel = mapelEl.value, kelas = kelasEl.value;
     if(!mapel || !kelas) return;
     var relevant = tujuanPembelajaran.filter(function(t){ return t.mapel===mapel && t.kelas===kelas; });
     var sel = document.getElementById('cTPSelect');
@@ -854,15 +884,13 @@ function renderCreate(c){
             '<button onclick="switchCreateTab(\'json\')" id="tabJson" class="text-muted hover:text-light pb-2 text-sm"><i class="fas fa-file-code mr-1"></i>Import JSON (Banyak)</button>' +
         '</div>' +
         '<div id="panelSingle" class="card"></div>' +
-        '<div id="panelJson" class="hidden card"></div>' +
-    '</div>';
+        '<div id="panelJson" class="hidden card"></div></div>';
     buildSingleForm();
     buildJsonForm();
 }
 
 function buildSingleForm(){
-    document.getElementById('panelSingle').innerHTML =
-        '<h3 class="font-display text-lg font-bold text-light mb-4">Input Soal Manual</h3>' +
+    var html = '<h3 class="font-display text-lg font-bold text-light mb-4">Input Soal Manual</h3>' +
         '<div class="grid md:grid-cols-2 gap-4 mb-4">' +
             '<div><label class="text-xs text-muted mb-1 block">Mapel</label><select id="cMapel" class="input-field" onchange="updateTPDropdown()">'+makeMapelOpt(currentUser.mapel)+'</select></div>' +
             '<div><label class="text-xs text-muted mb-1 block">Kelas</label><select id="cKelas" class="input-field" onchange="onCreateKelasChange()">'+makeKelasOpt(currentUser.kelas)+'</select></div>' +
@@ -880,18 +908,17 @@ function buildSingleForm(){
         '<div class="mb-4">' +
             '<label class="text-xs text-muted mb-1 block">Teks Soal</label>' +
             '<textarea id="cText" class="input-field" rows="3" placeholder="Tulis soal di sini..."></textarea>' +
-            
-            <!-- URL GAMBAR SOAL -->
             '<div class="flex gap-2 items-center mt-2">' +
                 '<div class="flex-1"><label class="text-xs text-muted block mb-1">URL Gambar Soal (Opsional)</label><input type="text" id="cImgUrl" class="input-field text-xs" placeholder="https://..."></div>' +
                 '<div class="mt-5"><button onclick="document.getElementById(\'cImgFile\').click()" class="btn-secondary text-xs py-2 px-3" title="Upload Gambar"><i class="fas fa-cloud-upload-alt mr-1"></i>Upload</button></div>' +
-                '<input type="file" id="cImgFile" accept="image/*" class="hidden" onchange="handleImageUpload(this, \'cImgUrl\', \'cImgPrev\')">' +
+                '<input type="file" id="cImgFile" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cImgUrl\',\'cImgPrev\')">' +
             '</div>' +
             '<div id="cImgPrev" class="mt-2"></div>' +
         '</div>' +
         '<div id="optionsArea" class="mb-4"></div>' +
         '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><div class="flex gap-2"><select id="cAnswerSelect" class="input-field" style="width:90px" onchange="document.getElementById(\'cAnswer\').value=this.value"><option value="">--</option></select><input type="text" id="cAnswer" class="input-field" placeholder="Jawaban / uraian kunci"></div></div>' +
         '<button onclick="saveSingleQuestion()" id="btnSaveSingle" class="btn-primary w-full"><i class="fas fa-save mr-2"></i>Simpan Soal</button>';
+    document.getElementById('panelSingle').innerHTML = html;
     onCreateKelasChange();
     updateTPDropdown();
 }
@@ -899,8 +926,8 @@ function buildSingleForm(){
 function buildJsonForm(){
     document.getElementById('panelJson').innerHTML =
         '<h3 class="font-display text-lg font-bold text-light mb-2">Import Soal Banyak (JSON)</h3>' +
-        '<p class="text-xs text-muted mb-4">Paste format JSON Array di bawah. Gambar harus dalam bentuk URL.</p>' +
-        '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Paste JSON Anda:</label><textarea id="jsonInput" class="input-field font-mono text-xs" rows="12" placeholder=\'[{"soal":"...","opsi_a":"...","kunci":"A"}]\'></textarea></div>' +
+        '<p class="text-xs text-muted mb-4">Paste format JSON Array. Gambar harus URL dari Firebase Storage (upload dulu manual).</p>' +
+        '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Paste JSON:</label><textarea id="jsonInput" class="input-field font-mono text-xs" rows="12" placeholder=\'[{"soal":"...","opsi_a":"...","kunci":"A"}]\'></textarea></div>' +
         '<button onclick="processJSON()" id="btnProcessJson" class="btn-primary w-full"><i class="fas fa-file-import mr-2"></i>Proses & Import JSON</button>';
 }
 
@@ -912,81 +939,56 @@ function switchCreateTab(tab){
 }
 
 function onCreateKelasChange(){
-    var kelas = document.getElementById('cKelas').value;
-    var type = document.getElementById('cType');
-    if(!type || type.value === 'uraian'){
-        document.getElementById('optionsArea').innerHTML = '';
-        return;
-    }
+    var kelas = document.getElementById('cKelas') ? document.getElementById('cKelas').value : '';
+    var type = document.getElementById('cType') ? document.getElementById('cType').value : 'pg';
+    if(type==='uraian'){ var a=document.getElementById('optionsArea'); if(a) a.innerHTML=''; return; }
     var letters = getOptLetters(kelas);
     var area = document.getElementById('optionsArea');
-    area.innerHTML = '<label class="text-xs text-muted mb-1 block">Pilihan Jawaban</label><div class="space-y-3">' +
-        letters.map(function(l){
-            return '<div class="flex flex-col gap-1">' +
-                '<div class="flex gap-2 items-center">' +
-                    '<span class="font-bold text-kopAccent w-6 text-center">'+l+'</span>' +
-                    '<input type="text" id="cOpt'+l+'" class="input-field flex-1" placeholder="Opsi '+l+'">' +
-                '</div>' +
-                <!-- URL GAMBAR OPSI -->
-                '<div class="ml-6 flex gap-2 items-center">' +
-                    '<input type="text" id="cOptImgUrl'+l+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l+' (Opsional)">' +
-                    '<button onclick="document.getElementById(\'cOptImgFile'+l+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload Gambar Opsi"><i class="fas fa-camera"></i></button>' +
-                    '<input type="file" id="cOptImgFile'+l+'" accept="image/*" class="hidden" onchange="handleImageUpload(this, \'cOptImgUrl'+l+'\', \'cOptImgPrev'+l+'\')">' +
-                '</div>' +
-                '<div id="cOptImgPrev'+l+'" class="ml-6"></div>' +
-            '</div>';
-        }).join('') +
-    '</div>';
-
+    if(!area) return;
+    var h = '<label class="text-xs text-muted mb-1 block">Pilihan Jawaban</label><div class="space-y-3">';
+    letters.forEach(function(l){
+        h += '<div class="flex flex-col gap-1">' +
+            '<div class="flex gap-2 items-center"><span class="font-bold text-kopAccent w-6 text-center">'+l+'</span><input type="text" id="cOpt'+l+'" class="input-field flex-1" placeholder="Opsi '+l+'"></div>' +
+            '<div class="ml-6 flex gap-2 items-center"><input type="text" id="cOptImgUrl'+l+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l+' (Opsional)"><button onclick="document.getElementById(\'cOptImgFile'+l+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button><input type="file" id="cOptImgFile'+l+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cOptImgUrl'+l+'\',\'cOptImgPrev'+l+'\')"></div>' +
+            '<div id="cOptImgPrev'+l+'" class="ml-6"></div></div>';
+    });
+    h += '</div>';
+    area.innerHTML = h;
     var sel = document.getElementById('cAnswerSelect');
-    sel.innerHTML = '<option value="">--</option>' + letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join('');
+    if(sel) sel.innerHTML = '<option value="">--</option>' + letters.map(function(l){ return '<option value="'+l+'">'+l+'</option>'; }).join('');
     updateTPDropdown();
 }
 
 function toggleOptions(){
-    var type = document.getElementById('cType').value;
-    if(type === 'uraian'){
-        document.getElementById('optionsArea').innerHTML = '';
-    } else {
-        onCreateKelasChange();
-    }
+    if(document.getElementById('cType').value==='uraian'){
+        document.getElementById('optionsArea').innerHTML='';
+    } else { onCreateKelasChange(); }
 }
 
-// Helper: Upload Gambar dan Set URL ke Input Text
 function handleImageUpload(input, targetInputId, previewId){
     var file = input.files[0];
     if(!file) return;
-    
     var targetInput = document.getElementById(targetInputId);
     var previewContainer = document.getElementById(previewId);
-    
-    // Tampilkan loading text di preview
+    if(!targetInput || !previewContainer) return;
     previewContainer.innerHTML = '<span class="text-xs text-kopAccent"><i class="fas fa-spinner fa-spin mr-1"></i>Mengupload...</span>';
-
     var fileName = Date.now() + '_' + file.name;
     var ref = storage.ref('soal/' + fileName);
-
-    ref.put(file).then(function(snapshot){
-        return snapshot.ref.getDownloadURL();
-    }).then(function(url){
-        // Set URL ke input text
+    ref.put(file).then(function(snapshot){ return snapshot.ref.getDownloadURL(); })
+    .then(function(url){
         targetInput.value = url;
-        // Tampilkan preview gambar (STANDAR SIZE)
         previewContainer.innerHTML = '<img src="'+url+'" class="img-preview">';
         showToast('Gambar berhasil diupload', 'success');
     }).catch(function(error){
-        console.error(error);
-        previewContainer.innerHTML = '<span class="text-xs text-danger">Gagal upload: '+error.message+'</span>';
-        showToast('Gagal upload gambar', 'error');
+        previewContainer.innerHTML = '<span class="text-xs text-danger">Gagal: '+error.message+'</span>';
+        showToast('Gagal upload gambar','error');
     });
 }
 
 function saveSingleQuestion(){
     var btn = document.getElementById('btnSaveSingle');
     if(!btn) return;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner mr-2"></span>Menyimpan...';
-
+    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner mr-2"></span>Menyimpan...';
     var mapel = document.getElementById('cMapel').value;
     var kelas = document.getElementById('cKelas').value;
     var type  = document.getElementById('cType').value;
@@ -994,52 +996,37 @@ function saveSingleQuestion(){
     if(!text){ showToast('Teks soal tidak boleh kosong','error'); btn.disabled=false; btn.innerHTML='<i class="fas fa-save mr-2"></i>Simpan Soal'; return; }
 
     var qData = {
-        mapel: mapel,
-        kelas: kelas,
-        type: type,
-        text: text,
-        tp: document.getElementById('cTPManual').value || document.getElementById('cTPSelect').value || '',
+        mapel:mapel, kelas:kelas, type:type, text:text,
+        tp: (document.getElementById('cTPManual').value || document.getElementById('cTPSelect').value || '').trim(),
         difficulty: document.getElementById('cDiff').value,
         score: parseInt(document.getElementById('cScore').value) || 1,
         answer: document.getElementById('cAnswer').value.trim(),
-        // Ambil URL langsung dari input text
-        image: document.getElementById('cImgUrl').value.trim() || '',
-        options: [],
-        optionImages: [],
+        image: (document.getElementById('cImgUrl').value || '').trim(),
+        options: [], optionImages: [],
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    // Jika PG, ambil URL opsi dari input text
-    if(type === 'pg'){
+    if(type==='pg'){
         var letters = getOptLetters(kelas);
         letters.forEach(function(l){
-            qData.options.push(document.getElementById('cOpt'+l).value.trim());
-            // Ambil URL gambar opsi dari input text
-            var optImgUrl = document.getElementById('cOptImgUrl'+l) ? document.getElementById('cOptImgUrl'+l).value.trim() : '';
-            qData.optionImages.push(optImgUrl);
+            qData.options.push((document.getElementById('cOpt'+l) ? document.getElementById('cOpt'+l).value : '').trim());
+            qData.optionImages.push((document.getElementById('cOptImgUrl'+l) ? document.getElementById('cOptImgUrl'+l).value : '').trim());
         });
     }
 
     db.collection('questions').add(qData).then(function(){
         showToast('Soal berhasil disimpan!');
-        // Reset Form
-        document.getElementById('cText').value = '';
-        document.getElementById('cImgUrl').value = '';
-        document.getElementById('cImgPrev').innerHTML = '';
-        document.getElementById('cAnswer').value = '';
-        if(document.getElementById('cTPManual')) document.getElementById('cTPManual').value = '';
-        if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value = '';
-        
-        // Reset Opsi
-        if(type === 'pg'){
-            var letters2 = getOptLetters(kelas);
-            letters2.forEach(function(l){
-                var optEl = document.getElementById('cOpt'+l);
-                if(optEl) optEl.value = '';
-                var optUrlEl = document.getElementById('cOptImgUrl'+l);
-                if(optUrlEl) optUrlEl.value = '';
-                var prevEl = document.getElementById('cOptImgPrev'+l);
-                if(prevEl) prevEl.innerHTML = '';
+        document.getElementById('cText').value='';
+        document.getElementById('cImgUrl').value='';
+        document.getElementById('cImgPrev').innerHTML='';
+        document.getElementById('cAnswer').value='';
+        if(document.getElementById('cTPManual')) document.getElementById('cTPManual').value='';
+        if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value='';
+        if(type==='pg'){
+            getOptLetters(kelas).forEach(function(l){
+                var o=document.getElementById('cOpt'+l); if(o) o.value='';
+                var u=document.getElementById('cOptImgUrl'+l); if(u) u.value='';
+                var p=document.getElementById('cOptImgPrev'+l); if(p) p.innerHTML='';
             });
         }
     }).catch(function(e){ showToast('Error: '+(e.message||e),'error'); })
@@ -1048,154 +1035,91 @@ function saveSingleQuestion(){
 
 function processJSON(){
     var btn = document.getElementById('btnProcessJson');
-    btn.disabled = true; btn.innerHTML = '<span class="loading-spinner mr-2"></span>Memproses...';
+    btn.disabled=true; btn.innerHTML='<span class="loading-spinner mr-2"></span>Memproses...';
     var txt = document.getElementById('jsonInput').value;
     var defMapel = currentUser.isAdmin ? '' : currentUser.mapel;
     var defKelas = currentUser.isAdmin ? '' : currentUser.kelas;
-
     if(!txt.trim()){ showToast('JSON kosong','error'); btn.disabled=false; btn.innerHTML='<i class="fas fa-file-import mr-2"></i>Proses & Import JSON'; return; }
-
     try {
         var data = JSON.parse(txt);
-        if(!Array.isArray(data)) throw new Error('Format harus Array JSON');
-
-        var batch = db.batch();
-        var count = 0;
+        if(!Array.isArray(data)) throw new Error('Format harus Array');
+        var batch = db.batch(); var count = 0;
         data.forEach(function(item){
             var qText = item.soal || item.text || '';
             if(!qText) return;
-            // Ambil opsi dari format fleksibel
-            var qOpts = item.options || [item.opsi_a, item.opsi_b, item.opsi_c, item.opsi_d, item.opsi_e].filter(Boolean);
-            var docRef = db.collection('questions').doc();
-            batch.set(docRef, {
-                mapel: item.mapel || defMapel,
-                kelas: item.kelas || defKelas,
-                type: item.tipe || item.type || 'pg',
-                text: qText,
-                options: qOpts,
-                answer: item.kunci || item.answer || '',
-                difficulty: item.difficulty || 'Sedang',
-                score: item.skor || item.score || 1,
-                tp: item.tp || '',
-                // Langsung pakai URL dari JSON
-                image: item.image || '',
-                optionImages: item.optionImages || [],
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            var qOpts = item.options || [item.opsi_a,item.opsi_b,item.opsi_c,item.opsi_d,item.opsi_e].filter(Boolean);
+            batch.set(db.collection('questions').doc(), {
+                mapel:item.mapel||defMapel, kelas:item.kelas||defKelas,
+                type:item.tipe||item.type||'pg', text:qText, options:qOpts,
+                answer:item.kunci||item.answer||'', difficulty:item.difficulty||'Sedang',
+                score:item.skor||item.score||1, tp:item.tp||'',
+                image:item.image||'', optionImages:item.optionImages||[],
+                createdAt:firebase.firestore.FieldValue.serverTimestamp()
             });
             count++;
         });
-        batch.commit().then(function(){
-            showToast(count + ' soal berhasil diimport!');
-            document.getElementById('jsonInput').value = '';
-        }).catch(function(e){ showToast('Gagal import: '+(e.message||e),'error'); });
-    } catch(e){
-        showToast('Format JSON Salah: '+(e.message||e),'error');
-    }
-    btn.disabled = false; btn.innerHTML='<i class="fas fa-file-import mr-2"></i>Proses & Import JSON';
+        batch.commit().then(function(){ showToast(count+' soal berhasil diimport!'); document.getElementById('jsonInput').value=''; }).catch(function(e){ showToast('Gagal: '+(e.message||e),'error'); });
+    } catch(e){ showToast('JSON Salah: '+(e.message||e),'error'); }
+    btn.disabled=false; btn.innerHTML='<i class="fas fa-file-import mr-2"></i>Proses & Import JSON';
 }
 
 // ================================================================
 // BANK SOAL
 // ================================================================
 function renderQuestions(c){
-    var filterHtml = '';
+    var fh = '';
     if(currentUser.isAdmin){
-        filterHtml = '<div class="flex flex-wrap gap-4 mb-4 p-4 bg-dark/30 rounded-lg">' +
-            '<div class="w-44"><label class="text-xs text-muted">Filter Mapel</label><select id="filterMapel" class="input-field" onchange="renderBankFiltered()">'+makeMapelOpt('')+'</select></div>' +
-            '<div class="w-44"><label class="text-xs text-muted">Filter Kelas</label><select id="filterKelas" class="input-field" onchange="renderBankFiltered()"><option value="">Semua</option>'+KELAS_LIST.map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('')+'</select></div>' +
-        '</div>';
+        fh = '<div class="flex flex-wrap gap-4 mb-4 p-4 bg-dark/30 rounded-lg"><div class="w-44"><label class="text-xs text-muted">Filter Mapel</label><select id="filterMapel" class="input-field" onchange="renderBankFiltered()">'+makeMapelOpt('')+'</select></div><div class="w-44"><label class="text-xs text-muted">Filter Kelas</label><select id="filterKelas" class="input-field" onchange="renderBankFiltered()"><option value="">Semua</option>'+KELAS_LIST.map(function(k){return '<option value="'+k+'">'+k+'</option>';}).join('')+'</select></div></div>';
     }
-
-    c.innerHTML = '<div class="fade-in card">' +
-        '<h3 class="font-display text-lg font-bold text-light mb-4">Bank Soal</h3>' +
-        filterHtml +
-        '<div id="bankList" class="space-y-2 max-h-[72vh] overflow-y-auto pr-2"></div>' +
-    '</div>';
+    c.innerHTML = '<div class="fade-in card"><h3 class="font-display text-lg font-bold text-light mb-4">Bank Soal</h3>'+fh+'<div id="bankList" class="space-y-2 max-h-[72vh] overflow-y-auto pr-2"></div></div>';
     renderBankFiltered();
 }
 
 function renderBankFiltered(){
-    var mapel = document.getElementById('filterMapel');
-    var kelas = document.getElementById('filterKelas');
+    var mapel=document.getElementById('filterMapel'), kelas=document.getElementById('filterKelas');
     var list = questions.slice();
     if(currentUser.isAdmin){
-        if(mapel && mapel.value) list = list.filter(function(q){return q.mapel===mapel.value;});
-        if(kelas && kelas.value) list = list.filter(function(q){return q.kelas===kelas.value;});
-    } else {
-        list = list.filter(function(q){return q.mapel===currentUser.mapel && q.kelas===currentUser.kelas;});
-    }
+        if(mapel&&mapel.value) list=list.filter(function(q){return q.mapel===mapel.value;});
+        if(kelas&&kelas.value) list=list.filter(function(q){return q.kelas===kelas.value;});
+    } else { list=list.filter(function(q){return q.mapel===currentUser.mapel && q.kelas===currentUser.kelas;}); }
     renderBankList(list);
 }
 
 function renderBankList(list){
     var container = document.getElementById('bankList');
     if(!container) return;
-    if(list.length === 0){
-        container.innerHTML = '<p class="text-center text-muted py-10"><i class="fas fa-inbox text-3xl mb-3 block opacity-30"></i>Belum ada soal</p>';
-        return;
-    }
+    if(!list.length){ container.innerHTML='<p class="text-center text-muted py-10"><i class="fas fa-inbox text-3xl mb-3 block opacity-30"></i>Belum ada soal</p>'; return; }
     container.innerHTML = list.map(function(q){
-        var typeColor = q.type==='uraian' ? 'border-info' : 'border-kopAccent';
-        var typeBg = q.type==='uraian' ? 'bg-info/20 text-info' : 'bg-kopAccent/20 text-kopAccent';
-        return '<div class="p-3 bg-dark/30 rounded-lg flex justify-between items-start border-l-4 '+typeColor+' hover:bg-dark/50 transition-colors">' +
-            '<div class="flex-1 pr-4 min-w-0">' +
-                '<div class="flex gap-2 mb-1 flex-wrap">' +
-                    '<span class="text-xs px-2 py-0.5 rounded '+typeBg+' font-semibold">'+(q.type==='uraian'?'URAIAN':'PG')+'</span>' +
-                    '<span class="text-xs text-muted">'+getMapelSingkat(q.mapel)+' - '+q.kelas+'</span>' +
-                    '<span class="text-xs text-muted">Skor: '+(q.score||1)+'</span>' +
-                '</div>' +
-                '<p class="text-sm truncate">'+escHtml(q.text)+'</p>' +
-                (q.image ? '<i class="fas fa-image text-muted text-xs mt-1"></i>' : '') +
-            '</div>' +
-            '<div class="flex gap-2 flex-shrink-0">' +
-                '<button onclick="editQuestion(\''+q.id+'\')" class="text-kopAccent/60 hover:text-kopAccent p-1" title="Edit"><i class="fas fa-pen text-xs"></i></button>' +
-                '<button onclick="deleteQuestion(\''+q.id+'\')" class="text-danger/60 hover:text-danger p-1" title="Hapus"><i class="fas fa-trash text-xs"></i></button>' +
-            '</div>' +
-        '</div>';
+        var tc=q.type==='uraian'?'border-info':'border-kopAccent';
+        var tb=q.type==='uraian'?'bg-info/20 text-info':'bg-kopAccent/20 text-kopAccent';
+        return '<div class="p-3 bg-dark/30 rounded-lg flex justify-between items-start border-l-4 '+tc+' hover:bg-dark/50 transition-colors"><div class="flex-1 pr-4 min-w-0"><div class="flex gap-2 mb-1 flex-wrap"><span class="text-xs px-2 py-0.5 rounded '+tb+' font-semibold">'+(q.type==='uraian'?'URAIAN':'PG')+'</span><span class="text-xs text-muted">'+getMapelSingkat(q.mapel)+' - '+q.kelas+'</span><span class="text-xs text-muted">Skor: '+(q.score||1)+'</span></div><p class="text-sm truncate">'+escHtml(q.text)+'</p>'+(q.image?' <i class="fas fa-image text-muted text-xs"></i>':'')+'</div><div class="flex gap-2 flex-shrink-0"><button onclick="editQuestion(\''+q.id+'\')" class="text-kopAccent/60 hover:text-kopAccent p-1"><i class="fas fa-pen text-xs"></i></button><button onclick="deleteQuestion(\''+q.id+'\')" class="text-danger/60 hover:text-danger p-1"><i class="fas fa-trash text-xs"></i></button></div></div>';
     }).join('');
 }
 
 function editQuestion(id){
-    var q = null;
-    for(var i=0;i<questions.length;i++){ if(questions[i].id===id){q=questions[i];break;} }
-    if(!q) return;
-
-    var tpVal = escHtml(q.tp || '');
-    openModal(
-        '<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3>' +
-        '<div class="space-y-4">' +
-            '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="4">'+escHtml(q.text)+'</textarea></div>' +
-            '<div><label class="text-xs text-muted mb-1 block">URL Gambar</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
-            '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran</label><textarea id="eTP" class="input-field" rows="2">'+tpVal+'</textarea></div>' +
-            '<div class="grid grid-cols-2 gap-4">' +
-                '<div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div>' +
-                '<div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div>' +
-            '</div>' +
-            (q.type==='pg' && q.options ? '<div><label class="text-xs text-muted mb-1 block">Opsi Jawaban</label>' +
-                q.options.map(function(opt,i){ return '<div class="flex items-center gap-2 mb-2"><span class="font-bold text-kopAccent w-6">'+String.fromCharCode(65+i)+'</span><input type="text" class="input-field eOptVal" value="'+escHtml(opt)+'"></div>'; }).join('') +
-            '</div>' : '') +
-            '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="doUpdateQuestion(\''+id+'\')" class="btn-primary">Simpan Perubahan</button></div>' +
-        '</div>'
-    );
+    var q=null; for(var i=0;i<questions.length;i++){if(questions[i].id===id){q=questions[i];break;}} if(!q) return;
+    var optHtml = '';
+    if(q.type==='pg' && q.options){
+        optHtml = '<div><label class="text-xs text-muted mb-1 block">Opsi Jawaban</label>';
+        q.options.forEach(function(opt,i){
+            optHtml += '<div class="flex items-center gap-2 mb-2"><span class="font-bold text-kopAccent w-6">'+String.fromCharCode(65+i)+'</span><input type="text" class="input-field eOptVal" value="'+escHtml(opt)+'"></div>';
+        });
+        optHtml += '</div>';
+    }
+    openModal('<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3><div class="space-y-4">' +
+        '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="4">'+escHtml(q.text)+'</textarea></div>' +
+        '<div><label class="text-xs text-muted mb-1 block">URL Gambar Soal</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
+        '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran</label><textarea id="eTP" class="input-field" rows="2">'+escHtml(q.tp||'')+'</textarea></div>' +
+        '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
+        optHtml +
+        '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="doUpdateQuestion(\''+id+'\')" class="btn-primary">Simpan Perubahan</button></div></div>');
 }
 
 function doUpdateQuestion(id){
-    var updateData = {
-        text: document.getElementById('eText').value,
-        image: document.getElementById('eImg').value,
-        tp: document.getElementById('eTP').value,
-        answer: document.getElementById('eAnswer').value,
-        score: parseInt(document.getElementById('eScore').value) || 1
-    };
-    var optEls = document.querySelectorAll('.eOptVal');
-    if(optEls.length > 0){
-        updateData.options = [];
-        optEls.forEach(function(el){ updateData.options.push(el.value); });
-    }
-    db.collection('questions').doc(id).update(updateData).then(function(){
-        showToast('Soal diperbarui!');
-        closeModal();
-    }).catch(function(){ showToast('Gagal update','error'); });
+    var d = { text:document.getElementById('eText').value, image:document.getElementById('eImg').value, tp:document.getElementById('eTP').value, answer:document.getElementById('eAnswer').value, score:parseInt(document.getElementById('eScore').value)||1 };
+    var opts = document.querySelectorAll('.eOptVal');
+    if(opts.length) { d.options=[]; opts.forEach(function(el){d.options.push(el.value);}); }
+    db.collection('questions').doc(id).update(d).then(function(){ showToast('Soal diperbarui!'); closeModal(); }).catch(function(){ showToast('Gagal update','error'); });
 }
 
 function deleteQuestion(id){
@@ -1204,7 +1128,7 @@ function deleteQuestion(id){
 }
 
 // ================================================================
-// CETAK SOAL (PROFESSIONAL)
+// CETAK SOAL - PREVIEW RAPI + PRINT RAPI
 // ================================================================
 function renderPrint(c){
     c.innerHTML = '<div class="fade-in no-print">' +
@@ -1215,116 +1139,181 @@ function renderPrint(c){
                 '<div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasPrint" class="input-field" onchange="refreshPrintPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div>' +
             '</div>' +
             '<div class="mt-4 grid md:grid-cols-2 gap-4">' +
-                '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (Muncul di Dokumen Cetak)</label><textarea id="printTPGlobal" class="input-field" rows="2" placeholder="Masukkan tujuan pembelajaran umum..."></textarea></div>' +
-                '<div><label class="text-xs text-muted mb-1 block">Nama Guru (Tanda Tangan)</label><input type="text" id="printGuruName" class="input-field" placeholder="Contoh: Siti Nurhaliza, S.Pd"></input></div>' +
+                '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (Di Dokumen Cetak)</label><textarea id="printTPGlobal" class="input-field" rows="2" placeholder="Masukkan tujuan pembelajaran umum..."></textarea></div>' +
+                '<div><label class="text-xs text-muted mb-1 block">Nama Guru (Tanda Tangan)</label><input type="text" id="printGuruName" class="input-field" placeholder="Contoh: Siti Nurhaliza, S.Pd"></div>' +
             '</div>' +
-            '<div class="mt-4"><button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / Simpan sebagai PDF</button></div>' +
+            '<div class="mt-4"><button onclick="doPrintSoal()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / Simpan sebagai PDF</button>' +
+            '<p class="text-xs text-muted mt-2"><i class="fas fa-info-circle mr-1"></i>Pastikan di dialog print: Margins = None, Background Graphics = Aktifkan</p></div>' +
         '</div>' +
-        '<div id="printPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden min-h-[600px]"></div>' +
+        '<div id="printPreviewContainer"></div>' +
     '</div>';
-    setTimeout(refreshPrintPreview, 150);
+    // Delay agar elemen ada dulu
+    setTimeout(refreshPrintPreview, 100);
+}
+
+// Fungsi cetak khusus: copy konten ke iframe agar terbebas dari style app
+function doPrintSoal(){
+    var sheet = document.querySelector('.print-preview-sheet');
+    if(!sheet){ showToast('Tidak ada preview untuk dicetak','error'); return; }
+    
+    var iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.left = '-9999px';
+    iframe.style.top = '0';
+    iframe.style.width = '210mm';
+    iframe.style.height = '297mm';
+    document.body.appendChild(iframe);
+    
+    var doc = iframe.contentDocument || iframe.contentWindow.document;
+    doc.open();
+    doc.write('<!DOCTYPE html><html><head>');
+    doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">');
+    doc.write('<style>');
+    doc.write('@page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }');
+    doc.write('body { margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.4; color: black; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }');
+    doc.write('.print-page { padding: 0; }');
+    doc.write('.kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }');
+    doc.write('.kop-surat img { height: 70px; width: auto; flex-shrink: 0; }');
+    doc.write('.kop-text { text-align: center; line-height: 1.2; }');
+    doc.write('.kop-text h1 { font-family: "Times New Roman", serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }');
+    doc.write('.kop-text h2 { font-family: "Times New Roman", serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }');
+    doc.write('.kop-text .kop-sub { font-family: "Times New Roman", serif; font-size: 9.5pt; margin-top: 2px; color: #333; }');
+    doc.write('.ujian-title { text-align: center; margin-bottom: 20px; }');
+    doc.write('.ujian-title h3 { font-family: "Times New Roman", serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }');
+    doc.write('.ujian-title p { font-family: "Times New Roman", serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }');
+    doc.write('.soal-header { margin-bottom: 20px; }');
+    doc.write('.soal-header table { width: 100%; font-family: "Times New Roman", serif; font-size: 12pt; }');
+    doc.write('.soal-header td { padding: 2px 0; vertical-align: bottom; }');
+    doc.write('.soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }');
+    doc.write('.print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }');
+    doc.write('.print-tp-title { font-family: "Times New Roman", serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }');
+    doc.write('.print-tp-text { font-family: "Times New Roman", serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }');
+    doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
+    doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
+    doc.write('.soal-item { margin-bottom: 18px; page-break-inside: avoid; clear: both; }');
+    doc.write('.soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }');
+    doc.write('.soal-body { display: block; }');
+    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
+    doc.write('.soal-img-print { display: block; width: auto; height: auto; max-width: 240px; max-height: 160px; margin: 8px auto 8px 0; object-fit: contain; page-break-inside: avoid; }');
+    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 8px; display: flex; flex-direction: column; gap: 5px; }');
+    doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
+    doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
+    doc.write('.opsi-img-print { max-width: 90px; max-height: 60px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
+    doc.write('.answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
+    doc.write('.ttd-section { margin-top: 50px; display: flex; justify-content: space-between; font-family: "Times New Roman", serif; font-size: 11pt; gap: 20px; }');
+    doc.write('.ttd-box { text-align: center; min-width: 180px; flex: 1; }');
+    doc.write('.ttd-box .ttd-space { height: 70px; }');
+    doc.write('.ttd-box .ttd-line { border-top: 1px solid #000; padding-top: 4px; font-weight: bold; font-size: 11pt; }');
+    doc.write('.ttd-box .ttd-nip { font-size: 10pt; font-weight: normal; }');
+    doc.write('</style></head><body>');
+    doc.write(sheet.innerHTML);
+    doc.write('</body></html>');
+    doc.close();
+
+    // Tunggu gambar dimuat lalu cetak
+    setTimeout(function(){
+        var imgs = doc.querySelectorAll('img');
+        var loaded = 0;
+        var total = imgs.length;
+        
+        if(total === 0){
+            iframe.contentWindow.focus();
+            iframe.contentWindow.print();
+            setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
+            return;
+        }
+        
+        imgs.forEach(function(img){
+            if(img.complete){ loaded++; checkAll(); }
+            else { img.onload = function(){ loaded++; checkAll(); }; img.onerror = function(){ loaded++; checkAll(); }; }
+        });
+        
+        function checkAll(){
+            if(loaded >= total){
+                setTimeout(function(){
+                    iframe.contentWindow.focus();
+                    iframe.contentWindow.print();
+                    setTimeout(function(){ document.body.removeChild(iframe); }, 3000);
+                }, 500);
+            }
+        }
+        
+        // Fallback: cetak anyway setelah 5 detik
+        setTimeout(function(){
+            try{ iframe.contentWindow.focus(); iframe.contentWindow.print(); } catch(e){}
+            setTimeout(function(){ try{ document.body.removeChild(iframe); }catch(e){} }, 3000);
+        }, 5000);
+    }, 300);
 }
 
 function refreshPrintPreview(){
     var mapelEl = document.getElementById('pMapelPrint');
     var kelasEl = document.getElementById('pKelasPrint');
     if(!mapelEl || !kelasEl) return;
-    var mapel = mapelEl.value;
-    var kelas = kelasEl.value;
+    var mapel = mapelEl.value, kelas = kelasEl.value;
     var container = document.getElementById('printPreviewContainer');
-    if(!mapel || !kelas){ container.innerHTML = '<p class="text-center text-gray-400 py-20">Pilih mapel dan kelas terlebih dahulu</p>'; return; }
+    if(!mapel || !kelas){ container.innerHTML='<p class="text-center text-muted py-20">Pilih mapel dan kelas terlebih dahulu</p>'; return; }
 
     var globalTP = (document.getElementById('printTPGlobal').value || '').trim();
     var guruName = (document.getElementById('printGuruName').value || '').trim();
-
     var data = questions.filter(function(q){ return q.mapel===mapel && q.kelas===kelas; });
     var pg = data.filter(function(q){ return q.type==='pg'; });
     var uraian = data.filter(function(q){ return q.type==='uraian'; });
-
     var logoUrl = 'https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
 
-    var html = '<div class="print-page">';
+    var html = '<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page">';
 
-    // === KOP SURAT ===
-    html += '<div class="kop-surat">' +
-        '<img src="'+logoUrl+'" alt="Logo">' +
-        '<div class="kop-text">' +
-            '<h1>Pemerintah Kabupaten Majalengka</h1>' +
-            '<h1>Dinas Pendidikan dan Kebudayaan</h1>' +
-            '<h2>SD Negeri 1 Majalengka Kulon</h2>' +
-            '<p class="kop-sub">Jl. KH. Abdul Halim No. 123, Kec. Majalengka, Kab. Majalengka 45411</p>' +
-        '</div>' +
-    '</div>';
+    // KOP
+    html += '<div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Pemerintah Kabupaten Majalengka</h1><h1>Dinas Pendidikan dan Kebudayaan</h1><h2>SD Negeri 1 Majalengka Kulon</h2><p class="kop-sub">Jl. KH. Abdul Halim No. 123, Kec. Majalengka, Kab. Majalengka 45411</p></div></div>';
 
-    // === JUDUL UJIAN ===
-    html += '<div class="ujian-title">' +
-        '<h3>Ulangan Tengah Semester (UTS)</h3>' +
-        '<p>'+getMapelName(mapel)+'</p>' +
-    '</div>';
+    // JUDUL
+    html += '<div class="ujian-title"><h3>Ulangan Tengah Semester (UTS)</h3><p>'+getMapelName(mapel)+'</p></div>';
 
-    // === HEADER SISWA ===
-    html += '<div class="soal-header"><table>' +
-        '<tr><td width="100">Nama</td><td width="12">:</td><td class="dot-cell"></td></tr>' +
-        '<tr><td>Kelas</td><td>:</td><td>'+kelas+'</td></tr>' +
-        '<tr><td>Hari / Tanggal</td><td>:</td><td class="dot-cell"></td></tr>' +
-    '</table></div>';
+    // HEADER SISWA
+    html += '<div class="soal-header"><table><tr><td width="100">Nama</td><td width="12">:</td><td class="dot-cell"></td></tr><tr><td>Kelas</td><td>:</td><td>'+kelas+'</td></tr><tr><td>Hari / Tanggal</td><td>:</td><td class="dot-cell"></td></tr></table></div>';
 
-    // === TP SECTION ===
+    // TP
     if(globalTP){
-        html += '<div class="print-tp-section">' +
-            '<div class="print-tp-title">Tujuan Pembelajaran:</div>' +
-            '<div class="print-tp-text">'+escHtml(globalTP)+'</div>' +
-        '</div>';
+        html += '<div class="print-tp-section"><div class="print-tp-title">Tujuan Pembelajaran:</div><div class="print-tp-text">'+escHtml(globalTP)+'</div></div>';
     }
 
-    // === BAGIAN PG ===
+    // PG
     if(pg.length > 0){
         html += '<div class="section-heading">I. Pilihan Ganda</div>';
-        html += '<p style="font-size:11pt;margin-bottom:12px;font-style:italic">Pilihlah satu jawaban yang paling tepat!</p>';
+        html += '<p class="petunjuk-soal">Pilihlah satu jawaban yang paling tepat!</p>';
         pg.forEach(function(q, i){
-            html += '<div class="soal-item">' +
-                '<span class="soal-num">'+(i+1)+'.</span>' +
-                '<div class="soal-body">' +
-                    '<span class="soal-text">'+escHtml(q.text)+'</span>' +
-                    (q.image ? '<img src="'+q.image+'" class="soal-img">' : '') +
-                    '<div class="opsi-wrapper">';
+            html += '<div class="soal-item"><span class="soal-num">'+(i+1)+'.</span><div class="soal-body">';
+            html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
+            if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
+            html += '<div class="opsi-wrapper">';
             (q.options||[]).forEach(function(opt, oi){
                 var letter = String.fromCharCode(65+oi);
-                var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img">' : '';
-                html += '<div class="opsi-row">' +
-                    '<span class="opsi-label">'+letter+'.</span>' +
-                    '<span>'+escHtml(opt)+'</span>' +
-                    optImg +
-                '</div>';
+                var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
+                html += '<div class="opsi-row"><span class="opsi-label">'+letter+'.</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
             html += '</div></div></div>';
         });
     }
 
-    // === BAGIAN URAIAN ===
+    // URAIAN
     if(uraian.length > 0){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
-        html += '<p style="font-size:11pt;margin-bottom:12px;font-style:italic">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
+        html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
         uraian.forEach(function(q, i){
-            html += '<div class="soal-item">' +
-                '<span class="soal-num">'+(i+1)+'.</span>' +
-                '<div class="soal-body">' +
-                    '<span class="soal-text">'+escHtml(q.text)+'</span>' +
-                    (q.image ? '<img src="'+q.image+'" class="soal-img">' : '') +
-                    '<div class="answer-lines"></div>' +
-                '</div>' +
-            '</div>';
+            html += '<div class="soal-item"><span class="soal-num">'+(i+1)+'.</span><div class="soal-body">';
+            html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
+            if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
+            html += '<div class="answer-lines"></div></div></div>';
         });
     }
 
-    // === TANDA TANGAN ===
-    html += '<div class="ttd-section">' +
-        '<div class="ttd-box">Mengetahui,<br>Kepala Sekolah<br><br><br><br><div class="ttd-line">NIP. ................................</div></div>' +
-        '<div class="ttd-box">Majalengka, ........................<br>Guru Mata Pelajaran<br><br><br><br><div class="ttd-line">'+(guruName ? escHtml(guruName) : '........................................')+'<br>' +
-        (guruName ? '<span class="ttd-nip">NIP. ................................</span>' : 'NIP. ................................') + '</div></div>' +
-    '</div>';
+    // TTD
+    html += '<div class="ttd-section">';
+    html += '<div class="ttd-box">Mengetahui,<br>Kepala Sekolah<br><div class="ttd-space"></div><div class="ttd-line">NIP. ................................</div></div>';
+    html += '<div class="ttd-box">Majalengka, ........................<br>Guru Mata Pelajaran<br><div class="ttd-space"></div><div class="ttd-line">'+(guruName?escHtml(guruName):'........................................')+'<br><span class="ttd-nip">NIP. ................................</span></div></div>';
+    html += '</div>';
 
-    html += '</div>'; // end print-page
+    html += '</div></div></div>'; // print-page, print-preview-sheet, print-preview-wrap
     container.innerHTML = html;
 }
 
@@ -1332,125 +1321,89 @@ function refreshPrintPreview(){
 // KISI-KISI
 // ================================================================
 function renderKisi(c){
-    c.innerHTML = '<div class="fade-in no-print">' +
-        '<div class="card mb-6">' +
-            '<h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-table mr-2 text-kopAccent"></i>Kisi-Kisi Soal</h3>' +
-            '<div class="flex flex-wrap gap-4 items-end">' +
-                '<div class="w-44"><label class="text-xs text-muted mb-1 block">Mapel</label><select id="pMapelKisi" class="input-field" onchange="refreshKisiPreview()">'+makeMapelOpt(currentUser.mapel)+'</select></div>' +
-                '<div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasKisi" class="input-field" onchange="refreshKisiPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div>' +
-                '<button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button>' +
-            '</div>' +
-        '</div>' +
-        '<div id="kisiPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden"></div>' +
-    '</div>';
-    setTimeout(refreshKisiPreview, 150);
+    c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-table mr-2 text-kopAccent"></i>Kisi-Kisi Soal</h3>' +
+        '<div class="flex flex-wrap gap-4 items-end"><div class="w-44"><label class="text-xs text-muted mb-1 block">Mapel</label><select id="pMapelKisi" class="input-field" onchange="refreshKisiPreview()">'+makeMapelOpt(currentUser.mapel)+'</select></div><div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasKisi" class="input-field" onchange="refreshKisiPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div><button onclick="doPrintGeneric(\'kisiPreviewContainer\')" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button></div></div>' +
+        '<div id="kisiPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden"></div></div>';
+    setTimeout(refreshKisiPreview, 100);
 }
 
 function refreshKisiPreview(){
-    var mapel = document.getElementById('pMapelKisi').value;
-    var kelas = document.getElementById('pKelasKisi').value;
-    var container = document.getElementById('kisiPreviewContainer');
-    if(!mapel || !kelas){ container.innerHTML = '<p class="text-center text-gray-400 py-20">Pilih mapel dan kelas</p>'; return; }
-
-    var data = questions.filter(function(q){ return q.mapel===mapel && q.kelas===kelas; });
-    var logoUrl = 'https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
-
-    var html = '<div class="print-page">' +
-        '<div class="kop-surat">' +
-            '<img src="'+logoUrl+'" alt="Logo">' +
-            '<div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div>' +
-        '</div>' +
-        '<table class="print-table">' +
-            '<thead><tr><th style="width:40px">No</th><th style="width:60px">No Soal</th><th>Kompetensi / TP</th><th style="width:80px">Tipe</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead>' +
-            '<tbody>';
-
-    data.forEach(function(q, i){
-        html += '<tr>' +
-            '<td class="center">'+(i+1)+'</td>' +
-            '<td class="center">'+(i+1)+'</td>' +
-            '<td>'+escHtml(q.tp||'-')+'</td>' +
-            '<td class="center">'+(q.type==='pg'?'PG':'Uraian')+'</td>' +
-            '<td class="center">'+(q.score||1)+'</td>' +
-            '<td>'+escHtml(q.answer||'-')+'</td>' +
-        '</tr>';
-    });
-
-    html += '</tbody></table></div>';
-    container.innerHTML = html;
+    var mapel=document.getElementById('pMapelKisi').value, kelas=document.getElementById('pKelasKisi').value, container=document.getElementById('kisiPreviewContainer');
+    if(!mapel||!kelas){ container.innerHTML='<p class="text-center text-gray-400 py-20">Pilih mapel dan kelas</p>'; return; }
+    var data=questions.filter(function(q){return q.mapel===mapel&&q.kelas===kelas;});
+    var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
+    var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
+    html+='<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:60px">No Soal</th><th>Kompetensi / TP</th><th style="width:80px">Tipe</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead><tbody>';
+    data.forEach(function(q,i){ html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(i+1)+'</td><td>'+escHtml(q.tp||'-')+'</td><td class="center">'+(q.type==='pg'?'PG':'Uraian')+'</td><td class="center">'+(q.score||1)+'</td><td>'+escHtml(q.answer||'-')+'</td></tr>'; });
+    html+='</tbody></table></div></div></div>';
+    container.innerHTML=html;
 }
 
 // ================================================================
 // KUNCI & SKORING
 // ================================================================
 function renderScoring(c){
-    c.innerHTML = '<div class="fade-in no-print">' +
-        '<div class="card mb-6">' +
-            '<h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban</h3>' +
-            '<div class="flex flex-wrap gap-4 items-end">' +
-                '<div class="w-44"><label class="text-xs text-muted mb-1 block">Mapel</label><select id="pMapelScore" class="input-field" onchange="refreshScoringPreview()">'+makeMapelOpt(currentUser.mapel)+'</select></div>' +
-                '<div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasScore" class="input-field" onchange="refreshScoringPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div>' +
-                '<button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button>' +
-            '</div>' +
-        '</div>' +
-        '<div id="scoringPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden"></div>' +
-    '</div>';
-    setTimeout(refreshScoringPreview, 150);
+    c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban</h3>' +
+        '<div class="flex flex-wrap gap-4 items-end"><div class="w-44"><label class="text-xs text-muted mb-1 block">Mapel</label><select id="pMapelScore" class="input-field" onchange="refreshScoringPreview()">'+makeMapelOpt(currentUser.mapel)+'</select></div><div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasScore" class="input-field" onchange="refreshScoringPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div><button onclick="doPrintGeneric(\'scoringPreviewContainer\')" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button></div></div>' +
+        '<div id="scoringPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden"></div></div>';
+    setTimeout(refreshScoringPreview, 100);
 }
 
 function refreshScoringPreview(){
-    var mapel = document.getElementById('pMapelScore').value;
-    var kelas = document.getElementById('pKelasScore').value;
-    var container = document.getElementById('scoringPreviewContainer');
-    if(!mapel || !kelas){ container.innerHTML = '<p class="text-center text-gray-400 py-20">Pilih mapel dan kelas</p>'; return; }
-
-    var data = questions.filter(function(q){ return q.mapel===mapel && q.kelas===kelas; });
-    var pg = data.filter(function(q){ return q.type==='pg'; });
-    var uraian = data.filter(function(q){ return q.type==='uraian'; });
-    var logoUrl = 'https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
-
-    var html = '<div class="print-page">' +
-        '<div class="kop-surat">' +
-            '<img src="'+logoUrl+'" alt="Logo">' +
-            '<div class="kop-text"><h1>Kunci Jawaban</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div>' +
-        '</div>';
-
-    // Kunci PG dalam format kolom
-    if(pg.length > 0){
-        html += '<div class="section-heading">I. Pilihan Ganda</div>';
-        html += '<table class="print-table"><thead><tr>';
-        for(var col=0; col<3; col++){
-            html += '<th style="width:60px">No</th><th style="width:60px">Kunci</th>';
-        }
-        html += '</tr></thead><tbody>';
-
-        for(var i=0; i<pg.length; i+=3){
-            html += '<tr>';
-            for(var j=0; j<3; j++){
-                var idx = i+j;
-                var q = pg[idx];
-                if(q){
-                    html += '<td class="center">'+(idx+1)+'</td><td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>';
-                } else {
-                    html += '<td class="center"></td><td class="center"></td>';
-                }
-            }
-            html += '</tr>';
-        }
-        html += '</tbody></table>';
+    var mapel=document.getElementById('pMapelScore').value, kelas=document.getElementById('pKelasScore').value, container=document.getElementById('scoringPreviewContainer');
+    if(!mapel||!kelas){ container.innerHTML='<p class="text-center text-gray-400 py-20">Pilih mapel dan kelas</p>'; return; }
+    var data=questions.filter(function(q){return q.mapel===mapel&&q.kelas===kelas;});
+    var pg=data.filter(function(q){return q.type==='pg';}), uraian=data.filter(function(q){return q.type==='uraian';});
+    var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
+    var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kunci Jawaban</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
+    if(pg.length){
+        html+='<div class="section-heading">I. Pilihan Ganda</div><table class="print-table"><thead><tr>';
+        for(var col=0;col<3;col++) html+='<th style="width:60px">No</th><th style="width:60px">Kunci</th>';
+        html+='</tr></thead><tbody>';
+        for(var i=0;i<pg.length;i+=3){ html+='<tr>'; for(var j=0;j<3;j++){ var idx=i+j, q=pg[idx]; if(q) html+='<td class="center">'+(idx+1)+'</td><td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>'; else html+='<td class="center"></td><td class="center"></td>'; } html+='</tr>'; }
+        html+='</tbody></table>';
     }
-
-    // Kunci Uraian
-    if(uraian.length > 0){
-        html += '<div class="section-heading" style="margin-top:24px">II. Uraian</div>';
-        html += '<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead><tbody>';
-        uraian.forEach(function(q, i){
-            html += '<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td>'+escHtml(q.answer||'Lihat pedoman penskoran')+'</td></tr>';
-        });
-        html += '</tbody></table>';
+    if(uraian.length){
+        html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div><table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead><tbody>';
+        uraian.forEach(function(q,i){ html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td>'+escHtml(q.answer||'Lihat pedoman penskoran')+'</td></tr>'; });
+        html+='</tbody></table>';
     }
+    html+='</div></div></div>';
+    container.innerHTML=html;
+}
 
-    html += '</div>';
-    container.innerHTML = html;
+// Fungsi cetak generik untuk Kisi & Kunci (menggunakan iframe juga)
+function doPrintGeneric(containerId){
+    var sheet = document.querySelector('#'+containerId+' .print-preview-sheet');
+    if(!sheet){ showToast('Tidak ada preview','error'); return; }
+    var iframe = document.createElement('iframe');
+    iframe.style.position='fixed'; iframe.style.left='-9999px'; iframe.style.top='0'; iframe.style.width='210mm'; iframe.style.height='297mm';
+    document.body.appendChild(iframe);
+    var doc=iframe.contentDocument||iframe.contentWindow.document;
+    doc.open();
+    doc.write('<!DOCTYPE html><html><head><style>');
+    doc.write('@page{size:A4 portrait;margin:1.5cm 2cm 2cm 2cm}');
+    doc.write('body{margin:0;padding:0;font-family:"Times New Roman",Times,serif;font-size:12pt;line-height:1.4;color:black;background:white;-webkit-print-color-adjust:exact;print-color-adjust:exact}');
+    doc.write('.print-page{padding:0}');
+    doc.write('.kop-surat{text-align:center;padding-bottom:12px;margin-bottom:24px;display:flex;align-items:center;justify-content:center;gap:18px;border-bottom:3px double #000}');
+    doc.write('.kop-surat img{height:70px;width:auto;flex-shrink:0}');
+    doc.write('.kop-text{text-align:center;line-height:1.2}');
+    doc.write('.kop-text h1{font-family:"Times New Roman",serif;font-size:13pt;font-weight:bold;text-transform:uppercase;margin:0}');
+    doc.write('.kop-text h2{font-family:"Times New Roman",serif;font-size:15pt;font-weight:bold;text-transform:uppercase;margin:0}');
+    doc.write('.section-heading{font-weight:bold;font-size:12pt;border-bottom:2px solid #000;padding-bottom:4px;margin-bottom:12px;margin-top:10px}');
+    doc.write('.print-table{width:100%;border-collapse:collapse;margin-top:12pt;font-size:11pt}');
+    doc.write('.print-table th,.print-table td{border:1px solid #000;padding:6px 8px;text-align:left;vertical-align:top}');
+    doc.write('.print-table th{background-color:#eee!important;text-align:center;font-weight:bold;font-size:10.5pt;text-transform:uppercase}');
+    doc.write('.print-table td.center{text-align:center}');
+    doc.write('</style></head><body>');
+    doc.write(sheet.innerHTML);
+    doc.write('</body></html>');
+    doc.close();
+    setTimeout(function(){
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        setTimeout(function(){document.body.removeChild(iframe);},3000);
+    },500);
 }
 
 // ================================================================
