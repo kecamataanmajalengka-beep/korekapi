@@ -69,7 +69,18 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s ease forwards}
 
-.img-preview{max-width:100%;max-height:150px;border-radius:6px;margin-top:8px;border:1px solid #2a3f5f}
+/* ===== IMAGE STYLES (APP & PRINT) ===== */
+/* Di aplikasi (preview) gambar jangan terlalu besar */
+.img-preview { 
+    max-width: 100%; 
+    max-height: 250px; /* Batas tinggi agar tidak scroll terlalu panjang */
+    object-fit: contain;  /* Jaga rasio */
+    border-radius: 6px; 
+    margin-top: 8px; 
+    border: 1px solid #2a3f5f; 
+    background: #0f1923;
+}
+
 .loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#c9a84c;animation:spin 1s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -79,7 +90,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @media print {
     @page {
         size: A4 portrait;
-        margin: 1.8cm 2cm 2cm 2cm;
+        margin: 1.5cm 2cm 2cm 2cm;
     }
 
     body {
@@ -89,12 +100,12 @@ textarea.input-field{resize:vertical;min-height:40px}
         print-color-adjust: exact;
         font-family: 'Times New Roman', Times, serif !important;
         font-size: 12pt;
-        line-height: 1.5;
+        line-height: 1.4;
     }
 
     /* Sembunyikan semua UI aplikasi */
     #sidebar, #mainArea > header, #sidebarOverlay, .no-print,
-    #toastContainer, #modalOverlay, #loginPage {
+    #toastContainer, #modalOverlay, #loginPage, .card {
         display: none !important;
     }
 
@@ -103,11 +114,15 @@ textarea.input-field{resize:vertical;min-height:40px}
         padding: 0 !important;
         width: 100% !important;
         height: auto !important;
+        background: white !important;
     }
 
     #pageContent {
         padding: 0 !important;
         margin: 0 !important;
+        width: 100% !important;
+        background: white !important;
+        color: black !important;
     }
 
     .print-page {
@@ -134,34 +149,33 @@ textarea.input-field{resize:vertical;min-height:40px}
         border-bottom: 3px double #000;
     }
     .kop-surat img {
-        height: 65px;
+        height: 70px; /* Sedikit lebih besar di kertas */
         width: auto;
         flex-shrink: 0;
     }
     .kop-text {
         text-align: center;
-        line-height: 1.25;
+        line-height: 1.2;
     }
     .kop-text h1 {
         font-family: 'Times New Roman', serif;
         font-size: 13pt;
         font-weight: bold;
         text-transform: uppercase;
-        letter-spacing: 1px;
         margin: 0;
     }
     .kop-text h2 {
         font-family: 'Times New Roman', serif;
-        font-size: 14pt;
+        font-size: 15pt;
         font-weight: bold;
         text-transform: uppercase;
         margin: 0;
     }
     .kop-text .kop-sub {
         font-family: 'Times New Roman', serif;
-        font-size: 9pt;
-        margin-top: 3px;
-        color: #444;
+        font-size: 9.5pt;
+        margin-top: 2px;
+        color: #333;
     }
 
     /* ---- JUDUL UJIAN ---- */
@@ -171,23 +185,23 @@ textarea.input-field{resize:vertical;min-height:40px}
     }
     .ujian-title h3 {
         font-family: 'Times New Roman', serif;
-        font-size: 14pt;
+        font-size: 15pt;
         font-weight: bold;
         text-decoration: underline;
         text-underline-offset: 3px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 2px;
+        margin: 0;
     }
     .ujian-title p {
         font-family: 'Times New Roman', serif;
         font-size: 12pt;
-        margin: 0;
+        margin: 4px 0 0 0;
+        font-weight: bold;
     }
 
     /* ---- HEADER SISWA ---- */
     .soal-header {
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
     .soal-header table {
         width: 100%;
@@ -195,35 +209,34 @@ textarea.input-field{resize:vertical;min-height:40px}
         font-size: 12pt;
     }
     .soal-header td {
-        padding: 3px 0;
+        padding: 2px 0;
         vertical-align: bottom;
     }
     .soal-header td.dot-cell {
-        border-bottom: 1px dotted #666;
+        border-bottom: 1px dotted #000;
         min-width: 200px;
     }
 
     /* ---- TUJUAN PEMBELAJARAN DI PRINT ---- */
     .print-tp-section {
-        margin-bottom: 24px;
-        padding: 10px 14px;
+        margin-bottom: 20px;
+        padding: 10px;
         border-left: 4px solid #333;
-        background-color: #fafafa;
-        -webkit-print-color-adjust: exact;
+        background-color: #f9f9f9;
         page-break-inside: avoid;
     }
     .print-tp-title {
         font-family: 'Times New Roman', serif;
         font-weight: bold;
         font-size: 11pt;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
     .print-tp-text {
         font-family: 'Times New Roman', serif;
         font-size: 11pt;
         font-style: italic;
         text-align: justify;
-        line-height: 1.5;
+        line-height: 1.4;
     }
 
     /* ---- SECTION HEADING (I. PG, II. Uraian) ---- */
@@ -231,10 +244,10 @@ textarea.input-field{resize:vertical;min-height:40px}
         font-family: 'Times New Roman', serif;
         font-weight: bold;
         font-size: 12pt;
-        border-bottom: 1.5px solid #000;
-        padding-bottom: 5px;
-        margin-bottom: 14px;
-        margin-top: 8px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 4px;
+        margin-bottom: 12px;
+        margin-top: 10px;
     }
 
     /* ---- ITEM SOAL ---- */
@@ -255,14 +268,18 @@ textarea.input-field{resize:vertical;min-height:40px}
     .soal-text {
         font-family: 'Times New Roman', serif;
         font-size: 12pt;
-        line-height: 1.6;
+        line-height: 1.5;
         display: block;
         text-align: justify;
     }
+    
+    /* ---- GAMBAR SAAT PRINT ---- */
     .soal-img {
         display: block;
-        max-width: 380px;
-        max-height: 260px;
+        max-width: 100%; /* Jangan lebihi margin kertas */
+        max-height: 250px; /* Batas tinggi di kertas */
+        width: auto;
+        height: auto;
         margin: 10px auto;
         object-fit: contain;
     }
@@ -273,7 +290,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         margin-top: 8px;
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 5px;
     }
     .opsi-row {
         display: flex;
@@ -281,7 +298,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         gap: 8px;
         font-family: 'Times New Roman', serif;
         font-size: 12pt;
-        line-height: 1.5;
+        line-height: 1.4;
         text-align: justify;
     }
     .opsi-label {
@@ -295,27 +312,31 @@ textarea.input-field{resize:vertical;min-height:40px}
         display: inline-block;
         vertical-align: middle;
         margin-left: 8px;
+        object-fit: contain;
     }
 
     /* ---- GARIS UNTUK JAWABAN URAIAN ---- */
     .answer-lines {
-        margin-top: 12px;
+        margin-top: 10px;
         border: 1px dashed #bbb;
-        height: 90px;
+        height: 80px;
         border-radius: 4px;
+        background-color: #fafafa;
     }
 
     /* ---- TANDA TANGAN ---- */
     .ttd-section {
-        margin-top: 40px;
+        margin-top: 50px;
         display: flex;
         justify-content: space-between;
         font-family: 'Times New Roman', serif;
         font-size: 11pt;
+        gap: 20px;
     }
     .ttd-box {
         text-align: center;
         min-width: 180px;
+        flex: 1;
     }
     .ttd-box .ttd-space {
         height: 70px;
@@ -324,6 +345,7 @@ textarea.input-field{resize:vertical;min-height:40px}
         border-top: 1px solid #000;
         padding-top: 4px;
         font-weight: bold;
+        font-size: 11pt;
     }
     .ttd-box .ttd-nip {
         font-size: 10pt;
@@ -340,13 +362,13 @@ textarea.input-field{resize:vertical;min-height:40px}
     }
     .print-table th,
     .print-table td {
-        border: 1px solid #333;
-        padding: 7px 10px;
+        border: 1px solid #000;
+        padding: 6px 8px;
         text-align: left;
         vertical-align: top;
     }
     .print-table th {
-        background-color: #e5e7eb !important;
+        background-color: #eee !important;
         -webkit-print-color-adjust: exact;
         text-align: center;
         font-weight: bold;
@@ -949,7 +971,7 @@ function handleImageUpload(input, targetInputId, previewId){
     }).then(function(url){
         // Set URL ke input text
         targetInput.value = url;
-        // Tampilkan preview gambar
+        // Tampilkan preview gambar (STANDAR SIZE)
         previewContainer.innerHTML = '<img src="'+url+'" class="img-preview">';
         showToast('Gambar berhasil diupload', 'success');
     }).catch(function(error){
