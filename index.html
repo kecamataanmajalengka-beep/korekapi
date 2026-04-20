@@ -546,7 +546,7 @@ function makeMapelOpt(sel){
     return '<option value="">-- Pilih --</option>';
 }
 
-// Helper: buat option kelas (BUG FIX: tidak pakai nested template literal)
+// Helper: buat option kelas
 function makeKelasOpt(sel){
     if(currentUser && currentUser.isAdmin){
         return KELAS_LIST.map(function(k){ return '<option value="'+k+'"'+(k===sel?' selected':'')+'>'+k+'</option>'; }).join('');
@@ -858,9 +858,14 @@ function buildSingleForm(){
         '<div class="mb-4">' +
             '<label class="text-xs text-muted mb-1 block">Teks Soal</label>' +
             '<textarea id="cText" class="input-field" rows="3" placeholder="Tulis soal di sini..."></textarea>' +
-            '<input type="file" id="cImgQ" accept="image/*" class="hidden" onchange="handleQImage(this)">' +
-            '<button onclick="document.getElementById(\'cImgQ\').click()" class="btn-secondary text-xs mt-2 py-1 px-3"><i class="fas fa-image mr-1"></i>Upload Gambar Soal</button>' +
-            '<div id="cImgQPrev" class="mt-2"></div>' +
+            
+            <!-- URL GAMBAR SOAL -->
+            '<div class="flex gap-2 items-center mt-2">' +
+                '<div class="flex-1"><label class="text-xs text-muted block mb-1">URL Gambar Soal (Opsional)</label><input type="text" id="cImgUrl" class="input-field text-xs" placeholder="https://..."></div>' +
+                '<div class="mt-5"><button onclick="document.getElementById(\'cImgFile\').click()" class="btn-secondary text-xs py-2 px-3" title="Upload Gambar"><i class="fas fa-cloud-upload-alt mr-1"></i>Upload</button></div>' +
+                '<input type="file" id="cImgFile" accept="image/*" class="hidden" onchange="handleImageUpload(this, \'cImgUrl\', \'cImgPrev\')">' +
+            '</div>' +
+            '<div id="cImgPrev" class="mt-2"></div>' +
         '</div>' +
         '<div id="optionsArea" class="mb-4"></div>' +
         '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><div class="flex gap-2"><select id="cAnswerSelect" class="input-field" style="width:90px" onchange="document.getElementById(\'cAnswer\').value=this.value"><option value="">--</option></select><input type="text" id="cAnswer" class="input-field" placeholder="Jawaban / uraian kunci"></div></div>' +
@@ -872,18 +877,9 @@ function buildSingleForm(){
 function buildJsonForm(){
     document.getElementById('panelJson').innerHTML =
         '<h3 class="font-display text-lg font-bold text-light mb-2">Import Soal Banyak (JSON)</h3>' +
-        '<p class="text-xs text-muted mb-4">Paste format JSON Array di bawah. <a href="#" onclick="showJsonExample(event)" class="text-kopAccent hover:underline">Lihat contoh format JSON.</a></p>' +
-        '<div id="jsonExampleArea" class="hidden bg-dark/50 p-4 rounded-lg mb-4 border border-border overflow-x-auto">' +
-            '<p class="text-xs text-kopAccent font-bold mb-2">Contoh Format JSON:</p>' +
-            '<pre class="text-xs text-muted font-mono whitespace-pre-wrap">[\n  {\n    "soal": "Apa nama ibukota Indonesia?",\n    "opsi_a": "Jakarta",\n    "opsi_b": "Bandung",\n    "opsi_c": "Surabaya",\n    "opsi_d": "Medan",\n    "kunci": "A",\n    "tp": "Peserta didik mampu menyebutkan ibukota negara.",\n    "tipe": "pg"\n  },\n  {\n    "soal": "Sebutkan ciri-ciri makhluk hidup!",\n    "kunci": "Bernapas, bertumbuh, berkembang biak",\n    "tp": "Peserta didik mampu menjelaskan ciri makhluk hidup",\n    "tipe": "uraian"\n  }\n]</pre>' +
-        '</div>' +
+        '<p class="text-xs text-muted mb-4">Paste format JSON Array di bawah. Gambar harus dalam bentuk URL.</p>' +
         '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Paste JSON Anda:</label><textarea id="jsonInput" class="input-field font-mono text-xs" rows="12" placeholder=\'[{"soal":"...","opsi_a":"...","kunci":"A"}]\'></textarea></div>' +
         '<button onclick="processJSON()" id="btnProcessJson" class="btn-primary w-full"><i class="fas fa-file-import mr-2"></i>Proses & Import JSON</button>';
-}
-
-function showJsonExample(e){
-    e.preventDefault();
-    document.getElementById('jsonExampleArea').classList.toggle('hidden');
 }
 
 function switchCreateTab(tab){
@@ -895,12 +891,12 @@ function switchCreateTab(tab){
 
 function onCreateKelasChange(){
     var kelas = document.getElementById('cKelas').value;
-    var letters = getOptLetters(kelas);
     var type = document.getElementById('cType');
     if(!type || type.value === 'uraian'){
         document.getElementById('optionsArea').innerHTML = '';
         return;
     }
+    var letters = getOptLetters(kelas);
     var area = document.getElementById('optionsArea');
     area.innerHTML = '<label class="text-xs text-muted mb-1 block">Pilihan Jawaban</label><div class="space-y-3">' +
         letters.map(function(l){
@@ -908,8 +904,12 @@ function onCreateKelasChange(){
                 '<div class="flex gap-2 items-center">' +
                     '<span class="font-bold text-kopAccent w-6 text-center">'+l+'</span>' +
                     '<input type="text" id="cOpt'+l+'" class="input-field flex-1" placeholder="Opsi '+l+'">' +
-                    '<input type="file" id="cOptImg'+l+'" accept="image/*" class="hidden" onchange="handleOptImg(this,\''+l+'\')">' +
-                    '<button onclick="document.getElementById(\'cOptImg'+l+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload gambar opsi"><i class="fas fa-camera"></i></button>' +
+                '</div>' +
+                <!-- URL GAMBAR OPSI -->
+                '<div class="ml-6 flex gap-2 items-center">' +
+                    '<input type="text" id="cOptImgUrl'+l+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l+' (Opsional)">' +
+                    '<button onclick="document.getElementById(\'cOptImgFile'+l+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload Gambar Opsi"><i class="fas fa-camera"></i></button>' +
+                    '<input type="file" id="cOptImgFile'+l+'" accept="image/*" class="hidden" onchange="handleImageUpload(this, \'cOptImgUrl'+l+'\', \'cOptImgPrev'+l+'\')">' +
                 '</div>' +
                 '<div id="cOptImgPrev'+l+'" class="ml-6"></div>' +
             '</div>';
@@ -930,18 +930,33 @@ function toggleOptions(){
     }
 }
 
-function handleQImage(input){
-    var file = input.files[0]; if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(e){ document.getElementById('cImgQPrev').innerHTML = '<img src="'+e.target.result+'" class="img-preview">'; };
-    reader.readAsDataURL(file);
-}
+// Helper: Upload Gambar dan Set URL ke Input Text
+function handleImageUpload(input, targetInputId, previewId){
+    var file = input.files[0];
+    if(!file) return;
+    
+    var targetInput = document.getElementById(targetInputId);
+    var previewContainer = document.getElementById(previewId);
+    
+    // Tampilkan loading text di preview
+    previewContainer.innerHTML = '<span class="text-xs text-kopAccent"><i class="fas fa-spinner fa-spin mr-1"></i>Mengupload...</span>';
 
-function handleOptImg(input, letter){
-    var file = input.files[0]; if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(e){ document.getElementById('cOptImgPrev'+letter).innerHTML = '<img src="'+e.target.result+'" class="img-preview">'; };
-    reader.readAsDataURL(file);
+    var fileName = Date.now() + '_' + file.name;
+    var ref = storage.ref('soal/' + fileName);
+
+    ref.put(file).then(function(snapshot){
+        return snapshot.ref.getDownloadURL();
+    }).then(function(url){
+        // Set URL ke input text
+        targetInput.value = url;
+        // Tampilkan preview gambar
+        previewContainer.innerHTML = '<img src="'+url+'" class="img-preview">';
+        showToast('Gambar berhasil diupload', 'success');
+    }).catch(function(error){
+        console.error(error);
+        previewContainer.innerHTML = '<span class="text-xs text-danger">Gagal upload: '+error.message+'</span>';
+        showToast('Gagal upload gambar', 'error');
+    });
 }
 
 function saveSingleQuestion(){
@@ -965,56 +980,46 @@ function saveSingleQuestion(){
         difficulty: document.getElementById('cDiff').value,
         score: parseInt(document.getElementById('cScore').value) || 1,
         answer: document.getElementById('cAnswer').value.trim(),
+        // Ambil URL langsung dari input text
+        image: document.getElementById('cImgUrl').value.trim() || '',
         options: [],
         optionImages: [],
-        image: '',
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
-    var qImgFile = document.getElementById('cImgQ').files[0];
-    var promiseChain = Promise.resolve();
-
-    if(qImgFile){
-        promiseChain = promiseChain.then(function(){
-            var ref = storage.ref('soal/' + Date.now() + '_' + qImgFile.name);
-            return ref.put(qImgFile).then(function(){ return ref.getDownloadURL(); }).then(function(url){ qData.image = url; });
-        });
-    }
-
+    // Jika PG, ambil URL opsi dari input text
     if(type === 'pg'){
         var letters = getOptLetters(kelas);
         letters.forEach(function(l){
             qData.options.push(document.getElementById('cOpt'+l).value.trim());
-            var optFile = document.getElementById('cOptImg'+l).files[0];
-            if(optFile){
-                (function(letter, f){
-                    promiseChain = promiseChain.then(function(){
-                        var ref = storage.ref('soal/' + Date.now() + '_' + letter + '_' + f.name);
-                        return ref.put(f).then(function(){ return ref.getDownloadURL(); }).then(function(url){ qData.optionImages.push(url); });
-                    });
-                })(l, optFile);
-            } else {
-                promiseChain = promiseChain.then(function(){ qData.optionImages.push(''); });
-            }
+            // Ambil URL gambar opsi dari input text
+            var optImgUrl = document.getElementById('cOptImgUrl'+l) ? document.getElementById('cOptImgUrl'+l).value.trim() : '';
+            qData.optionImages.push(optImgUrl);
         });
     }
 
-    promiseChain.then(function(){
-        return db.collection('questions').add(qData);
-    }).then(function(){
+    db.collection('questions').add(qData).then(function(){
         showToast('Soal berhasil disimpan!');
+        // Reset Form
         document.getElementById('cText').value = '';
-        document.getElementById('cImgQPrev').innerHTML = '';
+        document.getElementById('cImgUrl').value = '';
+        document.getElementById('cImgPrev').innerHTML = '';
         document.getElementById('cAnswer').value = '';
         if(document.getElementById('cTPManual')) document.getElementById('cTPManual').value = '';
         if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value = '';
-        var letters2 = getOptLetters(kelas);
-        letters2.forEach(function(l){
-            var optEl = document.getElementById('cOpt'+l);
-            if(optEl) optEl.value = '';
-            var prevEl = document.getElementById('cOptImgPrev'+l);
-            if(prevEl) prevEl.innerHTML = '';
-        });
+        
+        // Reset Opsi
+        if(type === 'pg'){
+            var letters2 = getOptLetters(kelas);
+            letters2.forEach(function(l){
+                var optEl = document.getElementById('cOpt'+l);
+                if(optEl) optEl.value = '';
+                var optUrlEl = document.getElementById('cOptImgUrl'+l);
+                if(optUrlEl) optUrlEl.value = '';
+                var prevEl = document.getElementById('cOptImgPrev'+l);
+                if(prevEl) prevEl.innerHTML = '';
+            });
+        }
     }).catch(function(e){ showToast('Error: '+(e.message||e),'error'); })
     .finally(function(){ btn.disabled=false; btn.innerHTML='<i class="fas fa-save mr-2"></i>Simpan Soal'; });
 }
@@ -1037,6 +1042,7 @@ function processJSON(){
         data.forEach(function(item){
             var qText = item.soal || item.text || '';
             if(!qText) return;
+            // Ambil opsi dari format fleksibel
             var qOpts = item.options || [item.opsi_a, item.opsi_b, item.opsi_c, item.opsi_d, item.opsi_e].filter(Boolean);
             var docRef = db.collection('questions').doc();
             batch.set(docRef, {
@@ -1049,6 +1055,7 @@ function processJSON(){
                 difficulty: item.difficulty || 'Sedang',
                 score: item.skor || item.score || 1,
                 tp: item.tp || '',
+                // Langsung pakai URL dari JSON
                 image: item.image || '',
                 optionImages: item.optionImages || [],
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
@@ -1058,12 +1065,11 @@ function processJSON(){
         batch.commit().then(function(){
             showToast(count + ' soal berhasil diimport!');
             document.getElementById('jsonInput').value = '';
-            document.getElementById('jsonExampleArea').classList.add('hidden');
         }).catch(function(e){ showToast('Gagal import: '+(e.message||e),'error'); });
     } catch(e){
         showToast('Format JSON Salah: '+(e.message||e),'error');
     }
-    btn.disabled = false; btn.innerHTML = '<i class="fas fa-file-import mr-2"></i>Proses & Import JSON';
+    btn.disabled = false; btn.innerHTML='<i class="fas fa-file-import mr-2"></i>Proses & Import JSON';
 }
 
 // ================================================================
@@ -1117,7 +1123,7 @@ function renderBankList(list){
                     '<span class="text-xs text-muted">Skor: '+(q.score||1)+'</span>' +
                 '</div>' +
                 '<p class="text-sm truncate">'+escHtml(q.text)+'</p>' +
-                (q.tp ? '<p class="text-xs text-muted/60 mt-1 truncate">TP: '+escHtml(q.tp)+'</p>' : '') +
+                (q.image ? '<i class="fas fa-image text-muted text-xs mt-1"></i>' : '') +
             '</div>' +
             '<div class="flex gap-2 flex-shrink-0">' +
                 '<button onclick="editQuestion(\''+q.id+'\')" class="text-kopAccent/60 hover:text-kopAccent p-1" title="Edit"><i class="fas fa-pen text-xs"></i></button>' +
@@ -1137,6 +1143,7 @@ function editQuestion(id){
         '<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3>' +
         '<div class="space-y-4">' +
             '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="4">'+escHtml(q.text)+'</textarea></div>' +
+            '<div><label class="text-xs text-muted mb-1 block">URL Gambar</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
             '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran</label><textarea id="eTP" class="input-field" rows="2">'+tpVal+'</textarea></div>' +
             '<div class="grid grid-cols-2 gap-4">' +
                 '<div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div>' +
@@ -1153,6 +1160,7 @@ function editQuestion(id){
 function doUpdateQuestion(id){
     var updateData = {
         text: document.getElementById('eText').value,
+        image: document.getElementById('eImg').value,
         tp: document.getElementById('eTP').value,
         answer: document.getElementById('eAnswer').value,
         score: parseInt(document.getElementById('eScore').value) || 1
@@ -1186,7 +1194,7 @@ function renderPrint(c){
             '</div>' +
             '<div class="mt-4 grid md:grid-cols-2 gap-4">' +
                 '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (Muncul di Dokumen Cetak)</label><textarea id="printTPGlobal" class="input-field" rows="2" placeholder="Masukkan tujuan pembelajaran umum..."></textarea></div>' +
-                '<div><label class="text-xs text-muted mb-1 block">Nama Guru (Tanda Tangan)</label><input type="text" id="printGuruName" class="input-field" placeholder="Contoh: Siti Nurhaliza, S.Pd"></div>' +
+                '<div><label class="text-xs text-muted mb-1 block">Nama Guru (Tanda Tangan)</label><input type="text" id="printGuruName" class="input-field" placeholder="Contoh: Siti Nurhaliza, S.Pd"></input></div>' +
             '</div>' +
             '<div class="mt-4"><button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / Simpan sebagai PDF</button></div>' +
         '</div>' +
@@ -1260,10 +1268,11 @@ function refreshPrintPreview(){
                     '<div class="opsi-wrapper">';
             (q.options||[]).forEach(function(opt, oi){
                 var letter = String.fromCharCode(65+oi);
+                var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img">' : '';
                 html += '<div class="opsi-row">' +
                     '<span class="opsi-label">'+letter+'.</span>' +
                     '<span>'+escHtml(opt)+'</span>' +
-                    (q.optionImages && q.optionImages[oi] ? '<img src="'+q.optionImages[oi]+'" class="opsi-img">' : '') +
+                    optImg +
                 '</div>';
             });
             html += '</div></div></div>';
