@@ -35,14 +35,9 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(201,168,76,0.3)}
 .btn-secondary{background:transparent;border:1px solid #2a3f5f;color:#e8ecf1;padding:10px 24px;border-radius:8px;cursor:pointer;transition:all .2s;font-size:14px;font-family:'Source Sans 3',sans-serif}
 .btn-secondary:hover{border-color:#c9a84c;color:#c9a84c}
-.btn-danger{background:linear-gradient(135deg,#ef4444,#dc2626);color:white;font-weight:600;padding:8px 20px;border-radius:8px;border:none;cursor:pointer;transition:all .2s;font-size:13px}
-.btn-danger:hover{box-shadow:0 4px 12px rgba(239,68,68,0.3)}
 .input-field{background:#0f1923;border:1px solid #2a3f5f;color:#e8ecf1;padding:10px 14px;border-radius:8px;width:100%;font-size:14px;transition:border-color .2s}
 .input-field:focus{outline:none;border-color:#c9a84c;box-shadow:0 0 0 2px rgba(201,168,76,0.15)}
-.input-field::placeholder{color:#4a6080}
 .card{background:#182538;border:1px solid #2a3f5f;border-radius:12px;padding:24px}
-.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
-.badge-success{background:rgba(34,197,94,0.15);color:#22c55e}.badge-warning{background:rgba(245,158,11,0.15);color:#f59e0b}.badge-info{background:rgba(6,182,212,0.15);color:#06b6d4}.badge-danger{background:rgba(239,68,68,0.15);color:#ef4444}
 .toast{position:fixed;top:20px;right:20px;z-index:9999;padding:14px 24px;border-radius:10px;font-size:14px;font-weight:600;animation:slideIn .3s ease;max-width:400px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,0.3)}
 .toast-success{background:linear-gradient(135deg,#166534,#15803d);color:white;border:1px solid #22c55e}
 .toast-error{background:linear-gradient(135deg,#7f1d1d,#991b1b);color:white;border:1px solid #ef4444}
@@ -52,53 +47,202 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:35;display:none}.sidebar-overlay.active{display:block}
 @media(max-width:1023px){.sidebar{transform:translateX(-260px)}.sidebar.mobile-open{transform:translateX(0)}.main-content{margin-left:0!important}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.fade-in{animation:fadeIn .4s ease}
-.stat-card{background:linear-gradient(135deg,#182538,#1f3050);border:1px solid #2a3f5f;border-radius:12px;padding:20px;text-align:center}
-.stat-card .stat-num{font-size:32px;font-weight:900;color:#c9a84c;font-family:'Playfair Display',serif}
-.field-error{color:#ef4444;font-size:11px;margin-top:4px;display:none}.field-error.show{display:block}
 .img-preview{max-width:100%;max-height:150px;border-radius:6px;margin-top:8px;border:1px solid #2a3f5f}
 .loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#c9a84c;animation:spin 1s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* PRINT STYLES - KHUSUS AGAR KOP SURAT TIDAK TERPOTONG */
+/* =========================================
+   CETAK PDF / PRINT STYLES (PENTING)
+   ========================================= */
 @media print {
-    body { background: white; color: black; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    #sidebar, #mainArea > header, #sidebarOverlay, .no-print { display: none !important; }
-    #mainArea { margin: 0 !important; padding: 0 !important; width: 100%; }
-    #pageContent { padding: 0 !important; }
-    .card { border: none !important; padding: 0 !important; box-shadow: none !important; background: white !important; }
-    
-    /* Paper Layout */
-    .print-page {
-        width: 100%;
-        padding: 20px 40px; /* Margin A4 standar */
-        background: white;
-        color: black;
-        font-family: 'Times New Roman', serif;
+    body { 
+        background: white; 
+        color: black; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact; 
+        font-family: 'Times New Roman', Times, serif; /* Font resmi */
     }
     
-    /* Kop Surat */
-    .kop-surat { text-align: center; border-bottom: 3px double black; padding-bottom: 10px; margin-bottom: 20px; position: relative; }
-    .kop-surat img { height: 80px; vertical-align: middle; margin-bottom: 10px; }
-    .kop-surat h1 { font-family: 'Times New Roman', serif; font-size: 18pt; font-weight: bold; margin: 0; text-transform: uppercase; }
-    .kop-surat h2 { font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold; margin: 0; text-transform: uppercase; }
-    .kop-surat h3 { font-family: 'Times New Roman', serif; font-size: 11pt; font-weight: normal; margin: 0; font-style: italic; }
-    .kop-surat p { font-family: 'Times New Roman', serif; font-size: 10pt; margin: 0; }
-
-    /* Soal Styles */
-    .soal-header { text-align: right; margin-bottom: 20px; font-size: 11pt; }
-    .soal-container { margin-bottom: 15px; page-break-inside: avoid; }
-    .soal-num { font-weight: bold; margin-right: 8px; }
-    .soal-text { font-size: 11pt; line-height: 1.5; display: inline; vertical-align: top; }
-    .soal-img { max-width: 200px; max-height: 150px; display: block; margin: 10px 0; }
-    .opsi-box { margin-left: 30px; margin-top: 5px; display: flex; flex-direction: column; gap: 5px; font-size: 11pt; }
-    .opsi-item { display: flex; align-items: flex-start; gap: 10px; }
-    .opsi-img { max-width: 150px; display: inline-block; vertical-align: middle; }
+    /* Sembunyikan UI Aplikasi */
+    #sidebar, #mainArea > header, #sidebarOverlay, .no-print { 
+        display: none !important; 
+    }
     
-    /* Table Styles for Kisi/Scoring */
-    .print-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 11pt; }
-    .print-table th, .print-table td { border: 1px solid black; padding: 8px; text-align: left; vertical-align: top; }
-    .print-table th { background-color: #f0f0f0 !important; -webkit-print-color-adjust: exact; text-align: center; }
+    #mainArea { 
+        margin: 0 !important; 
+        padding: 0 !important; 
+        width: 100%; 
+        height: auto;
+    }
+    
+    #pageContent { 
+        padding: 0 !important; 
+    }
+
+    /* Container Kertas A4 */
+    .print-page {
+        width: 100%;
+        padding: 40px; /* Margin kertas aman */
+        background: white;
+        color: black;
+        position: relative;
+        page-break-after: always;
+    }
+    
+    /* 1. KOP SURAT - WAJIB MUNCUL DAN RAPI */
+    .kop-surat {
+        text-align: center;
+        border-bottom: 4px double black;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .kop-surat img {
+        height: 90px; /* Ukuran logo standar */
+        width: auto;
+    }
+
+    .kop-text {
+        text-align: center;
+        line-height: 1.3;
+    }
+
+    .kop-text h1 {
+        font-family: 'Times New Roman', serif;
+        font-size: 16pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .kop-text h2 {
+        font-family: 'Times New Roman', serif;
+        font-size: 14pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+    }
+
+    .kop-text h3 {
+        font-family: 'Times New Roman', serif;
+        font-size: 12pt;
+        font-weight: normal;
+        margin: 0;
+        font-style: italic;
+    }
+
+    .kop-text p {
+        font-family: 'Times New Roman', serif;
+        font-size: 10pt;
+        margin: 0;
+    }
+
+    /* 2. HEADER SOAL (Judul Ulangan, Tabel Identitas) */
+    .soal-header {
+        text-align: right;
+        margin-bottom: 30px;
+        font-size: 12pt;
+    }
+
+    .soal-header table {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .soal-header td {
+        padding: 2px;
+        vertical-align: top;
+    }
+
+    /* 3. NOMOR & TEKS SOAL */
+    .soal-item {
+        margin-bottom: 20px;
+        page-break-inside: avoid; /* Mencegah soal terpotong halaman */
+        clear: both;
+    }
+
+    .soal-num {
+        font-weight: bold;
+        float: left;
+        margin-right: 8px;
+        min-width: 30px;
+    }
+
+    .soal-body {
+        display: block;
+    }
+
+    .soal-text {
+        font-size: 12pt;
+        line-height: 1.5;
+        display: block;
+    }
+
+    .soal-img {
+        display: block;
+        max-width: 400px; /* Batas lebar gambar soal */
+        max-height: 300px;
+        margin: 10px 0;
+        object-fit: contain;
+    }
+
+    /* 4. OPSI JAWABAN (Rapih) */
+    .opsi-wrapper {
+        margin-left: 40px;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .opsi-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+
+    .opsi-label {
+        font-weight: bold;
+        min-width: 25px;
+    }
+
+    /* Gambar di opsi jawaban */
+    .opsi-img {
+        max-width: 150px;
+        max-height: 100px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+    }
+
+    /* Tabel untuk Kisi & Kunci */
+    .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 11pt;
+        font-family: 'Times New Roman', serif;
+    }
+
+    .print-table th, .print-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .print-table th {
+        background-color: #eee !important;
+        -webkit-print-color-adjust: exact;
+        text-align: center;
+        font-weight: bold;
+    }
 }
 </style>
 </head>
@@ -115,7 +259,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
     <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo" class="w-full h-full object-cover">
 </div>
 <h1 class="font-display text-2xl font-bold text-kopAccent tracking-wide">KOREK API</h1>
-<p class="text-muted text-sm mt-1">Sistem Asesmen Tengah Semester (Online)</p>
+<p class="text-muted text-sm mt-1">Sistem Asesmen Tengah Semester</p>
 </div>
 <div class="space-y-4">
 <div>
@@ -132,7 +276,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#0f1923;color:#e8ecf1;min
 <input type="password" id="loginPass" class="input-field pr-10" placeholder="Masukkan password" onkeydown="if(event.key==='Enter')doLogin()">
 <button onclick="togglePassVis()" class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-light transition-colors" type="button"><i id="passEye" class="fas fa-eye text-sm"></i></button>
 </div>
-<p id="loginError" class="field-error"></p>
+<p id="loginError" class="text-danger text-xs mt-1 hidden"></p>
 </div>
 <button onclick="doLogin()" class="btn-primary w-full text-center mt-2" type="button"><i class="fas fa-sign-in-alt mr-2"></i>Masuk</button>
 </div>
@@ -193,8 +337,7 @@ const firebaseConfig = {
   projectId: "pembuatan-soal",
   storageBucket: "pembuatan-soal.firebasestorage.app",
   messagingSenderId: "56200686194",
-  appId: "1:56200686194:web:eb2de00c9d152d87bcf0eb",
-  measurementId: "G-5V2CLKCE5J"
+  appId: "1:56200686194:web:eb2de00c9d152d87bcf0eb"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -220,17 +363,24 @@ function getOptLetters(kelas){ return ['A','B','C','D'].slice(0,getMaxOpt(kelas)
 // STATE
 let currentUser=null;
 let questions=[]; 
-let tujuanPembelajaran=[];
+let tujuanPembelajaran=[]; // Array untuk menyimpan data TP
 let accounts=[];
 let currentEditId=null;
-let unsubQ=null;
+let unsubQ=null, unsubTP=null;
 
 // UTILS
 function getMapelName(id){return MAPEL_LIST.find(m=>m.id===id)?.nama||id;}
 function getMapelSingkat(id){return MAPEL_LIST.find(m=>m.id===id)?.singkat||id;}
 function escHtml(s){if(!s)return '';const d=document.createElement('div');d.textContent=String(s);return d.innerHTML;}
 
-function showToast(msg,type='success'){ const c=document.getElementById('toastContainer'); const t=document.createElement('div'); t.className=`toast toast-${type}`; t.innerHTML=`<i class="fas fa-${type==='success'?'check':type==='error'?'times':'info'}-circle flex-shrink-0"></i><span>${msg}</span>`; c.appendChild(t); setTimeout(()=>{t.remove();},3000); }
+function showToast(msg,type='success'){ 
+    const c=document.getElementById('toastContainer'); 
+    const t=document.createElement('div'); 
+    t.className=`toast toast-${type}`; 
+    t.innerHTML=`<i class="fas fa-${type==='success'?'check':type==='error'?'times':'info'}-circle flex-shrink-0"></i><span>${msg}</span>`; 
+    c.appendChild(t); 
+    setTimeout(()=>{t.remove();},3000); 
+}
 function closeModal(){document.getElementById('modalOverlay').classList.add('hidden');document.getElementById('modalBody').innerHTML='';}
 function openModal(html){document.getElementById('modalOverlay').classList.remove('hidden');document.getElementById('modalBody').innerHTML=html;}
 
@@ -238,6 +388,7 @@ function openModal(html){document.getElementById('modalOverlay').classList.remov
 // FIREBASE LOGIC
 // ================================================================
 async function initApp(){
+    // 1. Seed Accounts if empty
     const accSnap = await db.collection('accounts').limit(1).get();
     if(accSnap.empty){
         const batch = db.batch();
@@ -248,10 +399,19 @@ async function initApp(){
             });
         });
         await batch.commit();
+        showToast('Data akun default dibuat','info');
     }
+    // 2. Load Accounts
     db.collection('accounts').onSnapshot(snap => {
         accounts = snap.docs.map(d => ({id:d.id, ...d.data()}));
         populateLoginDropdown();
+    });
+    
+    // 3. Load TP (Tujuan Pembelajaran) - Penting untuk Dropdown
+    unsubTP = db.collection('tps').onSnapshot(snap => {
+        tujuanPembelajaran = snap.docs.map(d => ({id:d.id, ...d.data()}));
+        // Update dropdown jika form create sedang terbuka
+        if(document.getElementById('cMapel')) updateTPDropdown();
     });
 }
 
@@ -262,7 +422,7 @@ function populateLoginDropdown(){
     MAPEL_LIST.forEach(m=>{sel.innerHTML+=`<option value="${m.id}">${m.nama}</option>`;});
     sel.onchange=function(){
         const ks=document.getElementById('loginKelas');
-        document.getElementById('loginError').classList.remove('show');
+        document.getElementById('loginError').classList.add('hidden');
         if(this.value==='admin'){ks.innerHTML='<option value="Semua">Semua Kelas</option>';ks.disabled=false;}
         else if(this.value){ks.disabled=false;ks.innerHTML='<option value="">-- Pilih Kelas --</option>';KELAS_LIST.forEach(k=>{ks.innerHTML+=`<option value="${k}">${k}</option>`;});}
         else{ks.innerHTML='<option value="">-- Pilih Kelas --</option>';ks.disabled=true;}
@@ -275,15 +435,16 @@ function doLogin(){
     const kelas=document.getElementById('loginKelas').value;
     const pass=document.getElementById('loginPass').value;
     const errEl=document.getElementById('loginError');
-    if(!mapel){errEl.textContent='Pilih mata pelajaran';errEl.classList.add('show');return;}
-    if(!kelas){errEl.textContent='Pilih kelas';errEl.classList.add('show');return;}
+    if(!mapel){errEl.textContent='Pilih mapel';errEl.classList.remove('hidden');return;}
+    if(!kelas){errEl.textContent='Pilih kelas';errEl.classList.remove('hidden');return;}
     const acc = accounts.find(a => a.mapel === mapel && a.kelas === kelas && a.password === pass);
-    if(!acc){errEl.textContent='Password salah';errEl.classList.add('show');return;}
+    if(!acc){errEl.textContent='Password salah';errEl.classList.remove('hidden');return;}
+    
     currentUser={mapel:acc.mapel,kelas:acc.kelas,isAdmin:acc.mapel==='admin'};
     document.getElementById('loginPage').classList.add('hidden');
     document.getElementById('mainPage').classList.remove('hidden');
     initMainPage();
-    showToast('Selamat datang, '+(currentUser.isAdmin?'Administrator':getMapelName(currentUser.mapel)));
+    showToast('Selamat datang, '+(currentUser.isAdmin?'Admin':getMapelName(currentUser.mapel)));
 }
 
 function doLogout(){
@@ -296,17 +457,16 @@ function doLogout(){
 }
 
 function initMainPage(){
-    document.getElementById('sidebarUser').textContent=currentUser.isAdmin?'Administrator':getMapelName(currentUser.mapel);
+    document.getElementById('sidebarUser').textContent=currentUser.isAdmin?'Admin':getMapelName(currentUser.mapel);
     document.getElementById('sidebarRole').textContent=currentUser.isAdmin?'Akses Semua':currentUser.kelas;
-    document.getElementById('topbarInfo').innerHTML=currentUser.isAdmin?'<i class="fas fa-crown mr-1" style="color:#c9a84c"></i>Admin':`<i class="fas fa-graduation-cap mr-1"></i>${getMapelSingkat(currentUser.mapel)} - ${currentUser.kelas}`;
+    document.getElementById('topbarInfo').innerHTML=currentUser.isAdmin?'<i class="fas fa-crown mr-1 text-kopAccent"></i>Admin':`<i class="fas fa-graduation-cap mr-1"></i>${getMapelSingkat(currentUser.mapel)} - ${currentUser.kelas}`;
     
+    // Load Questions
+    // Jika Admin, load semua soal. Jika Guru, load soal mapel & kelasnya saja.
     let qRef = db.collection('questions');
-    if(!currentUser.isAdmin) qRef = qRef.where('mapel','==',currentUser.mapel).where('kelas','==',currentUser.kelas);
-    
-    unsubQ = qRef.onSnapshot(snap => {
+    // Kita akan memfilter di frontend untuk memudahkan switching filter mapel untuk admin
+    unsubQ = qRef.orderBy('createdAt','asc').onSnapshot(snap => {
         questions = snap.docs.map(d => ({id:d.id, ...d.data()}));
-        // Sort by creation date if available, or keep Firestore order
-        questions.sort((a,b) => (a.createdAt || 0) - (b.createdAt || 0));
         navigateTo('dashboard');
     });
 }
@@ -318,7 +478,7 @@ function navigateTo(page){
     document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
     const t=document.querySelector(`.nav-item[data-page="${page}"]`);
     if(t)t.classList.add('active');
-    const titles={dashboard:'Dashboard', create:'Buat Soal Baru',questions:'Bank Soal',print:'Cetak Soal',kisi:'Kisi-Kisi Soal',scoring:'Kunci Jawaban & Penskoran'};
+    const titles={dashboard:'Dashboard', create:'Buat Soal',questions:'Bank Soal',print:'Cetak Soal',kisi:'Kisi-Kisi',scoring:'Kunci & Skor'};
     document.getElementById('pageTitle').textContent=titles[page]||page;
     closeSidebar();
     const c=document.getElementById('pageContent');
@@ -339,20 +499,21 @@ function closeSidebar(){document.getElementById('sidebar').classList.remove('mob
 // DASHBOARD
 // ================================================================
 function renderDashboard(c){
-    const byType={pg:0,uraian:0}; const byDiff={Mudah:0,Sedang:0,Sulit:0};
-    questions.forEach(q=>{ byType[q.type==='pg'?'pg':'uraian']++; byDiff[q.difficulty]=(byDiff[q.difficulty]||0)+1; });
-    const totalSkor=questions.reduce((s,q)=>s+(q.score||0),0);
-    c.innerHTML=`<div class="fade-in grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-        <div class="stat-card"><div class="stat-num">${questions.length}</div><div class="stat-label">Total Soal</div></div>
-        <div class="stat-card"><div class="stat-num">${byType.pg}</div><div class="stat-label">Pilihan Ganda</div></div>
-        <div class="stat-card"><div class="stat-num">${byType.uraian}</div><div class="stat-label">Uraian</div></div>
-        <div class="stat-card"><div class="stat-num">${totalSkor}</div><div class="stat-label">Total Skor</div></div>
-        <div class="stat-card"><div class="stat-num">${byDiff.Sulit}</div><div class="stat-label">Soal Sulit</div></div>
+    // Filter dashboard sesuai user (Admin lihat semua, Guru lihat sendiri)
+    const myQ = currentUser.isAdmin ? questions : questions.filter(q => q.mapel===currentUser.mapel && q.kelas===currentUser.kelas);
+    const totalSkor=myQ.reduce((s,q)=>s+(q.score||0),0);
+    const byType={pg:0,uraian:0}; myQ.forEach(q=>{byType[q.type==='pg'?'pg':'uraian']++;});
+    
+    c.innerHTML=`<div class="fade-in grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="card text-center border border-kopAccent/20"><div class="text-3xl font-bold text-kopAccent">${myQ.length}</div><div class="text-xs text-muted mt-1">Total Soal</div></div>
+        <div class="card text-center"><div class="text-3xl font-bold text-light">${byType.pg}</div><div class="text-xs text-muted mt-1">Pilihan Ganda</div></div>
+        <div class="card text-center"><div class="text-3xl font-bold text-light">${byType.uraian}</div><div class="text-xs text-muted mt-1">Uraian</div></div>
+        <div class="card text-center"><div class="text-3xl font-bold text-success">${totalSkor}</div><div class="text-xs text-muted mt-1">Total Skor</div></div>
     </div>`;
 }
 
 // ================================================================
-// BUAT SOAL (DENGAN JSON IMPORT)
+// BUAT SOAL (DENGAN TP INTEGRASI & OPSI IMG)
 // ================================================================
 function renderCreate(c){
     currentEditId=null;
@@ -374,11 +535,14 @@ function renderCreate(c){
             <div><label>Difficulty</label><select id="cDiff" class="input-field"><option>Mudah</option><option selected>Sedang</option><option>Sulit</option></select></div>
             <div><label>Skor</label><input type="number" id="cScore" class="input-field" value="1"></div>
         </div>
+        
+        <!-- Dropdown TP Terintegrasi -->
         <div class="mb-4">
-            <label>TP</label>
+            <label>Tujuan Pembelajaran (TP)</label>
             <select id="cTPSelect" class="input-field mb-2"><option value="">-- Pilih TP --</option></select>
-            <textarea id="cTPManual" class="input-field" rows="2" placeholder="Atau tulis manual..."></textarea>
+            <textarea id="cTPManual" class="input-field" rows="2" placeholder="Atau tulis manual jika tidak ada di daftar..."></textarea>
         </div>
+
         <div class="mb-4">
             <label>Teks Soal</label>
             <textarea id="cText" class="input-field" rows="3"></textarea>
@@ -386,7 +550,10 @@ function renderCreate(c){
             <button onclick="document.getElementById('cImgQ').click()" class="btn-secondary text-xs mt-2"><i class="fas fa-image mr-1"></i>Upload Gambar Soal</button>
             <div id="cImgQPrev" class="mt-2"></div>
         </div>
+        
+        <!-- Area Opsi + Upload Gambar Opsi -->
         <div id="optionsArea" class="mb-4"></div>
+        
         <div class="grid md:grid-cols-2 gap-4 mb-4">
             <div><label>Kunci</label><div class="flex gap-2"><select id="cAnswerSelect" class="input-field" style="width:80px"><option value="">--</option></select><input type="text" id="cAnswer" class="input-field" placeholder="Jawaban"></div></div>
         </div>
@@ -396,30 +563,16 @@ function renderCreate(c){
     <!-- JSON IMPORT -->
     <div id="panelJson" class="hidden card">
         <h3 class="font-display text-lg font-bold text-light mb-2">Import Soal Banyak (JSON)</h3>
-        <p class="text-xs text-muted mb-4">Paste format JSON Array. Mapel dan Kelas akan diambil dari form, atau bisa di-override di JSON.</p>
-        
-        <div class="grid md:grid-cols-2 gap-4 mb-4">
-            <div><label>Mapel (Default)</label><select id="jMapel" class="input-field">${makeMapelOpt(currentUser.mapel)}</select></div>
-            <div><label>Kelas (Default)</label><select id="jKelas" class="input-field">${makeKelasOpt(currentUser.kelas)}</select></div>
-        </div>
-        
+        <p class="text-xs text-muted mb-4">Paste format JSON Array.</p>
         <div class="mb-4">
             <label>Format JSON</label>
-            <textarea id="jsonInput" class="input-field font-mono text-xs" rows="10" placeholder='[
-  {
-    "text": "Ibukota Indonesia adalah...",
-    "type": "pg",
-    "options": ["Jakarta", "Bandung", "Surabaya", "Medan"],
-    "answer": "A",
-    "difficulty": "Mudah",
-    "score": 2
-  }
-]'></textarea>
+            <textarea id="jsonInput" class="input-field font-mono text-xs" rows="10" placeholder='[{"text":"Ibukota Indonesia","options":["Jakarta","Bandung"],"answer":"A"}]'></textarea>
         </div>
         <button onclick="processJSON()" class="btn-primary w-full"><i class="fas fa-file-import mr-1"></i>Proses JSON</button>
     </div>
     </div>`;
     onCreateKelasChange();
+    updateTPDropdown(); // Load TP saat render awal
 }
 
 function switchCreateTab(tab){
@@ -429,28 +582,56 @@ function switchCreateTab(tab){
     document.getElementById('tabJson').className = tab==='json'?'text-kopAccent border-b-2 border-kopAccent pb-2 font-bold':'text-muted hover:text-light pb-2';
 }
 
-// Logic Single Input (Sama seperti sebelumnya, disederhanakan)
+function updateTPDropdown(){
+    const mapel=document.getElementById('cMapel').value;
+    const kelas=document.getElementById('cKelas').value;
+    if(!mapel || !kelas) return;
+    
+    // Filter TP dari array global
+    const relevantTPs=tujuanPembelajaran.filter(t=>t.mapel===mapel && t.kelas===kelas);
+    const sel=document.getElementById('cTPSelect');
+    sel.innerHTML='<option value="">-- Pilih TP --</option>';
+    relevantTPs.forEach(t=>{ sel.innerHTML+=`<option value="${escHtml(t.text)}">${escHtml(t.text.substring(0,50))}</option>`; });
+}
+
 function onCreateKelasChange(){
     const kelas=document.getElementById('cKelas').value;
     const letters=getOptLetters(kelas);
     const area=document.getElementById('optionsArea');
     area.innerHTML=`<label>Pilihan Jawaban</label><div class="space-y-3">${letters.map(l=>`
-        <div class="flex gap-2 items-center">
-            <span class="font-bold text-kopAccent">${l}.</span>
-            <input type="text" id="cOpt${l}" class="input-field flex-1">
-        </div>`).join('')}</div>`;
+        <div class="flex flex-col gap-2">
+            <div class="flex gap-2 items-center">
+                <span class="font-bold text-kopAccent">${l}.</span>
+                <input type="text" id="cOpt${l}" class="input-field flex-1">
+                <input type="file" id="cOptImg${l}" accept="image/*" class="hidden" onchange="handleOptImg(this, '${l}')">
+                <button onclick="document.getElementById('cOptImg${l}').click()" class="btn-secondary text-xs py-1 px-2"><i class="fas fa-camera"></i></button>
+            </div>
+            <div id="cOptImgPrev${l}" class="ml-6"></div>
+        </div>
+    `).join('')}</div>`;
+    
     const sel=document.getElementById('cAnswerSelect');
     sel.innerHTML='<option value="">--</option>'+letters.map(l=>`<option value="${l}">${l}</option>`).join('');
     sel.onchange=function(){document.getElementById('cAnswer').value=this.value;};
 }
+
+// Handle Image Preview for Question
 function handleQImage(input){
     const file = input.files[0]; if(!file) return;
     const reader = new FileReader();
     reader.onload = function(e){ document.getElementById('cImgQPrev').innerHTML = `<img src="${e.target.result}" class="img-preview">`; };
     reader.readAsDataURL(file);
 }
+
+// Handle Image Preview for Options (Fitur Baru)
+function handleOptImg(input, letter){
+    const file = input.files[0]; if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e){ document.getElementById('cOptImgPrev'+letter).innerHTML = `<img src="${e.target.result}" class="img-preview">`; };
+    reader.readAsDataURL(file);
+}
+
 async function saveSingleQuestion(){
-    // ... (Logic simpan sama seperti sebelumnya, dipersingkat untuk konteks)
     const btn = document.querySelector('button[onclick="saveSingleQuestion()"]');
     btn.disabled = true; btn.innerHTML = '<span class="loading-spinner mr-2"></span>Menyimpan...';
     try {
@@ -460,138 +641,155 @@ async function saveSingleQuestion(){
         const text=document.getElementById('cText').value.trim();
         if(!text) throw new Error('Soal kosong');
         
-        // Image handling (skip for brevity, assume text only or handle similarly)
         let qData = {
             mapel, kelas, type, text,
             tp: document.getElementById('cTPManual').value || document.getElementById('cTPSelect').value,
             difficulty: document.getElementById('cDiff').value,
             score: parseInt(document.getElementById('cScore').value)||1,
             answer: document.getElementById('cAnswer').value.trim(),
-            options: [], createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            options: [], 
+            optionImages: [], // Array untuk menyimpan URL gambar opsi
+            image: '', 
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
         
+        // 1. Upload Gambar Soal
+        const qImgFile = document.getElementById('cImgQ').files[0];
+        if(qImgFile){
+            const ref = storage.ref(`soal/${Date.now()}_${qImgFile.name}`);
+            await ref.put(qImgFile);
+            qData.image = await ref.getDownloadURL();
+        }
+        
+        // 2. Upload Gambar Opsi
         if(type==='pg'){
-            getOptLetters(kelas).forEach(l=>qData.options.push(document.getElementById('cOpt'+l).value.trim()));
+            const letters=getOptLetters(kelas);
+            for(let l of letters){
+                qData.options.push(document.getElementById('cOpt'+l).value.trim());
+                const optFile = document.getElementById('cOptImg'+l).files[0];
+                if(optFile){
+                    const ref = storage.ref(`soal/${Date.now()}_${l}_${optFile.name}`);
+                    await ref.put(optFile);
+                    qData.optionImages.push(await ref.getDownloadURL());
+                } else {
+                    qData.optionImages.push('');
+                }
+            }
         }
         
         await db.collection('questions').add(qData);
         showToast('Soal disimpan!');
         // Reset form partial
         document.getElementById('cText').value='';
-        getOptLetters(kelas).forEach(l=>{if(document.getElementById('cOpt'+l)) document.getElementById('cOpt'+l).value='';});
+        document.getElementById('cImgQPrev').innerHTML='';
+        getOptLetters(kelas).forEach(l=>{ 
+            if(document.getElementById('cOpt'+l)) document.getElementById('cOpt'+l).value=''; 
+            if(document.getElementById('cOptImgPrev'+l)) document.getElementById('cOptImgPrev'+l).innerHTML=''; 
+        });
     } catch(e){ showToast('Error: '+e.message, 'error'); }
     btn.disabled=false; btn.innerHTML='<i class="fas fa-save mr-1"></i>Simpan Soal';
 }
 
-// Logic JSON Import
+// Logic JSON Import (Simplified)
 async function processJSON(){
-    const btn = document.querySelector('button[onclick="processJSON()"]');
     const txt = document.getElementById('jsonInput').value;
-    const defMapel = document.getElementById('jMapel').value;
-    const defKelas = document.getElementById('jKelas').value;
-    
+    const defMapel = document.getElementById('cMapel').value; // Pakai mapel dari form
+    const defKelas = document.getElementById('cKelas').value;
     if(!txt.trim()){ showToast('JSON kosong','error'); return; }
-    
     try {
         const data = JSON.parse(txt);
-        if(!Array.isArray(data)) throw new Error('Format harus Array JSON [ ... ]');
-        
-        btn.disabled = true; btn.innerHTML = '<span class="loading-spinner mr-2"></span>Memproses...';
-        
-        let count=0;
+        if(!Array.isArray(data)) throw new Error('Format harus Array');
         const batch = db.batch();
-        
-        data.forEach((item, idx) => {
-            // Validate minimal fields
+        data.forEach(item => {
             if(!item.text) return;
-            
             const docRef = db.collection('questions').doc();
             const qData = {
                 mapel: item.mapel || defMapel,
                 kelas: item.kelas || defKelas,
                 type: item.type || 'pg',
-                text: item.text,
-                options: item.options || [],
-                answer: item.answer || '',
-                difficulty: item.difficulty || 'Sedang',
-                score: item.score || 1,
-                tp: item.tp || '',
+                text: item.text, options: item.options || [],
+                answer: item.answer || '', difficulty: 'Sedang',
+                score: item.score || 1, tp: item.tp || '',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             };
             batch.set(docRef, qData);
-            count++;
         });
-        
         await batch.commit();
-        showToast(`${count} soal berhasil diimport!`);
-        document.getElementById('jsonInput').value = '';
-    } catch(e){
-        console.error(e);
-        showToast('Format JSON Salah: '+e.message, 'error');
-    }
-    btn.disabled=false; btn.innerHTML='<i class="fas fa-file-import mr-1"></i>Proses JSON';
+        showToast('Import Berhasil!');
+        document.getElementById('jsonInput').value='';
+    } catch(e){ showToast('Format JSON Salah','error'); }
 }
 
 // ================================================================
-// BANK SOAL
+// BANK SOAL (ADMIN LIHAT SEMUA)
 // ================================================================
 function renderQuestions(c){
-    c.innerHTML=`<div class="fade-in card"><h3 class="font-display text-lg font-bold text-light mb-4">Bank Soal (${questions.length})</h3>
-    <div class="space-y-2 max-h-[70vh] overflow-y-auto pr-2">
-    ${questions.length===0?'<p class="text-center text-muted">Belum ada soal</p>':questions.map(q=>`
+    // Admin lihat semua, Guru filter mapel/kelas
+    const displayQ = currentUser.isAdmin ? questions : questions.filter(q => q.mapel===currentUser.mapel && q.kelas===currentUser.kelas);
+    
+    // Jika Admin, tampilkan dropdown filter di atas
+    let filterHtml = '';
+    if(currentUser.isAdmin){
+        filterHtml = `<div class="flex gap-4 mb-4 p-4 bg-dark/30 rounded">
+            <div><label class="text-xs text-muted">Filter Mapel</label><select id="filterMapel" class="input-field w-40" onchange="renderBankFiltered()">${makeMapelOpt('')}</select></div>
+            <div><label class="text-xs text-muted">Filter Kelas</label><select id="filterKelas" class="input-field w-40" onchange="renderBankFiltered()"><option value="">Semua</option>${KELAS_LIST.map(k=>`<option value="${k}">${k}</option>`).join('')}</select></div>
+        </div>`;
+    }
+
+    c.innerHTML=`<div class="fade-in card">
+        <h3 class="font-display text-lg font-bold text-light mb-4">Bank Soal (${displayQ.length})</h3>
+        ${filterHtml}
+        <div id="bankList" class="space-y-2 max-h-[70vh] overflow-y-auto pr-2">
+            ${displayQ.length===0?'<p class="text-center text-muted">Belum ada soal</p>':''}
+        </div>
+    </div>`;
+    
+    // Render list pertama kali
+    renderBankList(displayQ);
+}
+
+function renderBankFiltered(){
+    const mapel = document.getElementById('filterMapel').value;
+    const kelas = document.getElementById('filterKelas').value;
+    let filtered = questions;
+    if(mapel) filtered = filtered.filter(q => q.mapel===mapel);
+    if(kelas) filtered = filtered.filter(q => q.kelas===kelas);
+    renderBankList(filtered);
+}
+
+function renderBankList(list){
+    const container = document.getElementById('bankList');
+    container.innerHTML = list.map(q=>`
         <div class="p-3 bg-dark/30 rounded flex justify-between items-start border-l-4 ${q.type==='uraian'?'border-info':'border-kopAccent'}">
-            <div class="flex-1 pr-2">
+            <div class="flex-1 pr-4">
                 <div class="flex gap-2 mb-1">
                     <span class="badge ${q.type==='uraian'?'badge-info':'badge-success'}">${q.type.toUpperCase()}</span>
-                    <span class="badge badge-warning">${q.difficulty}</span>
+                    <span class="text-xs text-muted">${getMapelSingkat(q.mapel)} - ${q.kelas}</span>
                 </div>
                 <p class="text-sm">${escHtml(q.text.substring(0,80))}...</p>
             </div>
-            <button onclick="deleteQuestion('${q.id}')" class="text-danger hover:text-red-400"><i class="fas fa-trash"></i></button>
+            <div class="flex gap-2">
+                 <button onclick="editQuestion('${q.id}')" class="text-kopAccent hover:text-white"><i class="fas fa-pen"></i></button>
+                 <button onclick="deleteQuestion('${q.id}')" class="text-danger hover:text-red-400"><i class="fas fa-trash"></i></button>
+            </div>
         </div>
-    `).join('')}</div></div>`;
-}
-
-async function deleteQuestion(id){
-    if(!confirm('Hapus soal?')) return;
-    try { await db.collection('questions').doc(id).delete(); showToast('Dihapus'); } catch(e){ showToast('Gagal','error'); }
+    `).join('');
 }
 
 // ================================================================
-// HELPERS UNTUK DOKUMEN
-// ================================================================
-function makeMapelOpt(sel){
-    if(currentUser.isAdmin) return MAPEL_LIST.map(m=>`<option value="${m.id}"${m.id===sel?' selected':''}>${m.nama}</option>`).join('');
-    return `<option value="${currentUser.mapel}" selected>${getMapelName(currentUser.mapel)}</option>`;
-}
-function makeKelasOpt(sel){
-    if(currentUser.isAdmin) return KELAS_LIST.map(k=>`<option value="${k}"${k===sel?' selected':''}>${k}</option>`).join('');
-    return `<option value="${currentUser.kelas}" selected>${currentUser.kelas}</option>`;
-}
-
-function getFilteredQuestionsForPrint(){
-    const mapel = document.getElementById('pMapel').value;
-    const kelas = document.getElementById('pKelas').value;
-    if(!mapel || !kelas) return [];
-    return questions.filter(q => q.mapel === mapel && q.kelas === kelas);
-}
-
-// ================================================================
-// OUTPUT: CETAK SOAL (DENGAN KOP SURAT)
+// OUTPUT: CETAK SOAL (DENGAN KOP SURAT RAPI)
 // ================================================================
 function renderPrint(c){
     c.innerHTML=`<div class="fade-in no-print">
         <div class="card mb-6">
-            <h3 class="font-display text-lg font-bold text-light mb-4">Pengaturan Cetak</h3>
+            <h3 class="font-display text-lg font-bold text-light mb-4">Cetak Soal ke PDF</h3>
             <div class="flex flex-wrap gap-4 items-end">
                 <div class="w-40"><label class="text-xs text-muted">Mapel</label><select id="pMapel" class="input-field" onchange="refreshPrintPreview()">${makeMapelOpt(currentUser.mapel)}</select></div>
                 <div class="w-40"><label class="text-xs text-muted">Kelas</label><select id="pKelas" class="input-field" onchange="refreshPrintPreview()">${makeKelasOpt(currentUser.kelas)}</select></div>
-                <button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / PDF</button>
+                <button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak / Simpan PDF</button>
             </div>
         </div>
-        <div id="printPreviewContainer" class="bg-white text-black min-h-[800px] shadow-xl rounded overflow-hidden">
-            <div class="p-8 text-center text-muted">Silakan pilih Mapel dan Kelas untuk melihat preview.</div>
-        </div>
+        <div id="printPreviewContainer" class="bg-white text-black shadow-xl rounded overflow-hidden min-h-[1000px]"></div>
     </div>`;
     setTimeout(refreshPrintPreview, 100);
 }
@@ -600,7 +798,6 @@ function refreshPrintPreview(){
     const mapel = document.getElementById('pMapel').value;
     const kelas = document.getElementById('pKelas').value;
     const container = document.getElementById('printPreviewContainer');
-    
     if(!mapel || !kelas) return;
     
     const data = questions.filter(q => q.mapel===mapel && q.kelas===kelas);
@@ -608,44 +805,43 @@ function refreshPrintPreview(){
     const uraian = data.filter(q=>q.type==='uraian');
 
     let html = `<div class="print-page">
-    <!-- KOP SURAT -->
+    <!-- 1. KOP SURAT (Dipastikan Muncul) -->
     <div class="kop-surat">
-        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo" style="height:80px;vertical-align:middle">
-        <div style="display:inline-block;vertical-align:middle;margin-left:10px">
+        <img src="https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg" alt="Logo Sekolah">
+        <div class="kop-text">
             <h1>PEMERINTAH KABUPATEN MAJALENGKA</h1>
             <h2>DINAS PENDIDIKAN</h2>
             <h2>SD NEGERI 1 MAJALENGKA KULON</h2>
-            <p style="font-size:9pt">Jl. KH. Abdul Halim No. 123 Majalengka 45411</p>
+            <p>Jl. KH. Abdul Halim No. 123 Majalengka 45411</p>
         </div>
-        <div style="clear:both"></div>
     </div>
 
-    <!-- HEADER SOAL -->
+    <!-- 2. HEADER SOAL -->
     <div class="soal-header">
         <h3 style="font-size:14pt;font-weight:bold;text-decoration:underline;text-transform:uppercase">ULANGAN TENGAH SEMESTER</h3>
         <p>${getMapelName(mapel)}</p>
-        <table style="width:100%;font-size:11pt;margin-top:10px">
-            <tr><td width="150">Nama</td><td width="10">:</td><td>................................................</td></tr>
+        <table>
+            <tr><td width="120">Nama</td><td width="10">:</td><td>................................................</td></tr>
             <tr><td>Kelas</td><td>:</td><td>${kelas}</td></tr>
             <tr><td>Hari/Tanggal</td><td>:</td><td>................................................</td></tr>
         </table>
     </div>
 
-    <!-- SOAL PG -->
-    <div style="margin-bottom:30px">
+    <!-- 3. ISI SOAL PG -->
+    <div style="margin-bottom:30px;page-break-inside:avoid">
         <h4 style="font-weight:bold;border-bottom:1px solid #000;padding-bottom:5px;margin-bottom:10px">I. Pilihan Ganda</h4>
-        ${pg.length===0?'<p>Tidak ada soal PG.</p>':''}
         ${pg.map((q,i)=>`
-            <div class="soal-container">
-                <div class="soal-num">${i+1}.</div>
-                <div class="inline-block w-full">
+            <div class="soal-item">
+                <span class="soal-num">${i+1}.</span>
+                <div class="soal-body">
                     <span class="soal-text">${escHtml(q.text)}</span>
                     ${q.image ? `<img src="${q.image}" class="soal-img">` : ''}
-                    <div class="opsi-box">
+                    <div class="opsi-wrapper">
                         ${(q.options||[]).map((opt,oi)=>`
-                            <div class="opsi-item">
-                                <span class="font-bold">${String.fromCharCode(65+oi)}.</span>
+                            <div class="opsi-row">
+                                <span class="opsi-label">${String.fromCharCode(65+oi)}.</span>
                                 <span>${escHtml(opt)}</span>
+                                ${q.optionImages && q.optionImages[oi] ? `<img src="${q.optionImages[oi]}" class="opsi-img">` : ''}
                             </div>
                         `).join('')}
                     </div>
@@ -654,21 +850,21 @@ function refreshPrintPreview(){
         `).join('')}
     </div>
 
-    <!-- SOAL URAIAN -->
-    <div>
+    <!-- 4. ISI SOAL URAIAN -->
+    <div style="page-break-inside:avoid">
         <h4 style="font-weight:bold;border-bottom:1px solid #000;padding-bottom:5px;margin-bottom:10px">II. Uraian</h4>
-        ${uraian.length===0?'<p>Tidak ada soal Uraian.</p>':''}
         ${uraian.map((q,i)=>`
-            <div class="soal-container">
-                <div class="soal-num">${i+1}.</div>
-                <span class="soal-text">${escHtml(q.text)}</span>
-                ${q.image ? `<img src="${q.image}" class="soal-img">` : ''}
-                <div style="height:80px;border:1px dotted #999;margin-top:10px;border-radius:5px"></div>
+            <div class="soal-item">
+                <span class="soal-num">${i+1}.</span>
+                <div class="soal-body">
+                    <span class="soal-text">${escHtml(q.text)}</span>
+                    ${q.image ? `<img src="${q.image}" class="soal-img">` : ''}
+                    <div style="height:100px;border:1px dotted #999;margin-top:10px;border-radius:5px"></div>
+                </div>
             </div>
         `).join('')}
     </div>
-    </div>`; // End print-page
-
+    </div>`;
     container.innerHTML = html;
 }
 
@@ -694,35 +890,19 @@ function refreshKisiPreview(){
     const mapel = document.getElementById('pMapel').value;
     const kelas = document.getElementById('pKelas').value;
     const container = document.getElementById('kisiPreviewContainer');
-    
     if(!mapel || !kelas) return;
     
     const data = questions.filter(q => q.mapel===mapel && q.kelas===kelas);
-
     let html = `<div class="print-page">
-    <div class="kop-surat">
-        <h1>KISI-KISI PENULISAN SOAL</h1>
-        <h3>${getMapelName(mapel)} - ${kelas}</h3>
-    </div>
+    <div class="kop-surat"><h1>KISI-KISI PENULISAN SOAL</h1><h3>${getMapelName(mapel)} - ${kelas}</h3></div>
     <table class="print-table">
-        <thead>
-            <tr>
-                <th style="width:30px">No</th>
-                <th>Materi / TP</th>
-                <th>Indikator Soal</th>
-                <th style="width:60px">Lvl Kog</th>
-                <th style="width:40px">Bentuk</th>
-                <th style="width:40px">Kunci</th>
-            </tr>
-        </thead>
+        <thead><tr><th>No</th><th>Indikator / TP</th><th>Soal</th><th>Kunci</th></tr></thead>
         <tbody>
             ${data.map((q,i)=>`
                 <tr>
                     <td style="text-align:center">${i+1}</td>
                     <td>${escHtml(q.tp||'-')}</td>
                     <td>${escHtml(q.text.substring(0,100))}...</td>
-                    <td style="text-align:center">${q.difficulty}</td>
-                    <td style="text-align:center">${q.type==='pg'?'PG':'Uraian'}</td>
                     <td style="text-align:center">${q.answer||'-'}</td>
                 </tr>
             `).join('')}
@@ -738,23 +918,14 @@ function refreshKisiPreview(){
 function renderScoring(c){
     c.innerHTML=`<div class="fade-in no-print">
         <div class="card mb-6">
-            <h3 class="font-display text-lg font-bold text-light mb-4">Kunci Jawaban & Lembar Skor</h3>
+            <h3 class="font-display text-lg font-bold text-light mb-4">Kunci Jawaban</h3>
             <div class="flex flex-wrap gap-4 items-end">
                 <div class="w-40"><label class="text-xs text-muted">Mapel</label><select id="pMapel" class="input-field" onchange="refreshScoringPreview()">${makeMapelOpt(currentUser.mapel)}</select></div>
                 <div class="w-40"><label class="text-xs text-muted">Kelas</label><select id="pKelas" class="input-field" onchange="refreshScoringPreview()">${makeKelasOpt(currentUser.kelas)}</select></div>
-                <button onclick="window.print()" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button>
-            </div>
-        </div>
-        <div id="scoringPreviewContainer" class="bg-white text-black shadow-xl rounded overflow-hidden"></div>
-    </div>`;
-    setTimeout(refreshScoringPreview, 100);
-}
-
-function refreshScoringPreview(){
+                <button onclick="window.print()" function refreshScoringPreview(){
     const mapel = document.getElementById('pMapel').value;
     const kelas = document.getElementById('pKelas').value;
     const container = document.getElementById('scoringPreviewContainer');
-    
     if(!mapel || !kelas) return;
     
     const data = questions.filter(q => q.mapel===mapel && q.kelas===kelas);
@@ -762,43 +933,52 @@ function refreshScoringPreview(){
     const uraian = data.filter(q=>q.type==='uraian');
 
     let html = `<div class="print-page">
-    <div class="kop-surat">
-        <h1>KUNCI JAWABAN & LEMBAR SKOR</h1>
-        <h3>${getMapelName(mapel)} - ${kelas}</h3>
-    </div>
-    
-    <h4 style="margin-top:20px;font-weight:bold">A. Kunci Jawaban Pilihan Ganda</h4>
+    <div class="kop-surat"><h1>KUNCI JAWABAN</h1><h3>${getMapelName(mapel)} - ${kelas}</h3></div>
+    <h4 style="margin-top:20px;font-weight:bold">Pilihan Ganda</h4>
     <table class="print-table">
         <thead><tr><th>No</th><th>Kunci</th><th>No</th><th>Kunci</th><th>No</th><th>Kunci</th></tr></thead>
         <tbody>
-            <!-- Generate 3 columns layout -->
             ${Array.from({length: Math.ceil(pg.length/3)}, (_, colIdx) => {
-                let rows = '';
+                let rowHtml = '';
                 for(let r=0; r<3; r++){
                     const idx = colIdx * 3 + r;
                     const q = pg[idx];
-                    rows += `<td>${q ? q.answer||'-' : ''}</td>`;
+                    rowHtml += `<td>${q ? q.answer||'-' : ''}</td>`;
                 }
-                return `<tr><td style="text-align:center">${colIdx*3+1}</td>${rows}</tr>`;
+                return `<tr><td style="text-align:center">${colIdx*3+1}</td>${rowHtml}</tr>`;
             }).join('')}
         </tbody>
     </table>
-
-    <h4 style="margin-top:20px;font-weight:bold">B. Pedoman Penskoran Uraian</h4>
+    <h4 style="margin-top:20px;font-weight:bold">Uraian</h4>
     <table class="print-table">
-        <thead><tr><th style="width:30px">No</th><th>Skor</th><th>Kunci Jawaban / Rubrik</th></tr></thead>
+        <thead><tr><th>No</th><th>Skor</th><th>Kunci Jawaban</th></tr></thead>
         <tbody>
             ${uraian.map((q,i)=>`
                 <tr>
                     <td style="text-align:center">${i+1}</td>
                     <td style="text-align:center">${q.score}</td>
-                    <td>${escHtml(q.answer||'Lihat pedoman penskoran terpisah')}</td>
+                    <td>${escHtml(q.answer||'Lihat pedoman penskoran')}</td>
                 </tr>
             `).join('')}
         </tbody>
     </table>
     </div>`;
     container.innerHTML = html;
+}
+
+// Utils Helper untuk membuat Option Select
+function makeMapelOpt(sel){
+    if(currentUser.isAdmin) return MAPEL_LIST.map(m=>`<option value="${m.id}"${m.id===sel?' selected':''}>${m.nama}</option>`).join('');
+    return `<option value="${currentUser.mapel}" selected>${getMapelName(currentUser.mapel)}</option>`;
+}
+function makeKelasOpt(sel){
+    if(currentUser.isAdmin) return KELAS_LIST.map(k=>`<option value="${k}"${k===sel?' selected':''}>${k}</option>`).join('');
+    return `<option value="${currentUser.kelas}" selected>${currentUser.kelas}</option>`;
+}
+
+async function deleteQuestion(id){
+    if(!confirm('Hapus soal?')) return;
+    try { await db.collection('questions').doc(id).delete(); showToast('Dihapus'); } catch(e){ showToast('Gagal','error'); }
 }
 
 // Start
