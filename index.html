@@ -231,17 +231,24 @@ textarea.input-field{resize:vertical;min-height:40px}
     .soal-item {
         margin-bottom: 24px;
         page-break-inside: avoid;
-        clear: both;
+        /* FIX: Menggunakan Flexbox agar nomor sejajar rapi */
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
     }
+
     .soal-num {
         font-weight: bold;
-        float: left;
-        margin-right: 6px;
-        min-width: 28px;
+        flex-shrink: 0;
+        min-width: 28px; /* Lebar tetap agar rapi */
+        text-align: left; /* Pastikan rata kiri */
     }
+
     .soal-body {
+        flex-grow: 1;
         display: block;
     }
+
     .soal-text {
         font-family: 'Times New Roman', serif;
         font-size: 12pt;
@@ -264,7 +271,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 
     /* OPSI PRINT: A-B kiri (bawah), C-D kanan (bawah), Huruf kecil */
     .opsi-wrapper {
-        margin-left: 34px;
+        /* FIX: Sesuaikan margin agar tidak menjorok terlalu dalam */
         margin-top: 10px;
         display: grid;
         grid-template-columns: 1fr 1fr; /* 2 kolom */
@@ -374,14 +381,27 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .print-tp-title { font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
 .print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: justify; }
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
-.print-preview-sheet .soal-item { margin-bottom: 24px; clear: both; page-break-inside: avoid; }
-.print-preview-sheet .soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }
-.print-preview-sheet .soal-body { display: block; }
+
+/* FIX: Soal Item Preview - Flexbox */
+.print-preview-sheet .soal-item { 
+    margin-bottom: 24px; 
+    page-break-inside: avoid; 
+    display: flex; 
+    align-items: flex-start; 
+    gap: 8px; 
+}
+.print-preview-sheet .soal-num { 
+    font-weight: bold; 
+    flex-shrink: 0; 
+    min-width: 28px; 
+    text-align: left; 
+}
+.print-preview-sheet .soal-body { display: block; flex-grow: 1;}
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 .print-preview-sheet .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
 
 /* Opsi Preview Dynamic */
-.print-preview-sheet .opsi-wrapper { margin-left: 34px; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
+.print-preview-sheet .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
 .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
 .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
 .print-preview-sheet .opsi-label::after { content: '.'; } /* Huruf kecil otomatis */
@@ -839,9 +859,10 @@ function buildSingleForm(){
         '<div class="mb-4">' +
             '<label class="text-xs text-muted mb-1 block">Teks Soal</label>' +
             '<textarea id="cText" class="input-field" rows="3" placeholder="Tulis soal di sini..."></textarea>' +
-            '<div class="flex gap-2 items-center mt-2">' +
-                '<div class="flex-1"><label class="text-xs text-muted block mb-1">URL Gambar Soal (Opsional)</label><input type="text" id="cImgUrl" class="input-field text-xs" placeholder="https://..."></div>' +
-                '<div class="mt-5"><button onclick="document.getElementById(\'cImgFile\').click()" class="btn-secondary text-xs py-2 px-3" title="Upload Gambar"><i class="fas fa-cloud-upload-alt mr-1"></i>Upload</button></div>' +
+            <!-- FIX: Perbaikan Layout Upload Gambar -->
+            '<div class="flex gap-2 items-start mt-2 flex-col md:flex-row">' +
+                '<div class="flex-1 w-full"><label class="text-xs text-muted block mb-1">URL Gambar Soal (Opsional)</label><input type="text" id="cImgUrl" class="input-field text-xs" placeholder="https://..."></div>' +
+                '<div class="mt-5 md:mt-5"><label class="text-xs text-muted block mb-1 opacity-0">Upload</label><button onclick="document.getElementById(\'cImgFile\').click()" class="btn-secondary text-xs py-2.5 px-3" title="Upload Gambar"><i class="fas fa-cloud-upload-alt mr-1"></i>Upload</button></div>' +
                 '<input type="file" id="cImgFile" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cImgUrl\',\'cImgPrev\')">' +
             '</div>' +
             '<div id="cImgPrev" class="mt-2"></div>' +
@@ -880,7 +901,12 @@ function onCreateKelasChange(){
     letters.forEach(function(l){
         h += '<div class="flex flex-col gap-1">' +
             '<div class="flex gap-2 items-center"><span class="font-bold text-kopAccent w-6 text-center">'+l.toUpperCase()+'</span><input type="text" id="cOpt'+l.toUpperCase()+'" class="input-field flex-1" placeholder="Opsi '+l.toUpperCase()+'"></div>' +
-            '<div class="ml-6 flex gap-2 items-center"><input type="text" id="cOptImgUrl'+l.toUpperCase()+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l.toUpperCase()+' (Opsional)"><button onclick="document.getElementById(\'cOptImgFile'+l.toUpperCase()+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button><input type="file" id="cOptImgFile'+l.toUpperCase()+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cOptImgUrl'+l.toUpperCase()+'\',\'cOptImgPrev'+l.toUpperCase()+'\')"></div>' +
+            // FIX: Layout Upload Opsi
+            '<div class="ml-6 flex gap-2 items-start flex-col md:flex-row">' +
+                '<div class="flex-1 w-full"><input type="text" id="cOptImgUrl'+l.toUpperCase()+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l.toUpperCase()+' (Opsional)"></div>' +
+                '<div class="mt-0 md:mt-1"><button onclick="document.getElementById(\'cOptImgFile'+l.toUpperCase()+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button></div>' +
+                '<input type="file" id="cOptImgFile'+l.toUpperCase()+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cOptImgUrl'+l.toUpperCase()+'\',\'cOptImgPrev'+l.toUpperCase()+'\')">' +
+            '</div>' +
             '<div id="cOptImgPrev'+l.toUpperCase()+'" class="ml-6"></div></div>';
     });
     h += '</div>';
@@ -1122,15 +1148,17 @@ function doPrintSoal(){
     doc.write('.print-tp-text { font-family: "Times New Roman", serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }');
     doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
     doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
-    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; clear: both; }');
-    doc.write('.soal-num { font-weight: bold; float: left; margin-right: 6px; min-width: 28px; }');
-    doc.write('.soal-body { display: block; }');
+    
+    /* FIX: Nomor Soal Print (Flexbox) */
+    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }');
+    doc.write('.soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }');
+    doc.write('.soal-body { display: block; flex-grow: 1; }');
     doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
     
     doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
     
     /* Opsi Grid 2 kolom, Label Kecil */
-    doc.write('.opsi-wrapper { margin-left: 34px; margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
+    doc.write('.opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
     doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
     doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
     doc.write('.opsi-label::after { content: "."; }');
