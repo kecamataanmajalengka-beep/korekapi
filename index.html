@@ -987,9 +987,8 @@ function saveSingleQuestion(){
                 var u=document.getElementById('cOptImgUrl'+l.toUpperCase()); if(u) u.value='';
                 var p=document.getElementById('cOptImgPrev'+l.toUpperCase()); if(p) p.innerHTML='';
             });
-        }
-    }).catch(function(e){ 
-        showToast('Gagal menyimpan','error'); 
+        }   
+         
     })
     .finally(function(){ btn.disabled=false; btn.innerHTML='<i class="fas fa-save mr-2"></i>Simpan Soal'; });
 }
