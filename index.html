@@ -70,298 +70,77 @@ textarea.input-field{resize:vertical;min-height:40px}
    CETAK / PRINT STYLES
    ========================================== */
 @media print {
-    @page {
-        size: A4 portrait;
-        margin: 1.5cm 2cm 2cm 2cm;
-    }
+    @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
 
-    body {
-        background: white !important;
-        color: black !important;
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-        font-family: 'Times New Roman', Times, serif !important;
-        font-size: 12pt;
-        line-height: 1.4;
-    }
+    body { background: white !important; color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: 'Times New Roman', Times, serif !important; font-size: 12pt; line-height: 1.4; }
 
-    #sidebar, #mainArea > header, #sidebarOverlay, .no-print,
-    #toastContainer, #modalOverlay, #loginPage, .card {
-        display: none !important;
-    }
+    #sidebar, #mainArea > header, #sidebarOverlay, .no-print, #toastContainer, #modalOverlay, #loginPage, .card { display: none !important; }
 
-    #mainArea {
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-        height: auto !important;
-        background: white !important;
-        overflow: visible !important;
-    }
+    #mainArea { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; background: white !important; overflow: visible !important; }
+    #pageContent { padding: 0 !important; margin: 0 !important; width: 100% !important; background: white !important; color: black !important; overflow: visible !important; }
 
-    #pageContent {
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100% !important;
-        background: white !important;
-        color: black !important;
-        overflow: visible !important;
-    }
+    .print-page { width: 100%; padding: 0; background: white; color: black; page-break-after: always; }
+    .print-page:last-child { page-break-after: avoid; }
 
-    .print-page {
-        width: 100%;
-        padding: 0;
-        background: white;
-        color: black;
-        page-break-after: always;
-    }
+    .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
+    .kop-surat img { height: 70px; width: auto; flex-shrink: 0; }
+    .kop-text { text-align: center; line-height: 1.2; }
+    .kop-text h1 { font-family: 'Times New Roman', serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .kop-text .kop-sub { font-family: 'Times New Roman', serif; font-size: 9.5pt; margin-top: 2px; color: #333; }
 
-    .print-page:last-child {
-        page-break-after: avoid;
-    }
+    .ujian-title { text-align: center; margin-bottom: 20px; }
+    .ujian-title h3 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; margin: 0; }
+    .ujian-title p { font-family: 'Times New Roman', serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
 
-    .kop-surat {
-        text-align: center;
-        padding-bottom: 12px;
-        margin-bottom: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 18px;
-        border-bottom: 3px double #000;
-    }
-    .kop-surat img {
-        height: 70px;
-        width: auto;
-        flex-shrink: 0;
-    }
-    .kop-text {
-        text-align: center;
-        line-height: 1.2;
-    }
-    .kop-text h1 {
-        font-family: 'Times New Roman', serif;
-        font-size: 13pt;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin: 0;
-    }
-    .kop-text h2 {
-        font-family: 'Times New Roman', serif;
-        font-size: 15pt;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin: 0;
-    }
-    .kop-text .kop-sub {
-        font-family: 'Times New Roman', serif;
-        font-size: 9.5pt;
-        margin-top: 2px;
-        color: #333;
-    }
+    .soal-header { margin-bottom: 20px; }
+    .soal-header table { width: 100%; font-family: 'Times New Roman', serif; font-size: 12pt; }
+    .soal-header td { padding: 2px 0; vertical-align: bottom; }
+    .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
 
-    .ujian-title {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .ujian-title h3 {
-        font-family: 'Times New Roman', serif;
-        font-size: 15pt;
-        font-weight: bold;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        text-transform: uppercase;
-        margin: 0;
-    }
-    .ujian-title p {
-        font-family: 'Times New Roman', serif;
-        font-size: 12pt;
-        margin: 4px 0 0 0;
-        font-weight: bold;
-    }
+    .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }
+    .print-tp-title { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
+    .print-tp-text { font-family: 'Times New Roman', serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }
 
-    .soal-header {
-        margin-bottom: 20px;
-    }
-    .soal-header table {
-        width: 100%;
-        font-family: 'Times New Roman', serif;
-        font-size: 12pt;
-    }
-    .soal-header td {
-        padding: 2px 0;
-        vertical-align: bottom;
-    }
-    .soal-header td.dot-cell {
-        border-bottom: 1px dotted #000;
-        min-width: 200px;
-    }
+    .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
+    .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-    .print-tp-section {
-        margin-bottom: 20px;
-        padding: 10px;
-        border-left: 4px solid #333;
-        background-color: #f9f9f9;
-        page-break-inside: avoid;
-    }
-    .print-tp-title {
-        font-family: 'Times New Roman', serif;
-        font-weight: bold;
-        font-size: 11pt;
-        margin-bottom: 2px;
-    }
-    .print-tp-text {
-        font-family: 'Times New Roman', serif;
-        font-size: 11pt;
-        font-style: italic;
-        text-align: justify;
-        line-height: 1.4;
-    }
+    .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }
+    .soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }
+    .soal-body { display: block; flex-grow: 1; }
+    .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
+    .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }
 
-    .section-heading {
-        font-family: 'Times New Roman', serif;
-        font-weight: bold;
-        font-size: 12pt;
-        border-bottom: 2px solid #000;
-        padding-bottom: 4px;
-        margin-bottom: 12px;
-        margin-top: 10px;
-    }
+    /* OPSI PRINT: Grid 2 Kolom agar rapi */
+    .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
+    .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
+    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+    .opsi-label::after { content: '.'; } /* huruf kecil otomatis */
+    
+    /* Gambar opsi kecil di sebelah teks */
+    .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }
 
-    .soal-item {
-        margin-bottom: 24px;
-        page-break-inside: avoid;
-        /* FIX: Menggunakan Flexbox agar nomor sejajar rapi */
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .soal-num {
-        font-weight: bold;
-        flex-shrink: 0;
-        min-width: 28px; /* Lebar tetap agar rapi */
-        text-align: left; /* Pastikan rata kiri */
-    }
-
-    .soal-body {
-        flex-grow: 1;
-        display: block;
-    }
-
-    .soal-text {
-        font-family: 'Times New Roman', serif;
-        font-size: 12pt;
-        line-height: 1.5;
-        display: block;
-        text-align: justify;
-    }
-
-    .soal-img-print {
-        display: block;
-        width: 220px; 
-        height: 165px; 
-        object-fit: cover; 
-        object-position: center;
-        margin: 10px 0 10px 0;
-        border: 1px solid #ccc; 
-        page-break-inside: avoid;
-        background-color: #eee;
-    }
-
-    /* OPSI PRINT: A-B kiri (bawah), C-D kanan (bawah), Huruf kecil */
-    .opsi-wrapper {
-        /* FIX: Sesuaikan margin agar tidak menjorok terlalu dalam */
-        margin-top: 10px;
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 kolom */
-        column-gap: 20px;
-        row-gap: 8px;
-    }
-
-    .opsi-row {
-        display: flex;
-        align-items: flex-start; 
-        gap: 8px;
-        font-family: 'Times New Roman', serif;
-        font-size: 12pt;
-        line-height: 1.4;
-    }
-    .opsi-label {
-        font-weight: bold;
-        min-width: 22px;
-        flex-shrink: 0;
-    }
-    /* Huruf label kecil */
-    .opsi-label::after { content: '.'; }
-
-    .opsi-img-print {
-        max-width: 70px;
-        max-height: 50px;
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 8px;
-        object-fit: contain;
-        page-break-inside: avoid;
-    }
-
-    .answer-lines {
-        margin-top: 10px;
-        border: 1px dashed #bbb;
-        height: 80px;
-        border-radius: 4px;
-        background-color: #fafafa;
-    }
-
+    .answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
     .ttd-section { display: none; } 
 
-    .print-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 12px;
-        font-family: 'Times New Roman', serif;
-        font-size: 10pt;
+    /* TABEL KISI-KISI: FIX AGAR TIDAK TERPOTONG */
+    .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt; table-layout: fixed; }
+    .print-table th, .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
+    .print-table th { background-color: #eee !important; -webkit-print-color-adjust: exact; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
+    .print-table td.center { text-align: center; vertical-align: middle; }
+    
+    /* Force text wrap pada tabel */
+    .print-table td.wrap-text { 
+        word-wrap: break-word; 
+        white-space: pre-wrap; 
+        word-break: break-word; /* Memaksa kata panjang pecah jika perlu */
+        overflow-wrap: break-word;
     }
-    .print-table th,
-    .print-table td {
-        border: 1px solid #000;
-        padding: 6px 8px;
-        text-align: left;
-        vertical-align: top;
-    }
-    .print-table th {
-        background-color: #eee !important;
-        -webkit-print-color-adjust: exact;
-        text-align: center;
-        font-weight: bold;
-        font-size: 9pt;
-        text-transform: uppercase;
-    }
-    .print-table td.center { text-align: center; }
-    .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; }
 }
 
 /* ===== PREVIEW STYLES ===== */
-.print-preview-wrap {
-    background: #f3f4f6;
-    padding: 20px;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-}
-.print-preview-sheet {
-    background: white;
-    color: black;
-    width: 210mm;
-    max-width: 100%;
-    min-height: 297mm;
-    padding: 1.5cm 2cm 2cm 2cm;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.15);
-    font-family: 'Times New Roman', Times, serif;
-    font-size: 12pt;
-    line-height: 1.4;
-    overflow: hidden;
-}
+.print-preview-wrap { background: #f3f4f6; padding: 20px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
+.print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 2px 20px rgba(0,0,0,0.15); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; overflow: hidden; }
 
 /* Reuse print styles for preview */
 .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
@@ -381,39 +160,31 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .print-tp-title { font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
 .print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: justify; }
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
+.print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-/* FIX: Soal Item Preview - Flexbox */
-.print-preview-sheet .soal-item { 
-    margin-bottom: 24px; 
-    page-break-inside: avoid; 
-    display: flex; 
-    align-items: flex-start; 
-    gap: 8px; 
-}
-.print-preview-sheet .soal-num { 
-    font-weight: bold; 
-    flex-shrink: 0; 
-    min-width: 28px; 
-    text-align: left; 
-}
+/* Preview Soal Item - Flexbox */
+.print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }
+.print-preview-sheet .soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }
 .print-preview-sheet .soal-body { display: block; flex-grow: 1;}
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 .print-preview-sheet .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
 
-/* Opsi Preview Dynamic */
+/* Opsi Preview Dynamic - Grid 2 Kolom */
 .print-preview-sheet .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
 .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
 .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
-.print-preview-sheet .opsi-label::after { content: '.'; } /* Huruf kecil otomatis */
+.print-preview-sheet .opsi-label::after { content: '.'; } 
 .print-preview-sheet .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
 .print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
 .print-preview-sheet .ttd-section { display: none; }
-.print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 10pt; }
-.print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; }
+.print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 10pt; table-layout: fixed; }
+.print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
 .print-preview-sheet .print-table th { background-color: #eee; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
-.print-preview-sheet .print-table td.center { text-align: center; }
-.print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; }
-.print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
+.print-preview-sheet .print-table td.center { text-align: center; vertical-align: middle; }
+.print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; }
+
+/* Modal Internal Styling Fixes */
+.modal-body-content { max-height: 60vh; overflow-y: auto; }
 </style>
 </head>
 <body>
@@ -533,7 +304,7 @@ var MAPEL_LIST = [
 var KELAS_LIST = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
 
 function getMaxOpt(k){ var n=parseInt((k||'').replace('Kelas ',''))||0; return n<=2?3:4; }
-function getOptLetters(k){ return ['a','b','c','d'].slice(0,getMaxOpt(k)); } // HURUF KECIL
+function getOptLetters(k){ return ['a','b','c','d'].slice(0,getMaxOpt(k)); }
 function getMapelName(id){ var m=MAPEL_LIST.find(function(x){return x.id===id;}); return m?m.nama:id; }
 function getMapelSingkat(id){ var m=MAPEL_LIST.find(function(x){return x.id===id;}); return m?m.singkat:id; }
 function escHtml(s){ if(!s) return ''; var d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; }
@@ -570,7 +341,7 @@ function closeModal(){
 
 function openModal(html){
     document.getElementById('modalOverlay').classList.remove('hidden');
-    document.getElementById('modalBody').innerHTML = html;
+    document.getElementById('modalBody').innerHTML = '<div class="modal-body-content">' + html + '</div>';
 }
 
 function togglePassVis(){
@@ -785,6 +556,7 @@ function renderTPList(){
     container.innerHTML = list.map(function(t){
         return '<div class="p-3 bg-dark/30 rounded-lg flex justify-between items-start border-l-4 border-kopAccent hover:bg-dark/50 transition-colors">' +
             '<div class="flex-1 pr-4"><div class="flex gap-2 mb-1 flex-wrap"><span class="text-xs px-2 py-0.5 rounded bg-kopAccent/20 text-kopAccent font-semibold">'+getMapelSingkat(t.mapel)+'</span><span class="text-xs text-muted">'+t.kelas+'</span></div><p class="text-sm leading-relaxed">'+escHtml(t.text)+'</p></div>' +
+            '<button onclick="editTP(\''+t.id+'\')" class="text-info/60 hover:text-info mr-2 p-1"><i class="fas fa-pen text-xs"></i></button>' +
             '<button onclick="deleteTP(\''+t.id+'\')" class="text-danger/60 hover:text-danger flex-shrink-0 p-1"><i class="fas fa-trash text-xs"></i></button></div>';
     }).join('');
 }
@@ -796,11 +568,26 @@ function openAddTPModal(){
         '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="saveTP()" class="btn-primary">Simpan</button></div></div>');
 }
 
+function editTP(id){
+    var t = tujuanPembelajaran.find(function(x){return x.id===id;});
+    if(!t) return;
+    openModal('<h3 class="font-display text-lg font-bold text-light mb-4">Edit Tujuan Pembelajaran</h3><div class="space-y-4">' +
+        '<div><label class="text-xs text-muted mb-1 block">Isi Tujuan Pembelajaran</label><textarea id="mTPTextEdit" class="input-field" rows="4" placeholder="Contoh: Peserta didik mampu menjelaskan...">'+escHtml(t.text)+'</textarea></div>' +
+        '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="updateTP(\''+id+'\')" class="btn-primary">Simpan Perubahan</button></div></div>');
+}
+
 function saveTP(){
     var text = document.getElementById('mTPText').value.trim();
     if(!text){ showToast('Isi TP tidak boleh kosong','error'); return; }
     db.collection('tps').add({ mapel:document.getElementById('mTPMapel').value, kelas:document.getElementById('mTPKelas').value, text:text, createdAt:firebase.firestore.FieldValue.serverTimestamp() })
     .then(function(){ showToast('TP berhasil disimpan!'); closeModal(); }).catch(function(){ showToast('Gagal menyimpan TP','error'); });
+}
+
+function updateTP(id){
+    var text = document.getElementById('mTPTextEdit').value.trim();
+    if(!text){ showToast('Isi TP tidak boleh kosong','error'); return; }
+    db.collection('tps').doc(id).update({ text: text })
+    .then(function(){ showToast('TP diperbarui!'); closeModal(); }).catch(function(){ showToast('Gagal memperbarui TP','error'); });
 }
 
 function deleteTP(id){
@@ -859,7 +646,6 @@ function buildSingleForm(){
         '<div class="mb-4">' +
             '<label class="text-xs text-muted mb-1 block">Teks Soal</label>' +
             '<textarea id="cText" class="input-field" rows="3" placeholder="Tulis soal di sini..."></textarea>' +
-            <!-- FIX: Perbaikan Layout Upload Gambar -->
             '<div class="flex gap-2 items-start mt-2 flex-col md:flex-row">' +
                 '<div class="flex-1 w-full"><label class="text-xs text-muted block mb-1">URL Gambar Soal (Opsional)</label><input type="text" id="cImgUrl" class="input-field text-xs" placeholder="https://..."></div>' +
                 '<div class="mt-5 md:mt-5"><label class="text-xs text-muted block mb-1 opacity-0">Upload</label><button onclick="document.getElementById(\'cImgFile\').click()" class="btn-secondary text-xs py-2.5 px-3" title="Upload Gambar"><i class="fas fa-cloud-upload-alt mr-1"></i>Upload</button></div>' +
@@ -899,15 +685,16 @@ function onCreateKelasChange(){
     if(!area) return;
     var h = '<label class="text-xs text-muted mb-1 block">Pilihan Jawaban</label><div class="space-y-3">';
     letters.forEach(function(l){
+        var L = l.toUpperCase();
         h += '<div class="flex flex-col gap-1">' +
-            '<div class="flex gap-2 items-center"><span class="font-bold text-kopAccent w-6 text-center">'+l.toUpperCase()+'</span><input type="text" id="cOpt'+l.toUpperCase()+'" class="input-field flex-1" placeholder="Opsi '+l.toUpperCase()+'"></div>' +
-            // FIX: Layout Upload Opsi
+            '<div class="flex gap-2 items-center"><span class="font-bold text-kopAccent w-6 text-center">'+L+'</span><input type="text" id="cOpt'+L+'" class="input-field flex-1" placeholder="Opsi '+L+'"></div>' +
+            // FITUR UPLOAD GAMBAR OPSI
             '<div class="ml-6 flex gap-2 items-start flex-col md:flex-row">' +
-                '<div class="flex-1 w-full"><input type="text" id="cOptImgUrl'+l.toUpperCase()+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+l.toUpperCase()+' (Opsional)"></div>' +
-                '<div class="mt-0 md:mt-1"><button onclick="document.getElementById(\'cOptImgFile'+l.toUpperCase()+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button></div>' +
-                '<input type="file" id="cOptImgFile'+l.toUpperCase()+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cOptImgUrl'+l.toUpperCase()+'\',\'cOptImgPrev'+l.toUpperCase()+'\')">' +
+                '<div class="flex-1 w-full"><input type="text" id="cOptImgUrl'+L+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+L+' (Opsional)"></div>' +
+                '<div class="mt-0 md:mt-1"><button onclick="document.getElementById(\'cOptImgFile'+L+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button></div>' +
+                '<input type="file" id="cOptImgFile'+L+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'cOptImgUrl'+L+'\',\'cOptImgPrev'+L+'\')">' +
             '</div>' +
-            '<div id="cOptImgPrev'+l.toUpperCase()+'" class="ml-6"></div></div>';
+            '<div id="cOptImgPrev'+L+'" class="ml-6"></div></div>';
     });
     h += '</div>';
     area.innerHTML = h;
@@ -942,7 +729,6 @@ function handleImageUpload(input, targetInputId, previewId){
     });
 }
 
-// PERBAIKAN LOGIKA SIMPAN (Hapus Error Toast saat sukses)
 function saveSingleQuestion(){
     var btn = document.getElementById('btnSaveSingle');
     if(!btn) return;
@@ -967,14 +753,15 @@ function saveSingleQuestion(){
     if(type==='pg'){
         var letters = getOptLetters(kelas);
         letters.forEach(function(l){
-            qData.options.push((document.getElementById('cOpt'+l.toUpperCase()) ? document.getElementById('cOpt'+l.toUpperCase()).value : '').trim());
-            qData.optionImages.push((document.getElementById('cOptImgUrl'+l.toUpperCase()) ? document.getElementById('cOptImgUrl'+l.toUpperCase()).value : '').trim());
+            var L = l.toUpperCase();
+            qData.options.push((document.getElementById('cOpt'+L) ? document.getElementById('cOpt'+L).value : '').trim());
+            qData.optionImages.push((document.getElementById('cOptImgUrl'+L) ? document.getElementById('cOptImgUrl'+L).value : '').trim());
         });
     }
 
     db.collection('questions').add(qData).then(function(){
-        // HANYA NOTIFIKASI SUKSES
         showToast('Soal berhasil disimpan');
+        // Reset form manually
         document.getElementById('cText').value='';
         document.getElementById('cImgUrl').value='';
         document.getElementById('cImgPrev').innerHTML='';
@@ -983,12 +770,12 @@ function saveSingleQuestion(){
         if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value='';
         if(type==='pg'){
             getOptLetters(kelas).forEach(function(l){
-                var o=document.getElementById('cOpt'+l.toUpperCase()); if(o) o.value='';
-                var u=document.getElementById('cOptImgUrl'+l.toUpperCase()); if(u) u.value='';
-                var p=document.getElementById('cOptImgPrev'+l.toUpperCase()); if(p) p.innerHTML='';
+                var L = l.toUpperCase();
+                var o=document.getElementById('cOpt'+L); if(o) o.value='';
+                var u=document.getElementById('cOptImgUrl'+L); if(u) u.value='';
+                var p=document.getElementById('cOptImgPrev'+L); if(p) p.innerHTML='';
             });
         }   
-         
     })
     .finally(function(){ btn.disabled=false; btn.innerHTML='<i class="fas fa-save mr-2"></i>Simpan Soal'; });
 }
@@ -1024,7 +811,7 @@ function processJSON(){
 }
 
 // ================================================================
-// BANK SOAL
+// BANK SOAL & EDIT SOAL
 // ================================================================
 function renderQuestions(c){
     var fh = '';
@@ -1056,29 +843,94 @@ function renderBankList(list){
     }).join('');
 }
 
+// ==========================================
+// LOGIKA EDIT SOAL (DIPERBAIKI)
+// ==========================================
 function editQuestion(id){
     var q=null; for(var i=0;i<questions.length;i++){if(questions[i].id===id){q=questions[i];break;}} if(!q) return;
+    
+    // Dropdown Mapel & Kelas (Read-only di mode edit untuk menjaga konsistensi data)
+    var mkHtml = '<div class="grid md:grid-cols-2 gap-4 mb-3">' +
+        '<div><label class="text-xs text-muted">Mapel</label><input type="text" class="input-field" value="'+getMapelName(q.mapel)+'" disabled></div>' +
+        '<div><label class="text-xs text-muted">Kelas</label><input type="text" class="input-field" value="'+q.kelas+'" disabled></div></div>';
+    
     var optHtml = '';
-    if(q.type==='pg' && q.options){
+    var letters = getOptLetters(q.kelas); // Ambil huruf opsi berdasarkan kelas soal tsb
+    
+    // Generate Form Opsi jika PG
+    if(q.type==='pg'){
         optHtml = '<div><label class="text-xs text-muted mb-1 block">Opsi Jawaban</label>';
-        q.options.forEach(function(opt,i){
-            optHtml += '<div class="flex items-center gap-2 mb-2"><span class="font-bold text-kopAccent w-6">'+String.fromCharCode(65+i)+'</span><input type="text" class="input-field eOptVal" value="'+escHtml(opt)+'"></div>';
+        letters.forEach(function(l, idx){
+            var L = l.toUpperCase();
+            var val = (q.options && q.options[idx]) ? q.options[idx] : '';
+            var imgVal = (q.optionImages && q.optionImages[idx]) ? q.optionImages[idx] : '';
+            optHtml += 
+            '<div class="bg-dark/30 p-2 rounded mb-2 border border-border">' +
+                '<div class="flex items-center gap-2 mb-2">' +
+                    '<span class="font-bold text-kopAccent w-6 text-center">'+L+'</span>' +
+                    '<input type="text" id="eOptVal'+L+'" class="input-field eOptVal" value="'+escHtml(val)+'">' +
+                '</div>' +
+                '<div class="flex gap-2 ml-6">' +
+                    '<input type="text" id="eOptImgUrl'+L+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi" value="'+escHtml(imgVal)+'">' +
+                    '<button onclick="document.getElementById(\'eOptImgFile'+L+'\').click()" class="btn-secondary text-xs py-1.5 px-2"><i class="fas fa-camera"></i></button>' +
+                    '<input type="file" id="eOptImgFile'+L+'" accept="image/*" class="hidden" onchange="handleImageUpload(this,\'eOptImgUrl'+L+'\',\'eOptImgPrev'+L+'\')">' +
+                '</div>' +
+                '<div id="eOptImgPrev'+L+'" class="ml-6 mt-1"></div>' +
+            '</div>';
         });
         optHtml += '</div>';
     }
-    openModal('<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3><div class="space-y-4">' +
-        '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="4">'+escHtml(q.text)+'</textarea></div>' +
-        '<div><label class="text-xs text-muted mb-1 block">URL Gambar Soal</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
-        '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran</label><textarea id="eTP" class="input-field" rows="2">'+escHtml(q.tp||'')+'</textarea></div>' +
-        '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
-        optHtml +
-        '<div class="flex justify-end gap-3 pt-2"><button onclick="closeModal()" class="btn-secondary">Batal</button><button onclick="doUpdateQuestion(\''+id+'\')" class="btn-primary">Simpan Perubahan</button></div></div>');
+
+    var html = '<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3>' +
+        mkHtml +
+        '<div class="space-y-3">' +
+            '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (TP)</label><textarea id="eTP" class="input-field" rows="2">'+escHtml(q.tp||'')+'</textarea></div>' +
+            '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="3">'+escHtml(q.text)+'</textarea></div>' +
+            '<div><label class="text-xs text-muted mb-1 block">URL Gambar Soal</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
+            
+            // Area Opsi Dinamis
+            optHtml +
+
+            '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
+        '</div>' +
+        '<div class="flex justify-end gap-3 pt-4 mt-4 border-t border-border">' +
+            '<button onclick="closeModal()" class="btn-secondary">Batal</button>' +
+            '<button onclick="doUpdateQuestion(\''+id+'\', \''+q.type+'\', \''+q.kelas+'\')" class="btn-primary">Simpan Perubahan</button>' +
+        '</div>';
+
+    openModal(html);
+    
+    // Render preview images for existing option images
+    if(q.type==='pg'){
+        letters.forEach(function(l, idx){
+            var L = l.toUpperCase();
+            var imgVal = (q.optionImages && q.optionImages[idx]) ? q.optionImages[idx] : '';
+            if(imgVal){
+                document.getElementById('eOptImgPrev'+L).innerHTML = '<img src="'+imgVal+'" class="img-preview" style="max-height:100px">';
+            }
+        });
+    }
 }
 
-function doUpdateQuestion(id){
-    var d = { text:document.getElementById('eText').value, image:document.getElementById('eImg').value, tp:document.getElementById('eTP').value, answer:document.getElementById('eAnswer').value, score:parseInt(document.getElementById('eScore').value)||1 };
-    var opts = document.querySelectorAll('.eOptVal');
-    if(opts.length) { d.options=[]; opts.forEach(function(el){d.options.push(el.value);}); }
+function doUpdateQuestion(id, type, kelas){
+    var d = { 
+        tp:document.getElementById('eTP').value, 
+        text:document.getElementById('eText').value, 
+        image:document.getElementById('eImg').value, 
+        answer:document.getElementById('eAnswer').value, 
+        score:parseInt(document.getElementById('eScore').value)||1 
+    };
+
+    if(type==='pg'){
+        d.options=[]; d.optionImages=[];
+        var letters = getOptLetters(kelas);
+        letters.forEach(function(l){
+            var L = l.toUpperCase();
+            d.options.push(document.getElementById('eOptVal'+L).value.trim());
+            d.optionImages.push(document.getElementById('eOptImgUrl'+L).value.trim());
+        });
+    }
+
     db.collection('questions').doc(id).update(d).then(function(){ showToast('Soal diperbarui!'); closeModal(); }).catch(function(){ showToast('Gagal update','error'); });
 }
 
@@ -1237,7 +1089,7 @@ function refreshPrintPreview(){
             html += '<div class="opsi-wrapper">';
             
             (q.options||[]).forEach(function(opt, oi){
-                var letter = getOptLetters(kelas)[oi]; // Mengambil a, b, c, d
+                var letter = getOptLetters(kelas)[oi]; 
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
                 html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
@@ -1279,10 +1131,11 @@ function refreshKisiPreview(){
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
     
-    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:15%">TP</th><th style="width:15%">Diff.</th><th style="width:auto">Pertanyaan / Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
+    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Pertanyaan / Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
     data.forEach(function(q,i){ 
         var diffLabel = q.difficulty || '-';
-        var tpLabel = (q.tp || '-').length > 30 ? (q.tp || '-').substring(0,30)+'...' : (q.tp || '-');
+        var tpLabel = (q.tp || '-');
+        // Gunakan class wrap-text agar teks panjang turun ke bawah
         html+='<tr>'+
             '<td class="center">'+(i+1)+'</td>'+
             '<td class="center">'+(i+1)+'</td>'+
@@ -1326,7 +1179,7 @@ function refreshScoringPreview(){
     }
     if(uraian.length){
         html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div><table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead><tbody>';
-        uraian.forEach(function(q,i){ html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td>'+escHtml(q.answer||'Lihat pedoman penskoran')+'</td></tr>'; });
+        uraian.forEach(function(q,i){ html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td class="wrap-text">'+escHtml(q.answer||'Lihat pedoman penskoran')+'</td></tr>'; });
         html+='</tbody></table>';
     }
     html+='</div></div></div>';
@@ -1351,11 +1204,11 @@ function doPrintGeneric(containerId){
     doc.write('.kop-text h1{font-family:"Times New Roman",serif;font-size:13pt;font-weight:bold;text-transform:uppercase;margin:0}');
     doc.write('.kop-text h2{font-family:"Times New Roman",serif;font-size:15pt;font-weight:bold;text-transform:uppercase;margin:0}');
     doc.write('.section-heading{font-weight:bold;font-size:12pt;border-bottom:2px solid #000;padding-bottom:4px;margin-bottom:12px;margin-top:10px}');
-    doc.write('.print-table{width:100%;border-collapse:collapse;margin-top:12pt;font-size:10pt}');
+    doc.write('.print-table{width:100%;border-collapse:collapse;margin-top:12pt;font-size:10pt;table-layout:fixed}');
     doc.write('.print-table th,.print-table td{border:1px solid #000;padding:6px 8px;text-align:left;vertical-align:top}');
     doc.write('.print-table th{background-color:#eee!important;text-align:center;font-weight:bold;font-size:9pt;text-transform:uppercase}');
-    doc.write('.print-table td.center{text-align:center}');
-    doc.write('.print-table td.wrap-text{word-wrap:break-word;white-space:pre-wrap}');
+    doc.write('.print-table td.center{text-align:center;vertical-align:middle}');
+    doc.write('.print-table td.wrap-text{word-wrap:break-word;white-space:pre-wrap;word-break:break-word;overflow-wrap:break-word}');
     doc.write('</style></head><body>');
     doc.write(sheet.innerHTML);
     doc.write('</body></html>');
