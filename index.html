@@ -67,7 +67,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ==========================================
-   CETAK / PRINT STYLES
+   CETAK / PRINT STYLES (UPDATED FOR FLOWING TEXT)
    ========================================== */
 @media print {
     @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
@@ -111,13 +111,17 @@ textarea.input-field{resize:vertical;min-height:40px}
     .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
     .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }
 
-    /* OPSI PRINT: Grid 2 Kolom agar rapi */
-    .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
-    .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
-    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
-    .opsi-label::after { content: '.'; } /* huruf kecil otomatis */
+    /* OPSI PRINT: FLEX ROW WRAP (Untuk teks panjang yang turun ke bawah) */
+    .opsi-wrapper { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
     
-    /* Gambar opsi kecil di sebelah teks */
+    .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; text-align: left; }
+    
+    /* Label (A, B, C, D) di kiri, teks di kanan. Teks bisa panjang (wrap). */
+    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+    .opsi-label::after { content: '.'; } 
+    .opsi-text-body { display: block; flex-grow: 1; } /* Container untuk teks agar bisa membungus */
+    
+    /* Gambar opsi kecil di sebelah teks (sejajar dengan baris pertama teks) */
     .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }
 
     .answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
@@ -138,7 +142,7 @@ textarea.input-field{resize:vertical;min-height:40px}
     }
 }
 
-/* ===== PREVIEW STYLES ===== */
+/* ===== PREVIEW STYLES (UPDATED FOR FLOWING TEXT) ===== */
 .print-preview-wrap { background: #f3f4f6; padding: 20px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
 .print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 2px 20px rgba(0,0,0,0.15); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; overflow: hidden; }
 
@@ -169,11 +173,12 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 .print-preview-sheet .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
 
-/* Opsi Preview Dynamic - Grid 2 Kolom */
-.print-preview-sheet .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
-.print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
+/* Opsi Preview Dynamic - Flex Row Wrap (Untuk Flowing Text) */
+.print-preview-sheet .opsi-wrapper { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; text-align: left; }
 .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
 .print-preview-sheet .opsi-label::after { content: '.'; } 
+.print-preview-sheet .opsi-text-body { display: block; flex-grow: 1; } /* Memastikan teks bisa turun ke bawah */
 .print-preview-sheet .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
 .print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
 .print-preview-sheet .ttd-section { display: none; }
@@ -1008,11 +1013,12 @@ function doPrintSoal(){
     
     doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
     
-    /* Opsi Grid 2 kolom, Label Kecil */
-    doc.write('.opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
-    doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
+    /* OPSI: Flex Column, Flex Row Wrap (Untuk Flowing Text) */
+    doc.write('.opsi-wrapper { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }');
+    doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; text-align: left; }');
     doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
     doc.write('.opsi-label::after { content: "."; }');
+    doc.write('.opsi-text-body { display: block; flex-grow: 1; }'); /* Memastikan teks turun ke bawah */
     doc.write('.opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
     
     doc.write('.answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
@@ -1086,12 +1092,14 @@ function refreshPrintPreview(){
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
             if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
             
+            // Wrapper opsi sekarang menggunakan flex-direction: column
             html += '<div class="opsi-wrapper">';
             
             (q.options||[]).forEach(function(opt, oi){
                 var letter = getOptLetters(kelas)[oi]; 
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
-                html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
+                // Struktur HTML Baru untuk Flowing Text: Opsi Row dengan span ops-text-body
+                html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span class="opsi-text-body">'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
             html += '</div></div></div>';
         });
