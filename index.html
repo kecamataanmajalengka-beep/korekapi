@@ -68,7 +68,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ==========================================
-   CETAK / PRINT STYLES
+   CETAK / PRINT STYLES (UPDATED)
    ========================================== */
 @media print {
     @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
@@ -102,12 +102,24 @@ textarea.input-field{resize:vertical;min-height:40px}
     .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
     .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-    /* --- LAYOUT UTAMA SOAL (FIXED) --- */
+    /* --- LAYOUT UTAMA SOAL (FIXED NUMERATION) --- */
     .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
+    
     .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
+    
     .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
-    .soal-num-header { font-weight: bold; font-family: 'Times New Roman', serif; font-size: 12pt; margin-bottom: 4px; display: inline-block; }
-    .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; margin-bottom: 8px; }
+    
+    /* PERBAIKAN: Header nomor soal dibuat block, margin right 6px, agar rata kiri namun punya jarak dari teks */
+    .soal-num-header { 
+        font-weight: bold; 
+        font-family: 'Times New Roman', serif; 
+        font-size: 12pt; 
+        display: inline; /* Tetap inline agar sejajar dengan teks di baris pertama */
+        margin-right: 6px; /* Jarak antara nomor dan teks */
+        float: none; /* Pastikan tidak melayang */
+    }
+    
+    .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: inline; /* Inline agar mengikuti nomor */ text-align: justify; }
     .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }
     
     /* Opsi Grid 2 Kolom */
@@ -131,7 +143,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-wrap { background: #e5e7eb; padding: 40px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
 .print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 4px 20px rgba(0,0,0,0.2); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; transform-origin: top center; }
 
-/* Copy Paste Styles dari @media print */
+/* Copy Paste Styles dari @media print ke Preview */
 .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
 .print-preview-sheet .kop-surat img { height: 70px; width: auto; }
 .print-preview-sheet .kop-text { text-align: center; line-height: 1.2; }
@@ -151,12 +163,21 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
 .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-/* Preview Soal Item */
+/* Preview Soal Item (FIXED NUMERATION) */
 .print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
 .print-preview-sheet .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
 .print-preview-sheet .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
-.print-preview-sheet .soal-num-header { font-weight: bold; font-size: 12pt; margin-bottom: 4px; display: inline-block; }
-.print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; margin-bottom: 8px; }
+
+/* PERBAIKAN: Header nomor soal dibuat block, margin right 6px, agar rata kiri namun punya jarak dari teks */
+.print-preview-sheet .soal-num-header { 
+    font-weight: bold; 
+    font-size: 12pt; 
+    display: inline; /* Tetap inline agar sejajar dengan teks di baris pertama */
+    margin-right: 6px; /* Jarak antara nomor dan teks */
+    float: none; /* Pastikan tidak melayang */
+}
+
+.print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: inline; /* Inline agar mengikuti nomor */ text-align: justify; margin-bottom: 8px; }
 .print-preview-sheet .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ddd; background-color: #f9f9f9; }
 
 /* Opsi Preview */
@@ -1113,12 +1134,15 @@ function doPrintSoal(){
     doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
     doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
     
-    /* Print CSS Styles */
+    /* Print CSS Styles (FIXED NUMERATION) */
     doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }');
     doc.write('.soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }');
     doc.write('.soal-content-col { display: table-cell; width: 78%; vertical-align: top; }');
-    doc.write('.soal-num-header { font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; margin-bottom: 4px; display: inline-block; }');
-    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; margin-bottom: 8px; }');
+    
+    // FIXED: Header nomor soal inline dengan margin
+    doc.write('.soal-num-header { font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; display: inline; margin-right: 6px; float: none; }');
+    
+    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: inline; text-align: justify; }');
     doc.write('.soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }');
     doc.write('.opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }');
     doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
@@ -1221,7 +1245,7 @@ function refreshPrintPreview(){
 
     if(uraian.length > 0){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
-        html += '<p class="preview-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
+        html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
         uraian.forEach(function(q, i){
             html += '<div class="soal-item">';
             html += '<div class="soal-indicator-col">';
