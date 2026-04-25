@@ -105,9 +105,38 @@ textarea.input-field{resize:vertical;min-height:40px}
     .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
     .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-    .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }
-    .soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }
-    .soal-body { display: block; flex-grow: 1; }
+    /* UPDATE: LAYOUT SOAL DENGAN INDICATOR */
+    .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }
+    
+    /* Kolom Kiri: Indikator (20% lebar) */
+    .soal-indicator-col { 
+        display: table-cell; 
+        width: 20%; 
+        vertical-align: top; 
+        padding-right: 12px; 
+        font-size: 9.5pt; /* Lebih kecil agar muat */
+        font-style: italic;
+        color: #444;
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+
+    /* Kolom Kanan: Nomor & Isi Soal (80% lebar) */
+    .soal-content-col { 
+        display: table-cell; 
+        width: 80%; 
+        vertical-align: top; 
+    }
+
+    /* Nomor di atas konten soal */
+    .soal-num-header {
+        font-weight: bold; 
+        font-family: 'Times New Roman', serif; 
+        font-size: 12pt;
+        margin-bottom: 4px;
+        display: inline-block;
+    }
+
     .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
     .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }
 
@@ -162,10 +191,11 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
 .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-/* Preview Soal Item - Flexbox */
-.print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }
-.print-preview-sheet .soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }
-.print-preview-sheet .soal-body { display: block; flex-grow: 1;}
+/* Preview Soal Item - Tabel Layout dengan Indikator */
+.print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }
+.print-preview-sheet .soal-indicator-col { display: table-cell; width: 20%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; }
+.print-preview-sheet .soal-content-col { display: table-cell; width: 80%; vertical-align: top; }
+.print-preview-sheet .soal-num-header { font-weight: bold; font-size: 12pt; margin-bottom: 4px; display: inline-block; }
 .print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
 .print-preview-sheet .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
 
@@ -644,6 +674,10 @@ function buildSingleForm(){
             '<textarea id="cTPManual" class="input-field" rows="2" placeholder="Atau tulis manual jika tidak ada di daftar..."></textarea>' +
         '</div>' +
         '<div class="mb-4">' +
+            '<label class="text-xs text-muted mb-1 block">Indikator Soal</label>' +
+            '<textarea id="cIndicator" class="input-field" rows="2" placeholder="Disiplin Ilmu & Materi Esensial (e.g., Peserta didik dapat menjelaskan...)" style="border-color: #c9a84c;"></textarea>' +
+        '</div>' +
+        '<div class="mb-4">' +
             '<label class="text-xs text-muted mb-1 block">Teks Soal</label>' +
             '<textarea id="cText" class="input-field" rows="3" placeholder="Tulis soal di sini..."></textarea>' +
             '<div class="flex gap-2 items-start mt-2 flex-col md:flex-row">' +
@@ -742,6 +776,7 @@ function saveSingleQuestion(){
     var qData = {
         mapel:mapel, kelas:kelas, type:type, text:text,
         tp: (document.getElementById('cTPManual').value || document.getElementById('cTPSelect').value || '').trim(),
+        indicator: (document.getElementById('cIndicator').value || '').trim(), // NEW: Save Indicator
         difficulty: document.getElementById('cDiff').value,
         score: parseInt(document.getElementById('cScore').value) || 1,
         answer: document.getElementById('cAnswer').value.trim(),
@@ -766,6 +801,7 @@ function saveSingleQuestion(){
         document.getElementById('cImgUrl').value='';
         document.getElementById('cImgPrev').innerHTML='';
         document.getElementById('cAnswer').value='';
+        document.getElementById('cIndicator').value=''; // NEW: Reset Indicator
         if(document.getElementById('cTPManual')) document.getElementById('cTPManual').value='';
         if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value='';
         if(type==='pg'){
@@ -799,7 +835,7 @@ function processJSON(){
                 mapel:item.mapel||defMapel, kelas:item.kelas||defKelas,
                 type:item.tipe||item.type||'pg', text:qText, options:qOpts,
                 answer:item.kunci||item.answer||'', difficulty:item.difficulty||'Sedang',
-                score:item.skor||item.score||1, tp:item.tp||'',
+                score:item.skor||item.score||1, tp:item.tp||'', indicator:item.indicator||'', // NEW: Support import indicator
                 image:item.image||'', optionImages:item.optionImages||[],
                 createdAt:firebase.firestore.FieldValue.serverTimestamp()
             });
@@ -844,7 +880,7 @@ function renderBankList(list){
 }
 
 // ==========================================
-// LOGIKA EDIT SOAL (DIPERBAIKI)
+// LOGIKA EDIT SOAL (UPDATE: Tambah Indikator)
 // ==========================================
 function editQuestion(id){
     var q=null; for(var i=0;i<questions.length;i++){if(questions[i].id===id){q=questions[i];break;}} if(!q) return;
@@ -885,6 +921,10 @@ function editQuestion(id){
         mkHtml +
         '<div class="space-y-3">' +
             '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (TP)</label><textarea id="eTP" class="input-field" rows="2">'+escHtml(q.tp||'')+'</textarea></div>' +
+            
+            // NEW: Input Indikator di Edit Mode
+            '<div><label class="text-xs text-muted mb-1 block">Indikator Soal</label><textarea id="eIndicator" class="input-field" rows="2" placeholder="Disiplin Ilmu...">'+escHtml(q.indicator||'')+'</textarea></div>' +
+
             '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="3">'+escHtml(q.text)+'</textarea></div>' +
             '<div><label class="text-xs text-muted mb-1 block">URL Gambar Soal</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
             
@@ -915,6 +955,7 @@ function editQuestion(id){
 function doUpdateQuestion(id, type, kelas){
     var d = { 
         tp:document.getElementById('eTP').value, 
+        indicator: document.getElementById('eIndicator').value, // NEW: Save updated indicator
         text:document.getElementById('eText').value, 
         image:document.getElementById('eImg').value, 
         answer:document.getElementById('eAnswer').value, 
@@ -940,7 +981,7 @@ function deleteQuestion(id){
 }
 
 // ================================================================
-// CETAK SOAL
+// CETAK SOAL (UPDATE: Layout dengan Indikator)
 // ================================================================
 function renderPrint(c){
     c.innerHTML = '<div class="fade-in no-print">' +
@@ -1000,12 +1041,12 @@ function doPrintSoal(){
     doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
     doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
     
-    /* FIX: Nomor Soal Print (Flexbox) */
-    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: flex; align-items: flex-start; gap: 8px; }');
-    doc.write('.soal-num { font-weight: bold; flex-shrink: 0; min-width: 28px; text-align: left; }');
-    doc.write('.soal-body { display: block; flex-grow: 1; }');
+    /* UPDATE: Layout Soal dengan Indikator (Table Mode) */
+    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }');
+    doc.write('.soal-indicator-col { display: table-cell; width: 20%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; }');
+    doc.write('.soal-content-col { display: table-cell; width: 80%; vertical-align: top; }');
+    doc.write('.soal-num-header { font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; margin-bottom: 4px; display: inline-block; }');
     doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
-    
     doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
     
     /* Opsi Grid 2 kolom, Label Kecil */
@@ -1082,7 +1123,17 @@ function refreshPrintPreview(){
         html += '<div class="section-heading">I. Pilihan Ganda</div>';
         html += '<p class="petunjuk-soal">Pilihlah satu jawaban yang paling tepat!</p>';
         pg.forEach(function(q, i){
-            html += '<div class="soal-item"><span class="soal-num">'+(i+1)+'.</span><div class="soal-body">';
+            html += '<div class="soal-item">';
+            
+            // KOLOM KIRI: Indikator
+            html += '<div class="soal-indicator-col">';
+            if(q.indicator) html += escHtml(q.indicator);
+            else html += '&nbsp;';
+            html += '</div>';
+            
+            // KOLOM KANAN: Soal
+            html += '<div class="soal-content-col">';
+            html += '<div class="soal-num-header">'+(i+1)+'.</div>';
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
             if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
             
@@ -1093,7 +1144,8 @@ function refreshPrintPreview(){
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
                 html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
-            html += '</div></div></div>';
+            html += '</div></div>'; // End content-col
+            html += '</div>'; // End soal-item
         });
     }
 
@@ -1101,7 +1153,17 @@ function refreshPrintPreview(){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
         html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
         uraian.forEach(function(q, i){
-            html += '<div class="soal-item"><span class="soal-num">'+(i+1)+'.</span><div class="soal-body">';
+            html += '<div class="soal-item">';
+            
+            // KOLOM KIRI: Indikator (Jika ada)
+            html += '<div class="soal-indicator-col">';
+            if(q.indicator) html += escHtml(q.indicator);
+            else html += '&nbsp;';
+            html += '</div>';
+            
+            // KOLOM KANAN: Soal Uraian
+            html += '<div class="soal-content-col">';
+            html += '<div class="soal-num-header">'+(i+1)+'.</div>';
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
             if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
             html += '<div class="answer-lines"></div></div></div>';
@@ -1134,14 +1196,17 @@ function refreshKisiPreview(){
     html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Pertanyaan / Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
     data.forEach(function(q,i){ 
         var diffLabel = q.difficulty || '-';
-        var tpLabel = (q.tp || '-');
-        // Gunakan class wrap-text agar teks panjang turun ke bawah
+        // Menggabungkan TP dan Indikator di kolom pertanyaan
+        var content = '<strong>TP:</strong> ' + escHtml(q.tp||'-') + '<br>' + 
+                      '<strong>Indikator:</strong> ' + escHtml(q.indicator||'-') + '<br><br>' +
+                      '<strong>Soal:</strong> ' + escHtml(q.text||'');
+        
         html+='<tr>'+
             '<td class="center">'+(i+1)+'</td>'+
             '<td class="center">'+(i+1)+'</td>'+
-            '<td class="wrap-text">'+escHtml(tpLabel)+'</td>'+
+            '<td class="wrap-text">'+escHtml(q.tp||'-')+'</td>'+
             '<td class="center">'+escHtml(diffLabel)+'</td>'+
-            '<td class="wrap-text">'+escHtml(q.text||'')+'</td>'+
+            '<td class="wrap-text">'+content+'</td>'+
             '<td class="center">'+(q.type==='pg'?'PG':'Uraian')+'</td>'+
             '<td class="center">'+(q.score||1)+'</td>'+
             '<td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>'+
