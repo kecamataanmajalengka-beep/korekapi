@@ -1177,7 +1177,7 @@ function refreshPrintPreview(){
 }
 
 // ================================================================
-// KISI-KISI
+// KISI-KISI (UPDATE: Kolom Pertanyaan diganti Indikator Saja)
 // ================================================================
 function renderKisi(c){
     c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-table mr-2 text-kopAccent"></i>Kisi-Kisi Soal</h3>' +
@@ -1193,13 +1193,11 @@ function refreshKisiPreview(){
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
     
-    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Pertanyaan / Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
+    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
     data.forEach(function(q,i){ 
         var diffLabel = q.difficulty || '-';
-        // Menggabungkan TP dan Indikator di kolom pertanyaan
-        var content = '<strong>TP:</strong> ' + escHtml(q.tp||'-') + '<br>' + 
-                      '<strong>Indikator:</strong> ' + escHtml(q.indicator||'-') + '<br><br>' +
-                      '<strong>Soal:</strong> ' + escHtml(q.text||'');
+        // UPDATE: Kolom Pertanyaan hanya menampilkan Indikator Soal
+        var content = escHtml(q.indicator || '-');
         
         html+='<tr>'+
             '<td class="center">'+(i+1)+'</td>'+
@@ -1219,10 +1217,10 @@ function refreshKisiPreview(){
 }
 
 // ================================================================
-// KUNCI & SKORING
+// KUNCI & SKORING (UPDATE: Tambah Pedoman Penskoran)
 // ================================================================
 function renderScoring(c){
-    c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban</h3>' +
+    c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban & Pedoman Penskoran</h3>' +
         '<div class="flex flex-wrap gap-4 items-end"><div class="w-44"><label class="text-xs text-muted mb-1 block">Mapel</label><select id="pMapelScore" class="input-field" onchange="refreshScoringPreview()">'+makeMapelOpt(currentUser.mapel)+'</select></div><div class="w-44"><label class="text-xs text-muted mb-1 block">Kelas</label><select id="pKelasScore" class="input-field" onchange="refreshScoringPreview()">'+makeKelasOpt(currentUser.kelas)+'</select></div><button onclick="doPrintGeneric(\'scoringPreviewContainer\')" class="btn-primary"><i class="fas fa-print mr-2"></i>Cetak</button></div></div>' +
         '<div id="scoringPreviewContainer" class="bg-white text-black shadow-2xl rounded-lg overflow-hidden"></div></div>';
     setTimeout(refreshScoringPreview, 100);
@@ -1234,7 +1232,7 @@ function refreshScoringPreview(){
     var data=questions.filter(function(q){return q.mapel===mapel&&q.kelas===kelas;});
     var pg=data.filter(function(q){return q.type==='pg';}), uraian=data.filter(function(q){return q.type==='uraian';});
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
-    var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kunci Jawaban</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
+    var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kunci Jawaban & Pedoman Penskoran</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
     if(pg.length){
         html+='<div class="section-heading">I. Pilihan Ganda</div><table class="print-table"><thead><tr>';
         for(var col=0;col<3;col++) html+='<th style="width:60px">No</th><th style="width:60px">Kunci</th>';
@@ -1243,8 +1241,14 @@ function refreshScoringPreview(){
         html+='</tbody></table>';
     }
     if(uraian.length){
-        html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div><table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Kunci Jawaban</th></tr></thead><tbody>';
-        uraian.forEach(function(q,i){ html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td class="wrap-text">'+escHtml(q.answer||'Lihat pedoman penskoran')+'</td></tr>'; });
+        html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div>';
+        // UPDATE: Mengganti header tabel dan kontennya
+        html+='<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Pedoman Penskoran</th></tr></thead><tbody>';
+        uraian.forEach(function(q,i){ 
+            // Menampilkan Isi Kunci Jawaban / Pedoman Penskoran yang lengkap
+            var scoringContent = escHtml(q.answer || 'Lihat pedoman penskoran');
+            html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td class="wrap-text">'+scoringContent+'</td></tr>'; 
+        });
         html+='</tbody></table>';
     }
     html+='</div></div></div>';
