@@ -688,7 +688,7 @@ function buildSingleForm(){
             '<div id="cImgPrev" class="mt-2"></div>' +
         '</div>' +
         '<div id="optionsArea" class="mb-4"></div>' +
-        '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><div class="flex gap-2"><select id="cAnswerSelect" class="input-field" style="width:90px" onchange="document.getElementById(\'cAnswer\').value=this.value"><option value="">--</option></select><input type="text" id="cAnswer" class="input-field" placeholder="Jawaban / uraian kunci"></div></div>' +
+        '<div class="mb-4"><label class="text-xs text-muted mb-1 block">Kunci Jawaban / Pedoman</label><div class="flex gap-2"><select id="cAnswerSelect" class="input-field" style="width:90px" onchange="document.getElementById(\'cAnswer\').value=this.value"><option value="">--</option></select><input type="text" id="cAnswer" class="input-field" placeholder="Jawaban / uraian kunci"></div></div>' +
         '<button onclick="saveSingleQuestion()" id="btnSaveSingle" class="btn-primary w-full"><i class="fas fa-save mr-2"></i>Simpan Soal</button>';
     document.getElementById('panelSingle').innerHTML = html;
     onCreateKelasChange();
@@ -931,7 +931,7 @@ function editQuestion(id){
             // Area Opsi Dinamis
             optHtml +
 
-            '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
+            '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban / Pedoman</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
         '</div>' +
         '<div class="flex justify-end gap-3 pt-4 mt-4 border-t border-border">' +
             '<button onclick="closeModal()" class="btn-secondary">Batal</button>' +
@@ -1017,7 +1017,7 @@ function doPrintSoal(){
     var doc = iframe.contentDocument || iframe.contentWindow.document;
     doc.open();
     doc.write('<!DOCTYPE html><html><head>');
-    doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">');
+    doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=700&display=swap" rel="stylesheet">');
     doc.write('<style>');
     doc.write('@page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }');
     doc.write('body { margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.4; color: black; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }');
@@ -1177,7 +1177,7 @@ function refreshPrintPreview(){
 }
 
 // ================================================================
-// KISI-KISI (UPDATE: Kolom Pertanyaan diganti Indikator Saja)
+// KISI-KISI (UPDATE: Hapus Kunci)
 // ================================================================
 function renderKisi(c){
     c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-table mr-2 text-kopAccent"></i>Kisi-Kisi Soal</h3>' +
@@ -1193,7 +1193,8 @@ function refreshKisiPreview(){
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
     
-    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th><th style="width:60px">Kunci</th></tr></thead><tbody>';
+    // UPDATE: Header tabel diubah, kolom Kunci dihapus
+    html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th></tr></thead><tbody>';
     data.forEach(function(q,i){ 
         var diffLabel = q.difficulty || '-';
         // UPDATE: Kolom Pertanyaan hanya menampilkan Indikator Soal
@@ -1207,7 +1208,6 @@ function refreshKisiPreview(){
             '<td class="wrap-text">'+content+'</td>'+
             '<td class="center">'+(q.type==='pg'?'PG':'Uraian')+'</td>'+
             '<td class="center">'+(q.score||1)+'</td>'+
-            '<td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>'+
         '</tr>'; 
     });
     html+='</tbody></table>';
@@ -1217,7 +1217,7 @@ function refreshKisiPreview(){
 }
 
 // ================================================================
-// KUNCI & SKORING (UPDATE: Tambah Pedoman Penskoran)
+// KUNCI & SKORING (UPDATE: Urutan 1-2-3 kolom & Tambah Pedoman)
 // ================================================================
 function renderScoring(c){
     c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban & Pedoman Penskoran</h3>' +
@@ -1233,21 +1233,24 @@ function refreshScoringPreview(){
     var pg=data.filter(function(q){return q.type==='pg';}), uraian=data.filter(function(q){return q.type==='uraian';});
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kunci Jawaban & Pedoman Penskoran</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
+    
     if(pg.length){
         html+='<div class="section-heading">I. Pilihan Ganda</div><table class="print-table"><thead><tr>';
+        // UPDATE: Urutan 1,2,3 ke bawah (3 Kolom)
         for(var col=0;col<3;col++) html+='<th style="width:60px">No</th><th style="width:60px">Kunci</th>';
         html+='</tr></thead><tbody>';
         for(var i=0;i<pg.length;i+=3){ html+='<tr>'; for(var j=0;j<3;j++){ var idx=i+j, q=pg[idx]; if(q) html+='<td class="center">'+(idx+1)+'</td><td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>'; else html+='<td class="center"></td><td class="center"></td>'; } html+='</tr>'; }
         html+='</tbody></table>';
     }
+
     if(uraian.length){
         html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div>';
-        // UPDATE: Mengganti header tabel dan kontennya
-        html+='<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Pedoman Penskoran</th></tr></thead><tbody>';
+        // UPDATE: Tabel Uraian menampilkan Indikator + Pedoman Penskoran
+        html+='<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Indikator & Pedoman Penskoran</th></tr></thead><tbody>';
         uraian.forEach(function(q,i){ 
-            // Menampilkan Isi Kunci Jawaban / Pedoman Penskoran yang lengkap
-            var scoringContent = escHtml(q.answer || 'Lihat pedoman penskoran');
-            html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td class="wrap-text">'+scoringContent+'</td></tr>'; 
+            var indicatorText = '<strong>Indikator:</strong> ' + escHtml(q.indicator || '-');
+            var scoringText = '<br><strong>Pedoman:</strong> ' + escHtml(q.answer || 'Lihat pedoman penskoran');
+            html+='<tr><td class="center">'+(i+1)+'</td><td class="center">'+(q.score||1)+'</td><td class="wrap-text">'+indicatorText+scoringText+'</td></tr>'; 
         });
         html+='</tbody></table>';
     }
