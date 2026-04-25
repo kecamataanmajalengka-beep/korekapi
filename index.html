@@ -67,82 +67,157 @@ textarea.input-field{resize:vertical;min-height:40px}
 .loading-spinner{display:inline-block;width:20px;height:20px;border:2px solid rgba(255,255,255,0.3);border-radius:50%;border-top-color:#c9a84c;animation:spin 1s ease-in-out infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ==========================================
-   CETAK / PRINT STYLES (UPDATED)
-   ========================================== */
-@media print {
-    @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
-    body { background: white !important; color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: 'Times New Roman', Times, serif !important; font-size: 12pt; line-height: 1.4; }
-    #sidebar, #mainArea > header, #sidebarOverlay, .no-print, #toastContainer, #modalOverlay, #loginPage, .card { display: none !important; }
-    #mainArea { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; background: white !important; overflow: visible !important; }
-    #pageContent { padding: 0 !important; margin: 0 !important; width: 100% !important; background: white !important; color: black !important; overflow: visible !important; }
-    .print-page { width: 100%; padding: 0; background: white; color: black; page-break-after: always; }
-    .print-page:last-child { page-break-after: avoid; }
+    /* ==========================================
+       CETAK / PRINT STYLES (FIXED NUMERATION)
+       ========================================== */
+    @media print {
+        @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
+        body { background: white !important; color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-family: 'Times New Roman', Times, serif !important; font-size: 12pt; line-height: 1.4; }
+        #sidebar, #mainArea > header, #sidebarOverlay, .no-print, #toastContainer, #modalOverlay, #loginPage, .card { display: none !important; }
+        #mainArea { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; background: white !important; overflow: visible !important; }
+        #pageContent { padding: 0 !important; margin: 0 !important; width: 100% !important; background: white !important; color: black !important; overflow: visible !important; }
+        .print-page { width: 100%; padding: 0; background: white; color: black; page-break-after: always; }
+        .print-page:last-child { page-break-after: avoid; }
 
-    .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
-    .kop-surat img { height: 70px; width: auto; flex-shrink: 0; }
-    .kop-text { text-align: center; line-height: 1.2; }
-    .kop-text h1 { font-family: 'Times New Roman', serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-    .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-    .kop-text .kop-sub { font-family: 'Times New Roman', serif; font-size: 9.5pt; margin-top: 2px; color: #333; }
+        .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
+        .kop-surat img { height: 70px; width: auto; flex-shrink: 0; }
+        .kop-text { text-align: center; line-height: 1.2; }
+        .kop-text h1 { font-family: 'Times New Roman', serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+        .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+        .kop-text .kop-sub { font-family: 'Times New Roman', serif; font-size: 9.5pt; margin-top: 2px; color: #333; }
 
-    .ujian-title { text-align: center; margin-bottom: 20px; }
-    .ujian-title h3 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; margin: 0; }
-    .ujian-title p { font-family: 'Times New Roman', serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
+        .ujian-title { text-align: center; margin-bottom: 20px; }
+        .ujian-title h3 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; margin: 0; }
+        .ujian-title p { font-family: 'Times New Roman', serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
 
-    .soal-header { margin-bottom: 20px; }
-    .soal-header table { width: 100%; font-family: 'Times New Roman', serif; font-size: 12pt; }
-    .soal-header td { padding: 2px 0; vertical-align: bottom; }
-    .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
+        .soal-header { margin-bottom: 20px; }
+        .soal-header table { width: 100%; font-family: 'Times New Roman', serif; font-size: 12pt; }
+        .soal-header td { padding: 2px 0; vertical-align: bottom; }
+        .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
 
-    .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }
-    .print-tp-title { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
-    .print-tp-text { font-family: 'Times New Roman', serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }
+        .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }
+        .print-tp-title { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
+        .print-tp-text { font-family: 'Times New Roman', serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }
 
-    .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
-    .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
+        .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
+        .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-    /* --- LAYOUT UTAMA SOAL (FIXED NUMERATION) --- */
-    .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
-    
-    .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
-    
-    .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
-    
-    /* PERBAIKAN: Header nomor soal dibuat block, margin right 6px, agar rata kiri namun punya jarak dari teks */
-    .soal-num-header { 
+        /* --- LAYOUT UTAMA SOAL (FIXED) --- */
+        .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
+        
+        .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
+        
+        .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
+        
+        /* PERBAIKAN: Header nomor soal dibuat inline-block dengan min-width agar nempel kiri */
+        .soal-num-header { 
+            font-weight: bold; 
+            font-family: 'Times New Roman', serif; 
+            font-size: 12pt; 
+            display: inline-block; 
+            vertical-align: top; 
+            min-width: 30px;    /* Lebar minimal agar nomor punya ruang tetap */
+            margin-right: 4px;  /* Jarak kecil antara nomor dan teks */
+            margin-bottom: 4px; 
+            float: none; 
+        }
+        
+        .soal-text { 
+            font-family: 'Times New Roman', serif; 
+            font-size: 12pt; 
+            line-height: 1.5; 
+            display: inline-block; 
+            vertical-align: top;
+            max-width: calc(100% - 40px); /* Sisa lebar dikurangi lebar nomor */
+            text-align: justify; 
+        }
+        
+        .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }
+        
+        /* Opsi Grid 2 Kolom */
+        .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
+        .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
+        .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+        .opsi-label::after { content: "."; }
+        .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; }
+
+        .answer-lines { margin-top: 8px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
+        .ttd-section { display: none; } 
+
+        .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt; table-layout: fixed; }
+        .print-table th, .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
+        .print-table th { background-color: #eee !important; -webkit-print-color-adjust: exact; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
+        .print-table td.center { text-align: center; vertical-align: middle; }
+        .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt; }
+    }
+
+    /* ===== PREVIEW STYLES (MIRIP PRINT AGAR PRESISI) ===== */
+    .print-preview-wrap { background: #e5e7eb; padding: 40px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
+    .print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 4px 20px rgba(0,0,0,0.2); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; transform-origin: top center; }
+
+    /* Copy Paste Styles dari @media print ke Preview */
+    .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
+    .print-preview-sheet .kop-surat img { height: 70px; width: auto; }
+    .print-preview-sheet .kop-text { text-align: center; line-height: 1.2; }
+    .print-preview-sheet .kop-text h1 { font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .print-preview-sheet .kop-text h2 { font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .print-preview-sheet .kop-text .kop-sub { font-size: 9.5pt; margin-top: 2px; color: #555; }
+    .print-preview-sheet .ujian-title { text-align: center; margin-bottom: 20px; }
+    .print-preview-sheet .ujian-title h3 { font-size: 15pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
+    .print-preview-sheet .ujian-title p { font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
+    .print-preview-sheet .soal-header { margin-bottom: 20px; }
+    .print-preview-sheet .soal-header table { width: 100%; font-size: 12pt; }
+    .print-preview-sheet .soal-header td { padding: 2px 0; vertical-align: bottom; }
+    .print-preview-sheet .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
+    .print-preview-sheet .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; }
+    .print-preview-sheet .print-tp-title { font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
+    .print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: justify; }
+    .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
+    .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
+
+    /* Preview Soal Item (FIXED NUMERATION) */
+    .print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
+    .print-preview-sheet .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
+    .print-preview-sheet .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
+
+    /* PERBAIKAN: Header nomor soal dibuat inline-block dengan min-width agar nempel kiri */
+    .print-preview-sheet .soal-num-header { 
         font-weight: bold; 
-        font-family: 'Times New Roman', serif; 
         font-size: 12pt; 
-        display: inline; /* Tetap inline agar sejajar dengan teks di baris pertama */
-        margin-right: 6px; /* Jarak antara nomor dan teks */
-        float: none; /* Pastikan tidak melayang */
+        display: inline-block; 
+        vertical-align: top; 
+        min-width: 30px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        float: none; 
+    }
+
+    .print-preview-sheet .soal-text { 
+        font-size: 12pt; 
+        line-height: 1.5; 
+        display: inline-block; 
+        vertical-align: top;
+        max-width: calc(100% - 40px);
+        text-align: justify; 
+        margin-bottom: 8px; 
     }
     
-    .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: inline; /* Inline agar mengikuti nomor */ text-align: justify; }
-    .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }
-    
-    /* Opsi Grid 2 Kolom */
-    .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
-    .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
-    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
-    .opsi-label::after { content: "."; }
-    .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; }
+    .print-preview-sheet .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ddd; background-color: #f9f9f9; }
 
-    .answer-lines { margin-top: 8px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
-    .ttd-section { display: none; } 
-
-    .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt; table-layout: fixed; }
-    .print-table th, .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
-    .print-table th { background-color: #eee !important; -webkit-print-color-adjust: exact; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
-    .print-table td.center { text-align: center; vertical-align: middle; }
-    .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt; }
-}
-
-/* ===== PREVIEW STYLES (MIRIP PRINT AGAR PRESISI) ===== */
-.print-preview-wrap { background: #e5e7eb; padding: 40px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
-.print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 4px 20px rgba(0,0,0,0.2); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; transform-origin: top center; }
-
+    /* Opsi Preview */
+    .print-preview-sheet .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
+    .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
+    .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+    .print-preview-sheet .opsi-label::after { content: '.'; } 
+    .print-preview-sheet .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; }
+    .print-preview-sheet .answer-lines { margin-top: 8px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
+    .print-preview-sheet .ttd-section { display: none; }
+    .print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 10pt; table-layout: fixed; }
+    .print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
+    .print-preview-sheet .print-table th { background-color: #eee; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
+    .print-preview-sheet .print-table td.center { text-align: center; vertical-align: middle; }
+    .print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt;}
+   
 /* Copy Paste Styles dari @media print ke Preview */
 .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
 .print-preview-sheet .kop-surat img { height: 70px; width: auto; }
