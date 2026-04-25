@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAT Generator Online - Kecamatan Majalengka</title>
+<title>SAT Generator Online - Kecamatan Majalengka (Clean Print)</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -68,7 +68,7 @@ textarea.input-field{resize:vertical;min-height:40px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
     /* ==========================================
-       CETAK / PRINT STYLES (PERBAIKAN RATA KIRI-KANAN)
+       CETAK / PRINT STYLES (NO INDICATOR)
        ========================================== */
     @media print {
         @page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }
@@ -76,18 +76,19 @@ textarea.input-field{resize:vertical;min-height:40px}
         #sidebar, #mainArea > header, #sidebarOverlay, .no-print, #toastContainer, #modalOverlay, #loginPage, .card { display: none !important; }
         #mainArea { margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; background: white !important; overflow: visible !important; }
         #pageContent { padding: 0 !important; margin: 0 !important; width: 100% !important; background: white !important; color: black !important; overflow: visible !important; }
-        .print-page { width: 100%; padding: 0; background: white; color: black; page-break-after: always; }
-        .print-page:last-child { page-break-after: avoid; }
-
-        .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
-        .kop-surat img { height: 70px; width: auto; flex-shrink: 0; }
-        .kop-text { text-align: center; line-height: 1.2; }
+        .print-page { width: 100%; padding: 0; background: white; color: black; }
+        
+        /* KOP SURAT RAPI */
+        .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; border-bottom: 3px double #000; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .kop-surat-row { display: flex; align-items: center; justify-content: center; gap: 16px; width: 100%; }
+        .kop-surat img { height: 75px; width: auto; object-fit: contain; }
+        .kop-text { text-align: center; line-height: 1.3; flex: 1; }
         .kop-text h1 { font-family: 'Times New Roman', serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-        .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-        .kop-text .kop-sub { font-family: 'Times New Roman', serif; font-size: 9.5pt; margin-top: 2px; color: #333; }
+        .kop-text h2 { font-family: 'Times New Roman', serif; font-size: 16pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+        .kop-text .kop-sub { font-family: 'Times New Roman', serif; font-size: 10pt; margin-top: 2px; font-style: normal; }
 
         .ujian-title { text-align: center; margin-bottom: 20px; }
-        .ujian-title h3 { font-family: 'Times New Roman', serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; margin: 0; }
+        .ujian-title h3 { font-family: 'Times New Roman', serif; font-size: 14pt; font-weight: bold; text-decoration: underline; text-underline-offset: 3px; text-transform: uppercase; margin: 0; }
         .ujian-title p { font-family: 'Times New Roman', serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
 
         .soal-header { margin-bottom: 20px; }
@@ -95,50 +96,48 @@ textarea.input-field{resize:vertical;min-height:40px}
         .soal-header td { padding: 2px 0; vertical-align: bottom; }
         .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
 
-        .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }
+        .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #000; background-color: #f9f9f9; page-break-inside: avoid; }
         .print-tp-title { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
-        .print-tp-text { font-family: 'Times New Roman', serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }
+        .print-tp-text { font-family: 'Times New Roman', serif; font-size: 11pt; font-style: italic; text-align: left; line-height: 1.4; }
 
-        .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
-        .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
+        .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 15px; margin-top: 10px; text-align: left; }
+        .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; text-align: left; }
 
-        /* --- LAYOUT UTAMA SOAL (FIXED & JUSTIFIED) --- */
-        .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
+        /* --- LAYOUT SOAL (FIXED: NO INDICATOR) --- */
+        .soal-item { margin-bottom: 24px; page-break-inside: avoid; width: 100%; display: block; overflow: hidden; }
         
-        .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
-        
-        .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
-        
-        /* PERBAIKAN: Header nomor soal dibuat BLOCK + FLOAT agar berdiri di kiri (Standar Surat) */
-        .soal-num-header { 
+        /* Nomor Soal: Float Left agar teks mengalir di sebelah kanan */
+        .soal-num { 
+            float: left; 
             font-weight: bold; 
             font-family: 'Times New Roman', serif; 
             font-size: 12pt; 
-            display: block; 
-            float: left;
-            margin-right: 6px;  /* Jarak kecil antara nomor dan teks */
-            margin-bottom: 0px; 
+            width: 35px;  /* Lebar tetap agar rapi */
+            flex-shrink: 0;
         }
         
-        /* PERBAIKAN: Text-align: justify untuk rata kiri kanan */
         .soal-text { 
             font-family: 'Times New Roman', serif; 
             font-size: 12pt; 
             line-height: 1.5; 
-            display: block;
-            text-align: justify; /* RATA KIRI KANAN */
+            text-align: left; 
+            display: block; 
+            margin-left: 35px; /* Jarak agar teks tidak menabrak nomor */
         }
         
         .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }
         
         /* Opsi Grid 2 Kolom */
-        .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
-        .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
-        .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+        .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; row-gap: 6px; margin-left: 35px; /* Supaya sejajar dengan teks soal */ }
+        .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; text-align: left; }
+        .opsi-label { font-weight: bold; min-width: 20px; flex-shrink: 0; }
         .opsi-label::after { content: "."; }
         .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; }
 
-        .answer-lines { margin-top: 8px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
+        .answer-lines { margin-top: 8px; margin-left: 35px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
+        
+        /* Clearfix agar layout tidak berantakan jika ada gambar besar */
+        .clearfix::after { content: ""; display: table; clear: both; }
         .ttd-section { display: none; } 
 
         .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt; table-layout: fixed; }
@@ -148,70 +147,71 @@ textarea.input-field{resize:vertical;min-height:40px}
         .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt; }
     }
 
-    /* ===== PREVIEW STYLES (MIRIP PRINT AGAR PRESISI) ===== */
+    /* ===== PREVIEW STYLES (NO INDICATOR) ===== */
     .print-preview-wrap { background: #e5e7eb; padding: 40px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
     .print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 4px 20px rgba(0,0,0,0.2); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; transform-origin: top center; }
 
-    /* Copy Paste Styles dari @media print ke Preview */
-    .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
-    .print-preview-sheet .kop-surat img { height: 70px; width: auto; }
-    .print-preview-sheet .kop-text { text-align: center; line-height: 1.2; }
+    /* Copy Styles untuk Preview */
+    .print-preview-sheet .kop-surat { display: flex; flex-direction: column; align-items: center; text-align: center; padding-bottom: 12px; margin-bottom: 24px; border-bottom: 3px double #000; }
+    .print-preview-sheet .kop-surat-row { display: flex; align-items: center; justify-content: center; gap: 16px; width: 100%; }
+    .print-preview-sheet .kop-surat img { height: 75px; width: auto; object-fit: contain; }
+    .print-preview-sheet .kop-text { text-align: center; line-height: 1.3; flex: 1; }
     .print-preview-sheet .kop-text h1 { font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-    .print-preview-sheet .kop-text h2 { font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-    .print-preview-sheet .kop-text .kop-sub { font-size: 9.5pt; margin-top: 2px; color: #555; }
+    .print-preview-sheet .kop-text h2 { font-size: 16pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+    .print-preview-sheet .kop-text .kop-sub { font-size: 10pt; margin-top: 2px; color: #555; }
     .print-preview-sheet .ujian-title { text-align: center; margin-bottom: 20px; }
-    .print-preview-sheet .ujian-title h3 { font-size: 15pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
+    .print-preview-sheet .ujian-title h3 { font-size: 14pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
     .print-preview-sheet .ujian-title p { font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
     .print-preview-sheet .soal-header { margin-bottom: 20px; }
     .print-preview-sheet .soal-header table { width: 100%; font-size: 12pt; }
     .print-preview-sheet .soal-header td { padding: 2px 0; vertical-align: bottom; }
     .print-preview-sheet .soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }
-    .print-preview-sheet .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; }
+    .print-preview-sheet .print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #000; background-color: #f9f9f9; }
     .print-preview-sheet .print-tp-title { font-weight: bold; font-size: 11pt; margin-bottom: 2px; }
-    .print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: justify; }
-    .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
-    .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
+    .print-preview-sheet .print-tp-text { font-size: 11pt; font-style: italic; text-align: left; }
+    .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 15px; margin-top: 10px; text-align: left; }
+    .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; text-align: left; }
 
-    /* Preview Soal Item (FIXED & JUSTIFIED) */
-    .print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
-    .print-preview-sheet .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
-    .print-preview-sheet .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
-
-    /* PERBAIKAN: Header nomor soal dibuat BLOCK + FLOAT agar berdiri di kiri (Standar Surat) */
-    .print-preview-sheet .soal-num-header { 
+    /* Preview Soal Item (NO INDICATOR) */
+    .print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; width: 100%; display: block; overflow: hidden; }
+    
+    .print-preview-sheet .soal-num { 
+        float: left; 
         font-weight: bold; 
         font-size: 12pt; 
-        display: block; 
-        float: left;
-        margin-right: 6px; 
-        margin-bottom: 0px;
+        width: 35px; 
+        flex-shrink: 0; 
     }
 
-    /* PERBAIKAN: Text-align: justify untuk rata kiri kanan */
     .print-preview-sheet .soal-text { 
         font-size: 12pt; 
         line-height: 1.5; 
-        display: block;
-        text-align: justify; /* RATA KIRI KANAN */
+        text-align: left; 
+        display: block; 
+        margin-left: 35px;
         margin-bottom: 8px; 
     }
     
     .print-preview-sheet .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ddd; background-color: #f9f9f9; }
 
     /* Opsi Preview */
-    .print-preview-sheet .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
-    .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
-    .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+    .print-preview-sheet .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; row-gap: 6px; margin-left: 35px; }
+    .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; text-align: left; }
+    .print-preview-sheet .opsi-label { font-weight: bold; min-width: 20px; flex-shrink: 0; }
     .print-preview-sheet .opsi-label::after { content: '.'; } 
     .print-preview-sheet .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; }
-    .print-preview-sheet .answer-lines { margin-top: 8px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
+    .print-preview-sheet .answer-lines { margin-top: 8px; margin-left: 35px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
     .print-preview-sheet .ttd-section { display: none; }
+    
+    /* Clearfix Preview */
+    .print-preview-sheet .clearfix::after { content: ""; display: table; clear: both; }
+    
     .print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 10pt; table-layout: fixed; }
     .print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
     .print-preview-sheet .print-table th { background-color: #eee; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
     .print-preview-sheet .print-table td.center { text-align: center; vertical-align: middle; }
     .print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt;}
-   
+
 .modal-body-content { max-height: 60vh; overflow-y: auto; }
 </style>
 </head>
@@ -340,6 +340,7 @@ var MAPEL_LIST = [
 ];
 var KELAS_LIST = ['Kelas 1','Kelas 2','Kelas 3','Kelas 4','Kelas 5','Kelas 6'];
 
+// Logika Opsi Jawaban (Kelas 6: 5 Opsi, Lainnya: 3/4 Opsi)
 function getMaxOpt(k){ var n=parseInt((k||'').replace('Kelas ',''))||0; return n<=2?3:4; }
 function getOptLetters(k){ return ['a','b','c','d','e'].slice(0,getMaxOpt(k)); }
 
@@ -582,8 +583,10 @@ function renderDashboard(c){
     var isKelas6 = currentUser.kelas === 'Kelas 6';
     var myQ = currentUser.isAdmin ? questions : questions.filter(function(q){ return q.mapel===currentUser.mapel && q.kelas===currentUser.kelas; });
     var myPAJQ = (currentUser.isAdmin || isKelas6) ? pajQuestions.filter(function(q){ return q.mapel===currentUser.mapel && q.kelas==='Kelas 6'; }) : [];
+    
     var totalSkor=0, byPg=0, byUr=0;
     myQ.forEach(function(q){ totalSkor+=(q.score||0); if(q.type==='pg') byPg++; else byUr++; });
+    
     var pajSkor=0, pajTotal=0;
     myPAJQ.forEach(function(q){ pajSkor+=(q.score||0); pajTotal++; });
 
@@ -604,7 +607,7 @@ function renderDashboard(c){
 }
 
 // ================================================================
-// KELOLA TP
+// KELOLA TP (Tidak Berubah)
 // ================================================================
 function renderTP(c){
     var filterHtml = '';
@@ -756,7 +759,7 @@ function buildSingleForm(isPAJ){
     if(isPAJ) {
         var kSel = document.getElementById('cKelas');
         if(kSel) kSel.value = 'Kelas 6';
-        if(kSel) kSel.disabled = true; 
+        if(kSel) kSel.disabled = true;
     }
     
     onCreateKelasChange();
@@ -782,6 +785,7 @@ function onCreateKelasChange(){
     var kelas = document.getElementById('cKelas') ? document.getElementById('cKelas').value : '';
     var type = document.getElementById('cType') ? document.getElementById('cType').value : 'pg';
     if(type==='uraian'){ var a=document.getElementById('optionsArea'); if(a) a.innerHTML=''; return; }
+    
     var letters = getOptLetters(kelas);
     var area = document.getElementById('optionsArea');
     if(!area) return;
@@ -892,7 +896,7 @@ function processJSON(){
     var txt = document.getElementById('jsonInput').value;
     var defMapel = currentUser.isAdmin ? '' : currentUser.mapel;
     var defKelas = currentUser.isAdmin ? '' : currentUser.kelas;
-    if(currentEditType === 'paj') defKelas = 'Kelas 6'; 
+    if(currentEditType === 'paj') defKelas = 'Kelas 6';
 
     if(!txt.trim()){ showToast('JSON kosong','error'); btn.disabled=false; btn.innerHTML='<i class="fas fa-file-import mr-2"></i>Proses & Import JSON'; return; }
     try {
@@ -1063,7 +1067,7 @@ function deleteQuestion(id, mode){
 }
 
 // ================================================================
-// CETAK SOAL (SAT & PAJ)
+// CETAK SOAL (SAT & PAJ) - NO INDICATOR
 // ================================================================
 function renderPrint(c, mode){
     currentEditType = mode || 'sat';
@@ -1108,41 +1112,41 @@ function doPrintSoal(){
     doc.write('@page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }');
     doc.write('body { margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.4; color: black; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }');
     doc.write('.print-page { padding: 0; }');
-    doc.write('.kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }');
-    doc.write('.kop-surat img { height: 70px; width: auto; flex-shrink: 0; }');
-    doc.write('.kop-text { text-align: center; line-height: 1.2; }');
+    
+    // CSS KOP SURAT
+    doc.write('.kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; border-bottom: 3px double #000; display: flex; flex-direction: column; align-items: center; gap: 8px; }');
+    doc.write('.kop-surat-row { display: flex; align-items: center; justify-content: center; gap: 16px; width: 100%; }');
+    doc.write('.kop-surat img { height: 75px; width: auto; object-fit: contain; }');
+    doc.write('.kop-text { text-align: center; line-height: 1.3; flex: 1; }');
     doc.write('.kop-text h1 { font-family: "Times New Roman", serif; font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }');
-    doc.write('.kop-text h2 { font-family: "Times New Roman", serif; font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }');
-    doc.write('.kop-text .kop-sub { font-family: "Times New Roman", serif; font-size: 9.5pt; margin-top: 2px; color: #333; }');
+    doc.write('.kop-text h2 { font-family: "Times New Roman", serif; font-size: 16pt; font-weight: bold; text-transform: uppercase; margin: 0; }');
+    doc.write('.kop-text .kop-sub { font-family: "Times New Roman", serif; font-size: 10pt; margin-top: 2px; font-style: normal; }');
+    
     doc.write('.ujian-title { text-align: center; margin-bottom: 20px; }');
-    doc.write('.ujian-title h3 { font-family: "Times New Roman", serif; font-size: 15pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }');
+    doc.write('.ujian-title h3 { font-family: "Times New Roman", serif; font-size: 14pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }');
     doc.write('.ujian-title p { font-family: "Times New Roman", serif; font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }');
     doc.write('.soal-header { margin-bottom: 20px; }');
     doc.write('.soal-header table { width: 100%; font-family: "Times New Roman", serif; font-size: 12pt; }');
     doc.write('.soal-header td { padding: 2px 0; vertical-align: bottom; }');
     doc.write('.soal-header td.dot-cell { border-bottom: 1px dotted #000; min-width: 200px; }');
-    doc.write('.print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #333; background-color: #f9f9f9; page-break-inside: avoid; }');
+    doc.write('.print-tp-section { margin-bottom: 20px; padding: 10px; border-left: 4px solid #000; background-color: #f9f9f9; page-break-inside: avoid; }');
     doc.write('.print-tp-title { font-family: "Times New Roman", serif; font-weight: bold; font-size: 11pt; margin-bottom: 2px; }');
-    doc.write('.print-tp-text { font-family: "Times New Roman", serif; font-size: 11pt; font-style: italic; text-align: justify; line-height: 1.4; }');
-    doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
-    doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
+    doc.write('.print-tp-text { font-family: "Times New Roman", serif; font-size: 11pt; font-style: italic; text-align: left; line-height: 1.4; }');
+    doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 15px; margin-top: 10px; text-align: left; }');
+    doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; text-align: left; }');
     
-    /* Print CSS Styles (FIXED & JUSTIFIED) */
-    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }');
-    doc.write('.soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }');
-    doc.write('.soal-content-col { display: table-cell; width: 78%; vertical-align: top; }');
-    
-    // FIXED: Header nomor soal block + float
-    doc.write('.soal-num-header { font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; display: block; float: left; margin-right: 6px; margin-bottom: 0px; }');
-    
-    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
+    /* CSS SOAL (FIXED: NO INDICATOR) */
+    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; width: 100%; display: block; overflow: hidden; }');
+    doc.write('.soal-num { float: left; font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; width: 35px; flex-shrink: 0; }');
+    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; text-align: left; display: block; margin-left: 35px; }');
     doc.write('.soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }');
-    doc.write('.opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }');
-    doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
-    doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
+    doc.write('.opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 24px; row-gap: 6px; margin-left: 35px; }');
+    doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; text-align: left; }');
+    doc.write('.opsi-label { font-weight: bold; min-width: 20px; flex-shrink: 0; }');
     doc.write('.opsi-label::after { content: "."; }');
     doc.write('.opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; }');
-    doc.write('.answer-lines { margin-top: 8px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
+    doc.write('.answer-lines { margin-top: 8px; margin-left: 35px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
+    doc.write('.clearfix::after { content: ""; display: table; clear: both; }');
     doc.write('.ttd-section { display: none; }'); 
 
     doc.write('</style></head><body>');
@@ -1188,7 +1192,9 @@ function refreshPrintPreview(){
     if(!mapel || !kelas){ container.innerHTML='<p class="text-center text-muted py-20">Pilih mapel dan kelas terlebih dahulu</p>'; return; }
 
     var globalTP = (document.getElementById('printTPGlobal').value || '').trim();
+    
     var dataSource = (currentEditType === 'paj') ? pajQuestions : questions;
+    
     var data = dataSource.filter(function(q){ return q.mapel===mapel && q.kelas===kelas; });
     var pg = data.filter(function(q){ return q.type==='pg'; });
     var uraian = data.filter(function(q){ return q.type==='uraian'; });
@@ -1196,7 +1202,7 @@ function refreshPrintPreview(){
 
     var html = '<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page">';
 
-    html += '<div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Pemerintah Kabupaten Majalengka</h1><h1>Dinas Pendidikan</h1><h2>Korek Api Kecamatan Majalengka</h2><p class="kop-sub">Jl. KH. Abdul Halim No. 123, Kec. Majalengka, Kab. Majalengka 45411</p></div></div>';
+    html += '<div class="kop-surat"><div class="kop-surat-row"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Pemerintah Kabupaten Majalengka</h1><h1>Dinas Pendidikan</h1><h2>Korek Api Kecamatan Majalengka</h2></div></div><p class="kop-sub">Jl. KH. Abdul Halim No. 123, Kec. Majalengka, Kab. Majalengka 45411</p></div>';
 
     var examTitle = (currentEditType === 'paj') ? 'Penilaian Akhir Jenjang (PAJ)' : 'Sumatif Akhir Tahun';
     html += '<div class="ujian-title"><h3>'+examTitle+'</h3><p>'+getMapelName(mapel)+'</p></div>';
@@ -1211,15 +1217,10 @@ function refreshPrintPreview(){
         html += '<div class="section-heading">I. Pilihan Ganda</div>';
         html += '<p class="petunjuk-soal">Pilihlah satu jawaban yang paling tepat!</p>';
         pg.forEach(function(q, i){
-            html += '<div class="soal-item">';
-            html += '<div class="soal-indicator-col">';
-            if(q.indicator) html += escHtml(q.indicator);
-            else html += '&nbsp;';
-            html += '</div>';
-            html += '<div class="soal-content-col">';
-            html += '<div class="soal-num-header">'+(i+1)+'.</div>';
-            html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
-            if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
+            html += '<div class="soal-item clearfix">'; // Added clearfix class
+            html += '<div class="soal-num">'+(i+1)+'.</div>';
+            html += '<div class="soal-text">'+escHtml(q.text)+'</div>';
+            if(q.image) html += '<div style="margin-left:35px"><img src="'+q.image+'" class="soal-img-print"></div>';
             
             html += '<div class="opsi-wrapper">';
             (q.options||[]).forEach(function(opt, oi){
@@ -1227,7 +1228,7 @@ function refreshPrintPreview(){
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
                 html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
-            html += '</div></div>'; 
+            html += '</div>'; 
             html += '</div>';
         });
     }
@@ -1236,21 +1237,15 @@ function refreshPrintPreview(){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
         html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
         uraian.forEach(function(q, i){
-            html += '<div class="soal-item">';
-            html += '<div class="soal-indicator-col">';
-            if(q.indicator) html += escHtml(q.indicator);
-            else html += '&nbsp;';
-            html += '</div>';
-            html += '<div class="soal-content-col">';
-            html += '<div class="soal-num-header">'+(i+1)+'.</div>';
-            html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
-            if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
-            html += '<div class="answer-lines"></div></div></div>';
+            html += '<div class="soal-item clearfix">'; // Added clearfix class
+            html += '<div class="soal-num">'+(i+1)+'.</div>';
+            html += '<div class="soal-text">'+escHtml(q.text)+'</div>';
+            if(q.image) html += '<div style="margin-left:35px"><img src="'+q.image+'" class="soal-img-print"></div>';
+            html += '<div class="answer-lines"></div></div>';
         });
     }
 
     html += '<div class="ttd-section"></div>';
-
     html += '</div></div></div>';
     container.innerHTML = html;
 }
