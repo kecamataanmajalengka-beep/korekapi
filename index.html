@@ -105,30 +105,36 @@ textarea.input-field{resize:vertical;min-height:40px}
     .section-heading { font-family: 'Times New Roman', serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
     .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-    /* UPDATE: LAYOUT SOAL DENGAN INDICATOR */
-    .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }
+    /* --- LAYOUT UTAMA SOAL (FIXED) --- */
+    .soal-item { 
+        margin-bottom: 24px; 
+        page-break-inside: avoid; 
+        display: table; 
+        width: 100%; 
+        table-layout: fixed; 
+        border-spacing: 0; 
+        border-collapse: separate; /* Penting */
+    }
     
-    /* Kolom Kiri: Indikator (20% lebar) */
     .soal-indicator-col { 
         display: table-cell; 
-        width: 20%; 
+        width: 22%; /* Sedikit diperlebar agar teks indikator tidak terlalu gepeng */
         vertical-align: top; 
-        padding-right: 12px; 
-        font-size: 9.5pt; /* Lebih kecil agar muat */
-        font-style: italic;
-        color: #444;
+        padding-right: 15px; 
+        font-size: 9pt; /* Font kecil agar muat banyak teks */
+        font-style: italic; 
+        color: #444; 
         line-height: 1.3;
         word-wrap: break-word;
+        word-break: break-word; /* Agar kata panjang pecah */
     }
 
-    /* Kolom Kanan: Nomor & Isi Soal (80% lebar) */
     .soal-content-col { 
         display: table-cell; 
-        width: 80%; 
+        width: 78%; /* Dikurangi mengikuti indikator */
         vertical-align: top; 
     }
 
-    /* Nomor di atas konten soal */
     .soal-num-header {
         font-weight: bold; 
         font-family: 'Times New Roman', serif; 
@@ -137,49 +143,115 @@ textarea.input-field{resize:vertical;min-height:40px}
         display: inline-block;
     }
 
-    .soal-text { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
-    .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }
+    .soal-text { 
+        font-family: 'Times New Roman', serif; 
+        font-size: 12pt; 
+        line-height: 1.5; 
+        display: block; 
+        text-align: justify; 
+        margin-bottom: 8px;
+    }
 
-    /* OPSI PRINT: Grid 2 Kolom agar rapi */
-    .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
-    .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.4; }
-    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
-    .opsi-label::after { content: '.'; } /* huruf kecil otomatis */
+    .soal-img-print { 
+        display: block; 
+        max-width: 100%; /* Biar responsif dalam kolom */
+        height: auto; 
+        max-height: 200px; /* Max height biar rapi */
+        object-fit: contain; 
+        margin: 8px 0; 
+        border: 1px solid #ccc; 
+        background-color: #eee; 
+    }
+
+    /* Opsi Grid 2 Kolom */
+    .opsi-wrapper { 
+        margin-top: 8px; 
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        column-gap: 20px; 
+        row-gap: 6px; 
+    }
     
-    /* Gambar opsi kecil di sebelah teks */
-    .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }
+    .opsi-row { 
+        display: flex; 
+        align-items: flex-start; 
+        gap: 8px; 
+        font-family: 'Times New Roman', serif; 
+        font-size: 12pt; 
+        line-height: 1.4; 
+    }
+    
+    .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
+    .opsi-label::after { content: "."; } /* huruf kecil otomatis */
+    
+    .opsi-img-print { 
+        max-width: 60px; 
+        max-height: 50px; 
+        display: inline-block; 
+        vertical-align: middle; 
+        margin-left: 8px; 
+        object-fit: contain; 
+    }
 
-    .answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }
+    .answer-lines { 
+        margin-top: 8px; 
+        border: 1px dashed #bbb; 
+        height: 80px; 
+        border-radius: 4px; 
+        background-color: #fafafa; 
+    }
     .ttd-section { display: none; } 
 
-    /* TABEL KISI-KISI: FIX AGAR TIDAK TERPOTONG */
+    /* TABEL KISI-KISI */
     .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-family: 'Times New Roman', serif; font-size: 10pt; table-layout: fixed; }
     .print-table th, .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
     .print-table th { background-color: #eee !important; -webkit-print-color-adjust: exact; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
     .print-table td.center { text-align: center; vertical-align: middle; }
-    
-    /* Force text wrap pada tabel */
     .print-table td.wrap-text { 
         word-wrap: break-word; 
         white-space: pre-wrap; 
-        word-break: break-word; /* Memaksa kata panjang pecah jika perlu */
+        word-break: break-word; 
         overflow-wrap: break-word;
+        font-size: 9.5pt; /* Font sedikit lebih kecil agar muat di tabel kisi-kisi */
     }
 }
 
-/* ===== PREVIEW STYLES ===== */
-.print-preview-wrap { background: #f3f4f6; padding: 20px; border-radius: 8px; display: flex; justify-content: center; overflow-x: auto; }
-.print-preview-sheet { background: white; color: black; width: 210mm; max-width: 100%; min-height: 297mm; padding: 1.5cm 2cm 2cm 2cm; box-shadow: 0 2px 20px rgba(0,0,0,0.15); font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.4; overflow: hidden; }
+/* ===== PREVIEW STYLES (MIRIP PRINT AGAR PRESISI) ===== */
+.print-preview-wrap { 
+    background: #e5e7eb; 
+    padding: 40px; /* Padding lebih lega */
+    border-radius: 8px; 
+    display: flex; 
+    justify-content: center; 
+    overflow-x: auto; 
+}
 
-/* Reuse print styles for preview */
+/* Kita gunakan width auto tapi max-width agar tidak meledak di layar besar, 
+   tapi kita gunakan transform: scale untuk memperbesar tampilan di layar kecil */
+.print-preview-sheet { 
+    background: white; 
+    color: black; 
+    width: 210mm; 
+    max-width: 100%; 
+    min-height: 297mm; 
+    padding: 1.5cm 2cm 2cm 2cm; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+    font-family: 'Times New Roman', Times, serif; 
+    font-size: 12pt; 
+    line-height: 1.4; 
+    transform-origin: top center;
+    /* Transformasi zoom dibuat di JS jika perlu, atau biarkan standar */
+}
+
+/* Copy Paste Styles dari @media print agar Preview Mirip Cetak */
 .print-preview-sheet .kop-surat { text-align: center; padding-bottom: 12px; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 18px; border-bottom: 3px double #000; }
-.print-preview-sheet .kop-surat img { height: 65px; width: auto; }
+.print-preview-sheet .kop-surat img { height: 70px; width: auto; }
 .print-preview-sheet .kop-text { text-align: center; line-height: 1.2; }
-.print-preview-sheet .kop-text h1 { font-size: 12pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-.print-preview-sheet .kop-text h2 { font-size: 14pt; font-weight: bold; text-transform: uppercase; margin: 0; }
-.print-preview-sheet .kop-text .kop-sub { font-size: 9pt; margin-top: 2px; color: #555; }
+.print-preview-sheet .kop-text h1 { font-size: 13pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .kop-text h2 { font-size: 15pt; font-weight: bold; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .kop-text .kop-sub { font-size: 9.5pt; margin-top: 2px; color: #555; }
 .print-preview-sheet .ujian-title { text-align: center; margin-bottom: 20px; }
-.print-preview-sheet .ujian-title h3 { font-size: 14pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
+.print-preview-sheet .ujian-title h3 { font-size: 15pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 0; }
 .print-preview-sheet .ujian-title p { font-size: 12pt; margin: 4px 0 0 0; font-weight: bold; }
 .print-preview-sheet .soal-header { margin-bottom: 20px; }
 .print-preview-sheet .soal-header table { width: 100%; font-size: 12pt; }
@@ -191,27 +263,27 @@ textarea.input-field{resize:vertical;min-height:40px}
 .print-preview-sheet .section-heading { font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }
 .print-preview-sheet .petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }
 
-/* Preview Soal Item - Tabel Layout dengan Indikator */
-.print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }
-.print-preview-sheet .soal-indicator-col { display: table-cell; width: 20%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; }
-.print-preview-sheet .soal-content-col { display: table-cell; width: 80%; vertical-align: top; }
+/* Preview Soal Item */
+.print-preview-sheet .soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }
+.print-preview-sheet .soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }
+.print-preview-sheet .soal-content-col { display: table-cell; width: 78%; vertical-align: top; }
 .print-preview-sheet .soal-num-header { font-weight: bold; font-size: 12pt; margin-bottom: 4px; display: inline-block; }
-.print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }
-.print-preview-sheet .soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ddd; border-radius: 4px; background-color: #f9f9f9; }
+.print-preview-sheet .soal-text { font-size: 12pt; line-height: 1.5; display: block; text-align: justify; margin-bottom: 8px; }
+.print-preview-sheet .soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ddd; background-color: #f9f9f9; }
 
-/* Opsi Preview Dynamic - Grid 2 Kolom */
-.print-preview-sheet .opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }
+/* Opsi Preview */
+.print-preview-sheet .opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }
 .print-preview-sheet .opsi-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12pt; line-height: 1.4; }
 .print-preview-sheet .opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }
 .print-preview-sheet .opsi-label::after { content: '.'; } 
-.print-preview-sheet .opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; border-radius: 3px; }
-.print-preview-sheet .answer-lines { margin-top: 10px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
+.print-preview-sheet .opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; border: 1px solid #eee; }
+.print-preview-sheet .answer-lines { margin-top: 8px; border: 1px dashed #ccc; height: 80px; border-radius: 4px; background-color: #fafafa; }
 .print-preview-sheet .ttd-section { display: none; }
 .print-preview-sheet .print-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 10pt; table-layout: fixed; }
 .print-preview-sheet .print-table th, .print-preview-sheet .print-table td { border: 1px solid #000; padding: 6px 8px; text-align: left; vertical-align: top; overflow: hidden; }
 .print-preview-sheet .print-table th { background-color: #eee; text-align: center; font-weight: bold; font-size: 9pt; text-transform: uppercase; }
 .print-preview-sheet .print-table td.center { text-align: center; vertical-align: middle; }
-.print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; }
+.print-preview-sheet .print-table td.wrap-text { word-wrap: break-word; white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; font-size: 9.5pt;}
 
 /* Modal Internal Styling Fixes */
 .modal-body-content { max-height: 60vh; overflow-y: auto; }
@@ -722,7 +794,6 @@ function onCreateKelasChange(){
         var L = l.toUpperCase();
         h += '<div class="flex flex-col gap-1">' +
             '<div class="flex gap-2 items-center"><span class="font-bold text-kopAccent w-6 text-center">'+L+'</span><input type="text" id="cOpt'+L+'" class="input-field flex-1" placeholder="Opsi '+L+'"></div>' +
-            // FITUR UPLOAD GAMBAR OPSI
             '<div class="ml-6 flex gap-2 items-start flex-col md:flex-row">' +
                 '<div class="flex-1 w-full"><input type="text" id="cOptImgUrl'+L+'" class="input-field text-xs flex-1" placeholder="URL Gambar Opsi '+L+' (Opsional)"></div>' +
                 '<div class="mt-0 md:mt-1"><button onclick="document.getElementById(\'cOptImgFile'+L+'\').click()" class="btn-secondary text-xs py-1.5 px-2" title="Upload"><i class="fas fa-camera"></i></button></div>' +
@@ -776,7 +847,7 @@ function saveSingleQuestion(){
     var qData = {
         mapel:mapel, kelas:kelas, type:type, text:text,
         tp: (document.getElementById('cTPManual').value || document.getElementById('cTPSelect').value || '').trim(),
-        indicator: (document.getElementById('cIndicator').value || '').trim(), // NEW: Save Indicator
+        indicator: (document.getElementById('cIndicator').value || '').trim(),
         difficulty: document.getElementById('cDiff').value,
         score: parseInt(document.getElementById('cScore').value) || 1,
         answer: document.getElementById('cAnswer').value.trim(),
@@ -796,12 +867,11 @@ function saveSingleQuestion(){
 
     db.collection('questions').add(qData).then(function(){
         showToast('Soal berhasil disimpan');
-        // Reset form manually
         document.getElementById('cText').value='';
         document.getElementById('cImgUrl').value='';
         document.getElementById('cImgPrev').innerHTML='';
         document.getElementById('cAnswer').value='';
-        document.getElementById('cIndicator').value=''; // NEW: Reset Indicator
+        document.getElementById('cIndicator').value='';
         if(document.getElementById('cTPManual')) document.getElementById('cTPManual').value='';
         if(document.getElementById('cTPSelect')) document.getElementById('cTPSelect').value='';
         if(type==='pg'){
@@ -835,7 +905,7 @@ function processJSON(){
                 mapel:item.mapel||defMapel, kelas:item.kelas||defKelas,
                 type:item.tipe||item.type||'pg', text:qText, options:qOpts,
                 answer:item.kunci||item.answer||'', difficulty:item.difficulty||'Sedang',
-                score:item.skor||item.score||1, tp:item.tp||'', indicator:item.indicator||'', // NEW: Support import indicator
+                score:item.skor||item.score||1, tp:item.tp||'', indicator:item.indicator||'',
                 image:item.image||'', optionImages:item.optionImages||[],
                 createdAt:firebase.firestore.FieldValue.serverTimestamp()
             });
@@ -879,21 +949,13 @@ function renderBankList(list){
     }).join('');
 }
 
-// ==========================================
-// LOGIKA EDIT SOAL (UPDATE: Tambah Indikator)
-// ==========================================
 function editQuestion(id){
     var q=null; for(var i=0;i<questions.length;i++){if(questions[i].id===id){q=questions[i];break;}} if(!q) return;
-    
-    // Dropdown Mapel & Kelas (Read-only di mode edit untuk menjaga konsistensi data)
     var mkHtml = '<div class="grid md:grid-cols-2 gap-4 mb-3">' +
         '<div><label class="text-xs text-muted">Mapel</label><input type="text" class="input-field" value="'+getMapelName(q.mapel)+'" disabled></div>' +
         '<div><label class="text-xs text-muted">Kelas</label><input type="text" class="input-field" value="'+q.kelas+'" disabled></div></div>';
-    
     var optHtml = '';
-    var letters = getOptLetters(q.kelas); // Ambil huruf opsi berdasarkan kelas soal tsb
-    
-    // Generate Form Opsi jika PG
+    var letters = getOptLetters(q.kelas);
     if(q.type==='pg'){
         optHtml = '<div><label class="text-xs text-muted mb-1 block">Opsi Jawaban</label>';
         letters.forEach(function(l, idx){
@@ -916,22 +978,15 @@ function editQuestion(id){
         });
         optHtml += '</div>';
     }
-
     var html = '<h3 class="font-display text-lg font-bold text-light mb-4">Edit Soal</h3>' +
         mkHtml +
         '<div class="space-y-3">' +
             '<div><label class="text-xs text-muted mb-1 block">Tujuan Pembelajaran (TP)</label><textarea id="eTP" class="input-field" rows="2">'+escHtml(q.tp||'')+'</textarea></div>' +
-            
-            // NEW: Input Indikator di Edit Mode
             '<div><label class="text-xs text-muted mb-1 block">Indikator Soal</label><textarea id="eIndicator" class="input-field" rows="2" placeholder="Disiplin Ilmu...">'+escHtml(q.indicator||'')+'</textarea></div>' +
-
             '<div><label class="text-xs text-muted mb-1 block">Teks Soal</label><textarea id="eText" class="input-field" rows="3">'+escHtml(q.text)+'</textarea></div>' +
             '<div><label class="text-xs text-muted mb-1 block">URL Gambar Soal</label><input type="text" id="eImg" class="input-field" value="'+escHtml(q.image||'')+'"></div>' +
-            
-            // Area Opsi Dinamis
             optHtml +
-
-            '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban / Pedoman</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
+            '<div class="grid grid-cols-2 gap-4"><div><label class="text-xs text-muted mb-1 block">Kunci Jawaban</label><input type="text" id="eAnswer" class="input-field" value="'+escHtml(q.answer||'')+'"></div><div><label class="text-xs text-muted mb-1 block">Skor</label><input type="number" id="eScore" class="input-field" value="'+(q.score||1)+'" min="1"></div></div>' +
         '</div>' +
         '<div class="flex justify-end gap-3 pt-4 mt-4 border-t border-border">' +
             '<button onclick="closeModal()" class="btn-secondary">Batal</button>' +
@@ -939,8 +994,6 @@ function editQuestion(id){
         '</div>';
 
     openModal(html);
-    
-    // Render preview images for existing option images
     if(q.type==='pg'){
         letters.forEach(function(l, idx){
             var L = l.toUpperCase();
@@ -955,7 +1008,7 @@ function editQuestion(id){
 function doUpdateQuestion(id, type, kelas){
     var d = { 
         tp:document.getElementById('eTP').value, 
-        indicator: document.getElementById('eIndicator').value, // NEW: Save updated indicator
+        indicator: document.getElementById('eIndicator').value,
         text:document.getElementById('eText').value, 
         image:document.getElementById('eImg').value, 
         answer:document.getElementById('eAnswer').value, 
@@ -981,7 +1034,7 @@ function deleteQuestion(id){
 }
 
 // ================================================================
-// CETAK SOAL (UPDATE: Layout dengan Indikator)
+// CETAK SOAL
 // ================================================================
 function renderPrint(c){
     c.innerHTML = '<div class="fade-in no-print">' +
@@ -1017,7 +1070,7 @@ function doPrintSoal(){
     var doc = iframe.contentDocument || iframe.contentWindow.document;
     doc.open();
     doc.write('<!DOCTYPE html><html><head>');
-    doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=700&display=swap" rel="stylesheet">');
+    doc.write('<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght+700&display=swap" rel="stylesheet">');
     doc.write('<style>');
     doc.write('@page { size: A4 portrait; margin: 1.5cm 2cm 2cm 2cm; }');
     doc.write('body { margin: 0; padding: 0; font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.4; color: black; background: white; -webkit-print-color-adjust: exact; print-color-adjust: exact; }');
@@ -1041,22 +1094,19 @@ function doPrintSoal(){
     doc.write('.section-heading { font-family: "Times New Roman", serif; font-weight: bold; font-size: 12pt; border-bottom: 2px solid #000; padding-bottom: 4px; margin-bottom: 12px; margin-top: 10px; }');
     doc.write('.petunjuk-soal { font-size: 11pt; margin-bottom: 12px; font-style: italic; color: #333; }');
     
-    /* UPDATE: Layout Soal dengan Indikator (Table Mode) */
-    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; }');
-    doc.write('.soal-indicator-col { display: table-cell; width: 20%; vertical-align: top; padding-right: 12px; font-size: 9.5pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; }');
-    doc.write('.soal-content-col { display: table-cell; width: 80%; vertical-align: top; }');
+    /* Print CSS Styles */
+    doc.write('.soal-item { margin-bottom: 24px; page-break-inside: avoid; display: table; width: 100%; table-layout: fixed; border-spacing: 0; border-collapse: separate; }');
+    doc.write('.soal-indicator-col { display: table-cell; width: 22%; vertical-align: top; padding-right: 15px; font-size: 9pt; font-style: italic; color: #444; line-height: 1.3; word-wrap: break-word; word-break: break-word; }');
+    doc.write('.soal-content-col { display: table-cell; width: 78%; vertical-align: top; }');
     doc.write('.soal-num-header { font-weight: bold; font-family: "Times New Roman", serif; font-size: 12pt; margin-bottom: 4px; display: inline-block; }');
-    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; }');
-    doc.write('.soal-img-print { display: block; width: 220px; height: 165px; object-fit: cover; object-position: center; margin: 10px 0 10px 0; border: 1px solid #ccc; page-break-inside: avoid; background-color: #eee; }');
-    
-    /* Opsi Grid 2 kolom, Label Kecil */
-    doc.write('.opsi-wrapper { margin-top: 10px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 8px; }');
+    doc.write('.soal-text { font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.5; display: block; text-align: justify; margin-bottom: 8px; }');
+    doc.write('.soal-img-print { display: block; max-width: 100%; height: auto; max-height: 200px; object-fit: contain; margin: 8px 0; border: 1px solid #ccc; background-color: #eee; }');
+    doc.write('.opsi-wrapper { margin-top: 8px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 6px; }');
     doc.write('.opsi-row { display: flex; align-items: flex-start; gap: 8px; font-family: "Times New Roman", serif; font-size: 12pt; line-height: 1.4; }');
     doc.write('.opsi-label { font-weight: bold; min-width: 22px; flex-shrink: 0; }');
     doc.write('.opsi-label::after { content: "."; }');
-    doc.write('.opsi-img-print { max-width: 70px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; page-break-inside: avoid; }');
-    
-    doc.write('.answer-lines { margin-top: 10px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
+    doc.write('.opsi-img-print { max-width: 60px; max-height: 50px; display: inline-block; vertical-align: middle; margin-left: 8px; object-fit: contain; }');
+    doc.write('.answer-lines { margin-top: 8px; border: 1px dashed #bbb; height: 80px; border-radius: 4px; background-color: #fafafa; }');
     doc.write('.ttd-section { display: none; }'); 
 
     doc.write('</style></head><body>');
@@ -1124,44 +1174,35 @@ function refreshPrintPreview(){
         html += '<p class="petunjuk-soal">Pilihlah satu jawaban yang paling tepat!</p>';
         pg.forEach(function(q, i){
             html += '<div class="soal-item">';
-            
-            // KOLOM KIRI: Indikator
             html += '<div class="soal-indicator-col">';
             if(q.indicator) html += escHtml(q.indicator);
             else html += '&nbsp;';
             html += '</div>';
-            
-            // KOLOM KANAN: Soal
             html += '<div class="soal-content-col">';
             html += '<div class="soal-num-header">'+(i+1)+'.</div>';
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
             if(q.image) html += '<img src="'+q.image+'" class="soal-img-print">';
             
             html += '<div class="opsi-wrapper">';
-            
             (q.options||[]).forEach(function(opt, oi){
                 var letter = getOptLetters(kelas)[oi]; 
                 var optImg = (q.optionImages && q.optionImages[oi]) ? '<img src="'+q.optionImages[oi]+'" class="opsi-img-print">' : '';
                 html += '<div class="opsi-row"><span class="opsi-label">'+letter+'</span><span>'+escHtml(opt)+'</span>'+optImg+'</div>';
             });
-            html += '</div></div>'; // End content-col
-            html += '</div>'; // End soal-item
+            html += '</div></div>'; 
+            html += '</div>';
         });
     }
 
     if(uraian.length > 0){
         html += '<div class="section-heading" style="margin-top:30px">II. Uraian</div>';
-        html += '<p class="petunjuk-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
+        html += '<p class="preview-soal">Jawablah pertanyaan berikut dengan jelas dan benar!</p>';
         uraian.forEach(function(q, i){
             html += '<div class="soal-item">';
-            
-            // KOLOM KIRI: Indikator (Jika ada)
             html += '<div class="soal-indicator-col">';
             if(q.indicator) html += escHtml(q.indicator);
             else html += '&nbsp;';
             html += '</div>';
-            
-            // KOLOM KANAN: Soal Uraian
             html += '<div class="soal-content-col">';
             html += '<div class="soal-num-header">'+(i+1)+'.</div>';
             html += '<span class="soal-text">'+escHtml(q.text)+'</span>';
@@ -1177,7 +1218,7 @@ function refreshPrintPreview(){
 }
 
 // ================================================================
-// KISI-KISI (UPDATE: Hapus Kunci)
+// KISI-KISI
 // ================================================================
 function renderKisi(c){
     c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-table mr-2 text-kopAccent"></i>Kisi-Kisi Soal</h3>' +
@@ -1193,11 +1234,9 @@ function refreshKisiPreview(){
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kisi-Kisi Penulisan Soal</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
     
-    // UPDATE: Header tabel diubah, kolom Kunci dihapus
     html+='<table class="print-table"><thead><tr><th style="width:30px">No</th><th style="width:50px">No.Soal</th><th style="width:20%">TP</th><th style="width:10%">Diff.</th><th style="width:auto">Indikator Soal</th><th style="width:60px">Tipe</th><th style="width:50px">Skor</th></tr></thead><tbody>';
     data.forEach(function(q,i){ 
         var diffLabel = q.difficulty || '-';
-        // UPDATE: Kolom Pertanyaan hanya menampilkan Indikator Soal
         var content = escHtml(q.indicator || '-');
         
         html+='<tr>'+
@@ -1217,7 +1256,7 @@ function refreshKisiPreview(){
 }
 
 // ================================================================
-// KUNCI & SKORING (UPDATE: Urutan 1-2-3 kolom & Tambah Pedoman)
+// KUNCI & SKORING
 // ================================================================
 function renderScoring(c){
     c.innerHTML = '<div class="fade-in no-print"><div class="card mb-6"><h3 class="font-display text-lg font-bold text-light mb-4"><i class="fas fa-key mr-2 text-kopAccent"></i>Kunci Jawaban & Pedoman Penskoran</h3>' +
@@ -1233,19 +1272,15 @@ function refreshScoringPreview(){
     var pg=data.filter(function(q){return q.type==='pg';}), uraian=data.filter(function(q){return q.type==='uraian';});
     var logoUrl='https://www.image2url.com/r2/default/images/1776680731558-aaedfd5c-6674-4989-a7a4-c15f6291acac.jpeg';
     var html='<div class="print-preview-wrap"><div class="print-preview-sheet"><div class="print-page"><div class="kop-surat"><img src="'+logoUrl+'" alt="Logo"><div class="kop-text"><h1>Kunci Jawaban & Pedoman Penskoran</h1><h2>'+getMapelName(mapel)+' — '+kelas+'</h2></div></div>';
-    
     if(pg.length){
         html+='<div class="section-heading">I. Pilihan Ganda</div><table class="print-table"><thead><tr>';
-        // UPDATE: Urutan 1,2,3 ke bawah (3 Kolom)
         for(var col=0;col<3;col++) html+='<th style="width:60px">No</th><th style="width:60px">Kunci</th>';
         html+='</tr></thead><tbody>';
         for(var i=0;i<pg.length;i+=3){ html+='<tr>'; for(var j=0;j<3;j++){ var idx=i+j, q=pg[idx]; if(q) html+='<td class="center">'+(idx+1)+'</td><td class="center" style="font-weight:bold">'+escHtml(q.answer||'-')+'</td>'; else html+='<td class="center"></td><td class="center"></td>'; } html+='</tr>'; }
         html+='</tbody></table>';
     }
-
     if(uraian.length){
         html+='<div class="section-heading" style="margin-top:24px">II. Uraian</div>';
-        // UPDATE: Tabel Uraian menampilkan Indikator + Pedoman Penskoran
         html+='<table class="print-table"><thead><tr><th style="width:40px">No</th><th style="width:50px">Skor</th><th>Indikator & Pedoman Penskoran</th></tr></thead><tbody>';
         uraian.forEach(function(q,i){ 
             var indicatorText = '<strong>Indikator:</strong> ' + escHtml(q.indicator || '-');
